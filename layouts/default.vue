@@ -2,6 +2,7 @@
   <main class="main-wrap">
     <Header />
     <Nuxt />
+    <Footer />
   </main>
 </template>
 
