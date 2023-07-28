@@ -1,0 +1,27 @@
+@font-face {
+  font-family: 'PP Mori';
+  src: url('/fonts/PPMori/PPMori-Extralight.eot');
+  src: local('PP Mori'),
+       url('/fonts/PPMori/PPMori-Extralight.woff') format('woff'),
+       url('/fonts/PPMori/PPMori-Extralight.ttf') format('truetype'),
+       url('/fonts/PPMori/PPMori-Extralight.svg') format('svg');
+  font-weight: 300;
+}
+@font-face {
+  font-family: 'PP Mori';
+  src: url('/fonts/PPMori/PPMori-Regular.eot');
+  src: local('PP Mori'),
+       url('/fonts/PPMori/PPMori-Regular.woff') format('woff'),
+       url('/fonts/PPMori/PPMori-Regular.ttf') format('truetype'),
+       url('/fonts/PPMori/PPMori-Regular.svg') format('svg');
+  font-weight: 400;
+}
+@font-face {
+  font-family: 'PP Mori';
+  src: url('/fonts/PPMori/PPMori-SemiBold.eot');
+  src: local('PP Mori'),
+       url('/fonts/PPMori/PPMori-SemiBold.woff') format('woff'),
+       url('/fonts/PPMori/PPMori-SemiBold.ttf') format('truetype'),
+       url('/fonts/PPMori/PPMori-SemiBold.svg') format('svg');
+  font-weight: 600;
+}
