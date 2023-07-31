@@ -46,12 +46,12 @@ app.post('/email', (req, res) => {
 
 app.route("/db")
   .get((req, res) => {
-    db(`SELECT * FROM partners`)
+    db(`SELECT * FROM users`)
       .then(rows => res.send(rows))
       .catch(err => res.send({status: 'error', msg: err}))
   })
   .post((req, res) => {
-    db(`INSERT INTO partners (firstName, lastName, email, phone, notes) VALUES ('${req.body.params.firstName}', '${req.body.params.lastName}', '${req.body.params.email}', '${req.body.params.phone}', '${req.body.params.notes}')`)
+    db(`INSERT INTO users (card, type, fullName, phone, email, company, address, ein) VALUES ('${req.body.params.card}', '${req.body.params.type}', '${req.body.params.fullName}', '${req.body.params.phone}', '${req.body.params.email}', '${req.body.params.company}', '${req.body.params.address}', '${req.body.params.ein}')`)
       .then(rows => res.send(rows))
       .catch(err => res.send({status: 'error', msg: err}))
   })

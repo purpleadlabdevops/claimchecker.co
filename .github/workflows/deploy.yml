@@ -15,11 +15,11 @@ jobs:
       - name: Deploying
         uses: appleboy/ssh-action@master
         with:
-          host: 54.177.181.42
+          host: 52.47.136.75
           username: root
-          password: YRBENitB@{IXYwo?
+          password: 1oko*g4aYD8O6jyR
           script: |
-            cd /var/www/site/data/www/partners.financialmatch.com
+            cd /var/www/www-root/data/www/claimchecker.co
             git pull
             npm run build
-            pm2 restart partners.financialmatch.com
+            pm2 restart claimchecker.co

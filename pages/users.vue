@@ -3,10 +3,14 @@
     <div class="container">
       <div class="partners__list" v-if="list">
         <div class="partners__item" v-for="item in list.slice().reverse()">
-          <h3>{{ item.firstName }} {{ item.lastName }}</h3>
+          <h3>{{ item.fullName }}</h3>
           <p>email: <span>{{ item.email }}</span></p>
           <p>phone: <span>{{ item.phone }}</span></p>
-          <p>notes: <span>{{ item.notes }}</span></p>
+          <p>card: <span>{{ items.card }}</span></p>
+          <p>type: <span>{{ items.type }}</span></p>
+          <p>company: <span>{{ items.company }}</span></p>
+          <p>address: <span>{{ items.address }}</span></p>
+          <p>ein: <span>{{ items.ein }}</span></p>
         </div>
       </div>
     </div>
