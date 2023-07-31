@@ -185,7 +185,7 @@ export default {
               this.address = null
               this.ein = null
               this.step = 1
-              this.$router.push({path: '/thanks'})
+              this.$router.push('/thanks')
             }, 500);
           }
         })
