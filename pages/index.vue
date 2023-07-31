@@ -172,20 +172,28 @@ export default {
         .then(result => {
           console.log('Result----------')
           console.dir(result)
+          if(result.data.status == "error"){
+            throw result.data.status
+          } else{
+            setTimeout(()=>{
+              this.card = null
+              this.type = null
+              this.fullName = null
+              this.phone = null
+              this.email = null
+              this.company = null
+              this.address = null
+              this.ein = null
+              this.step = 1
+              this.$router.push({path: '/thanks'})
+            }, 500);
+          }
         })
         .catch(err => {
-          console.dir(err)
+          alert('Oops, something went wrong. Please reload page and try againe or contact us by email.')
         })
         .finally(()=>{
           this.spinner = false
-          this.card = null
-          this.type = null
-          this.fullName = null
-          this.phone = null
-          this.email = null
-          this.company = null
-          this.address = null
-          this.ein = null
         })
     },
   }
@@ -198,17 +206,14 @@ export default {
   h1{
     margin: 0 auto;
     font-weight: 600;
-    font-size: 20px;
+    font-size: res(24, 32);
     line-height: 130%;
     text-align: center;
     color: var(--text-black);
     margin-bottom: 16px;
-    @media(min-width:768px){
-      font-size: 32px;
-    }
   }
   h3{
-    font-size: 18px;
+    font-size: res(16, 18);
     line-height: 130%;
     color: var(--text-black);
     margin: 0 auto 16px;
@@ -221,23 +226,24 @@ export default {
     }
   }
   &__form{
-    margin: 0 auto 40px;
+    margin: 0 auto res(25, 40);
     padding-top: 8px;
     width: 650px;
+    max-width: 100%;
   }
   &__info{
     max-width: 900px;
     text-align: center;
     margin-left: auto;
     margin-right: auto;
-    margin-bottom: 60px;
+    margin-bottom: res(30, 60);
   }
   &__step{
     background: var(--bg-lightgray);
-    padding: 30px;
+    padding: res(25, 30) res(16, 30);
     border-radius: 16px;
     overflow: hidden;
-    max-height: 90px;
+    max-height: res(65, 90);
     transition: 1s ease;
     &.active{
       background: var(--bg-white);

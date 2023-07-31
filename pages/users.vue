@@ -29,6 +29,7 @@ export default {
       headers: { 'Content-Type': 'application/json' },
     })
       .then(dbResult => {
+        console.dir(dbResult)
         this.list = dbResult.data
       })
   }
