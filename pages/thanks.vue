@@ -3,7 +3,7 @@
     <div class="container">
       <div class="quiz__info">
         <h1>Thank you!</h1>
-        <p>We will contact you shortly ;)</p>
+        <h3>We will contact you shortly ;)</h3>
       </div>
     </div>
   </section>
@@ -24,6 +24,12 @@ export default {}
     text-align: center;
     color: var(--text-black);
     margin-bottom: 16px;
+  }
+  h3{
+    font-size: res(16, 18);
+    line-height: 130%;
+    color: var(--text-black);
+    text-align: center;
   }
 }
 </style>
