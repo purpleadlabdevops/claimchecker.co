@@ -1,27 +1,37 @@
 @font-face {
-  font-family: 'PP Mori';
-  src: url('/fonts/PPMori/PPMori-Extralight.eot');
-  src: local('PP Mori'),
-       url('/fonts/PPMori/PPMori-Extralight.woff') format('woff'),
-       url('/fonts/PPMori/PPMori-Extralight.ttf') format('truetype'),
-       url('/fonts/PPMori/PPMori-Extralight.svg') format('svg');
+  font-family: 'PP Pangram';
+  font-style: normal;
   font-weight: 300;
+  font-display: swap;
+  src: url('../fonts/PPPangram/PPPangramSans-Light.woff2') format('woff2'),
+  url('../fonts/PPPangram/PPPangramSans-Light.woff') format('woff'),
+  url('../fonts/PPPangram/PPPangramSans-Light.ttf') format('truetype');
 }
 @font-face {
-  font-family: 'PP Mori';
-  src: url('/fonts/PPMori/PPMori-Regular.eot');
-  src: local('PP Mori'),
-       url('/fonts/PPMori/PPMori-Regular.woff') format('woff'),
-       url('/fonts/PPMori/PPMori-Regular.ttf') format('truetype'),
-       url('/fonts/PPMori/PPMori-Regular.svg') format('svg');
+  font-family: 'PP Pangram';
+  font-style: normal;
   font-weight: 400;
+  font-display: swap;
+  src: url('../fonts/PPPangram/PPPangramSans-Medium.woff2') format('woff2'),
+  url('../fonts/PPPangram/PPPangramSans-Medium.woff') format('woff'),
+  url('../fonts/PPPangram/PPPangramSans-Medium.ttf') format('truetype');
 }
 @font-face {
-  font-family: 'PP Mori';
-  src: url('/fonts/PPMori/PPMori-SemiBold.eot');
-  src: local('PP Mori'),
-       url('/fonts/PPMori/PPMori-SemiBold.woff') format('woff'),
-       url('/fonts/PPMori/PPMori-SemiBold.ttf') format('truetype'),
-       url('/fonts/PPMori/PPMori-SemiBold.svg') format('svg');
+  font-family: 'PP Pangram';
+  font-style: normal;
   font-weight: 600;
+  font-display: swap;
+  src: url('../fonts/PPPangram/PPPangramSans-Semibold.woff2')
+  format('woff2'),
+  url('../fonts/PPPangram/PPPangramSans-Semibold.woff') format('woff'),
+  url('../fonts/PPPangram/PPPangramSans-Semibold.ttf') format('truetype');
+}
+@font-face {
+  font-family: 'PP Pangram';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url('../fonts/PPPangram/PPPangramSans-Bold.woff2') format('woff2'),
+  url('../fonts/PPPangram/PPPangramSans-Bold.woff') format('woff'),
+  url('../fonts/PPPangram/PPPangramSans-Bold.ttf') format('truetype');
 }

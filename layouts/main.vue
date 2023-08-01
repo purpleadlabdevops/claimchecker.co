@@ -1,5 +1,5 @@
 <template>
-  <main class="main-wrap">
+  <div class="main-wrap">
     <Header />
     <Nuxt />
     <Sponsors />
@@ -13,7 +13,7 @@
     <Section7 />
     <Faq />
     <Footer />
-  </main>
+  </div>
 </template>
 
 <script>

@@ -11,6 +11,10 @@
   flex-wrap: wrap;
   padding: 15px;
   img{
+    @media(max-width:991px){
+      margin-top: 10px;
+      margin-bottom: 10px;
+    }
     &:not(:first-child){
       margin-left: 15px;
     }

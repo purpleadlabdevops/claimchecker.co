@@ -17,7 +17,7 @@
 }
 
 *{
-  font-family: 'PP Mori', sans-serif;
+  font-family: 'Poppins', sans-serif;
 }
 
 html, body{
@@ -246,6 +246,9 @@ button, a, [type="submit"]{
 .banner{
   .container{
     display: flex;
-    justify-content: space-between;
+    flex-wrap: wrap;
+    @media(min-width:992px){
+      justify-content: space-between;
+    }
   }
 }

@@ -15,12 +15,15 @@
 
 <style lang="scss" scoped>
 .titles{
-  @media(min-width:768px){
+  width: 100%;
+  margin-bottom: 30px;
+  @media(min-width:992px){
     width: 50%;
+    margin-bottom: 0;
   }
   h3 {
     font-weight: 400;
-    font-size: res(16, 22);
+    font-size: res(14, 22);
     margin-bottom: 10px;
   }
   h1 {
@@ -51,13 +54,17 @@
   ul{
     font-weight: 400;
     list-style: none;
-    padding-left: 20px;
-    margin-bottom: 30px;
+    padding-left: 10px;
+    margin-bottom: 10px;
+    @media(min-width:768px){
+      margin-bottom: 30px;
+      padding-left: 20px;
+    }
     li {
       margin: 15px 0;
       padding-left: 36px;
       position: relative;
-      font-size: res(16, 18);
+      font-size: res(14, 18);
       &:before {
         content: '';
         position: absolute;

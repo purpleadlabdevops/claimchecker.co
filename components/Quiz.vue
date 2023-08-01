@@ -194,7 +194,14 @@ export default {
 
 <style lang="scss" scoped>
 .quiz{
-  @media(min-width:768px){
+  width: 100%;
+  @media(max-width:991px){
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+    order: 2;
+  }
+  @media(min-width:992px){
     width: 45%;
   }
   &__form{
@@ -203,22 +210,30 @@ export default {
     width: 100%;
   }
   h3{
-    font-size: res(18, 24);
+    font-size: res(14, 24);
   }
   &__step{
     background: var(--bg-lightgray);
-    padding: res(15, 30) res(15, 30);
+    padding: 15px;
     border-radius: 16px;
     overflow: hidden;
-    max-height: res(65, 85);
+    max-height: 50px;
     transition: .5s ease-in-out;
     opacity: .6;
+    @media(min-width:992px){
+      max-height: 60px;
+      padding: 15px 30px;
+    }
     &.active{
       transition: 1s ease-in-out .5s;
       background: var(--bg-white);
       box-shadow: 0 0 32px var(--text-black);
       max-height: 1000px;
       opacity: 1;
+      padding: 30px 15px;
+      @media(min-width:992px){
+        padding: 30px;
+      }
     }
     &:not(:first-child){
       margin-top: 16px;
