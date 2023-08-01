@@ -47,7 +47,7 @@ export default {
   padding-top: 60px;
   padding-bottom: 60px;
   &__item{
-    max-width: 400px;
+    max-width: 800px;
     background: var(--bg-white);
     box-shadow: 0 0 16px var(--bg-gray);
     border-radius: 12px;
