@@ -16,7 +16,7 @@ export default {
     script: []
   },
   styleResources: {
-    scss: ['~/assets/scss/_functions.scss']
+    scss: ['~/assets/scss/_functions.scss', '~/assets/scss/_mixins.scss']
   },
   plugins: [],
   css: ["~/assets/scss/global.scss"],
