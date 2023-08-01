@@ -4,13 +4,19 @@
       <div class="partners__list" v-if="list">
         <div class="partners__item" v-for="item in list.slice().reverse()">
           <h3>{{ item.fullName }}</h3>
-          <p>email: <span>{{ item.email }}</span></p>
-          <p>phone: <span>{{ item.phone }}</span></p>
-          <p>card: <span>{{ item.card }}</span></p>
-          <p>type: <span>{{ item.type }}</span></p>
-          <p>company: <span>{{ item.company }}</span></p>
-          <p>address: <span>{{ item.address }}</span></p>
-          <p>ein: <span>{{ item.ein }}</span></p>
+          <div class="partners__row">
+            <div>
+              <p>email: <span>{{ item.email }}</span></p>
+              <p>phone: <span>{{ item.phone }}</span></p>
+              <p>address: <span>{{ item.address }}</span></p>
+            </div>
+            <div>
+              <p>card: <span>{{ item.card }}</span></p>
+              <p>type: <span>{{ item.type }}</span></p>
+              <p>company: <span>{{ item.company }}</span></p>
+              <p>ein: <span>{{ item.ein }}</span></p>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -67,6 +73,17 @@ export default {
     span{
       font-weight: 600;
       font-size: 16px;
+    }
+  }
+  &__row{
+    @media(min-width:992px){
+      display: flex;
+      justify-content: space-between;
+    }
+    & > div{
+      @media(min-width:992px){
+        width: calc(50% - 10px);
+      }
     }
   }
 }
