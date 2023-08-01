@@ -6,6 +6,7 @@
           <h3>{{ item.fullName }}</h3>
           <div class="partners__row">
             <div>
+              <p>company: <span>{{ item.company }}</span></p>
               <p>email: <span>{{ item.email }}</span></p>
               <p>phone: <span>{{ item.phone }}</span></p>
               <p>address: <span>{{ item.address }}</span></p>
@@ -13,7 +14,6 @@
             <div>
               <p>card: <span>{{ item.card }}</span></p>
               <p>type: <span>{{ item.type }}</span></p>
-              <p>company: <span>{{ item.company }}</span></p>
               <p>ein: <span>{{ item.ein }}</span></p>
             </div>
           </div>
@@ -76,12 +76,12 @@ export default {
     }
   }
   &__row{
-    @media(min-width:992px){
+    @media(min-width:768px){
       display: flex;
       justify-content: space-between;
     }
     & > div{
-      @media(min-width:992px){
+      @media(min-width:768px){
         width: calc(50% - 10px);
       }
     }
