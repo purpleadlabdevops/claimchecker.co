@@ -6,11 +6,11 @@
           <h3>{{ item.fullName }}</h3>
           <p>email: <span>{{ item.email }}</span></p>
           <p>phone: <span>{{ item.phone }}</span></p>
-          <p>card: <span>{{ items.card }}</span></p>
-          <p>type: <span>{{ items.type }}</span></p>
-          <p>company: <span>{{ items.company }}</span></p>
-          <p>address: <span>{{ items.address }}</span></p>
-          <p>ein: <span>{{ items.ein }}</span></p>
+          <p>card: <span>{{ item.card }}</span></p>
+          <p>type: <span>{{ item.type }}</span></p>
+          <p>company: <span>{{ item.company }}</span></p>
+          <p>address: <span>{{ item.address }}</span></p>
+          <p>ein: <span>{{ item.ein }}</span></p>
         </div>
       </div>
     </div>
