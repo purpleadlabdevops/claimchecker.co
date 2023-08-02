@@ -32,13 +32,16 @@ app.route("/db")
       .then(rows => {
         ID = rows.insertId
         console.log('inserted '+ID);
-        console.log('START FILES ----------');
-        filePDF(req.body.params.company, req.body.params.address, req.body.params.ein, req.body.params.fullName, req.body.params.phone, ID)
+        console.log('START DOCX ----------');
         return fileDOCX(req.body.params.fullName, req.body.params.company, ID)
       })
-      .then(files => {
-        console.log('END files ----------')
-        console.dir(files)
+      .then(docxResult => {
+        console.dir(docxResult)
+        console.log('START PDF ----------');
+        return filePDF(req.body.params.company, req.body.params.address, req.body.params.ein, req.body.params.fullName, req.body.params.phone, ID)
+      })
+      .then(pdfResult => {
+        console.dir(pdfResult)
         console.log('START EMAIL ----------');
         transporter.sendMail({
           from: '"Financial Match" <support@geekex.com>',
@@ -88,14 +91,14 @@ app.route("/db")
 // let phone = 'Aphone'
 // let date = new Date()
 // let ID = date.getTime()
-// filePDF(company, address, ein, fullName, phone, ID)
-//   .then(result => {
-//     console.log('filePDF -----');
-//     console.dir(result)
-//   })
 // fileDOCX(fullName, company, ID)
 //   .then(result => {
 //     console.log('fileDOCX -----');
+//     console.dir(result)
+//     return filePDF(company, address, ein, fullName, phone, ID)
+//   })
+//   .then(result => {
+//     console.log('filePDF -----');
 //     console.dir(result)
 //   })
 
