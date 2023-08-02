@@ -54,11 +54,11 @@ app.route("/db")
           `,
           attachments: [{
             filename: 'if_engage_ltr',
-            path: __dirname + `/saved/if_engage_ltr_${rows.insertId}.docx`,
+            path: __dirname + `/saved/if_engage_ltr_${ID}.docx`,
             cid: 'if_engage_ltr'
           },{
             filename: 'f8821',
-            path: __dirname + `/saved/f8821_${rows.insertId}.pdf`,
+            path: __dirname + `/saved/f8821_${ID}.pdf`,
             cid: 'f8821'
           }]
         })
