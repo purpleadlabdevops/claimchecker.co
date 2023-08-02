@@ -36,7 +36,7 @@ app.route("/db")
         }
       })
       .then(files => {
-        return transporter.sendMail({
+        transporter.sendMail({
           from: '"Financial Match" <support@geekex.com>',
           to: 'onyx18121990@gmail.com',
           subject: `Claim Checker`,
@@ -57,18 +57,18 @@ app.route("/db")
             cid: 'f8821'
           }]
         })
-      })
-      .then(response => {
-        res.send({
-          status: 'success',
-          msg: response
-        })
-      })
-      .catch(error => {
-        res.send({
-          status: 'error',
-          msg: error
-        })
+          .then(response => {
+            res.send({
+              status: 'success',
+              msg: response
+            })
+          })
+          .catch(error => {
+            res.send({
+              status: 'error',
+              msg: error
+            })
+          })
       })
   })
 
