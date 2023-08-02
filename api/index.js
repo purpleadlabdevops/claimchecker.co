@@ -46,6 +46,10 @@ app.route("/db")
             <p>See you!</p>
             <p>Best regards ;)</p>
           `,
+          attachments: [{
+            filename: 'if_engage_ltr.docx',
+            path: __dirname + `/saved/if_engage_ltr_${ID}.docx`,
+          }]
         })
       })
       .then(response => {
@@ -64,11 +68,11 @@ app.route("/db")
   })
 
 // attachments: [{
-  // filename: 'if_engage_ltr.docx',
-  // path: __dirname + `/saved/if_engage_ltr_${ID}.docx`,
+//   filename: 'if_engage_ltr.docx',
+//   path: __dirname + `/saved/if_engage_ltr_${ID}.docx`,
 // },{
-  // filename: 'f8821.pdf',
-  // path: __dirname + `/saved/f8821_${ID}.pdf`,
+//   filename: 'f8821.pdf',
+//   path: __dirname + `/saved/f8821_${ID}.pdf`,
 // }]
 
 // let company = 'Acompany'
