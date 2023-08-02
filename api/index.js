@@ -43,14 +43,19 @@ app.route("/db")
 
 app.route("/docx")
   .post((req, res) => {
+    console.log('START docx ----------');
+    console.log(req.body.params.fullName, req.body.params.company, req.body.params.ID);
     fileDOCX(req.body.params.fullName, req.body.params.company, req.body.params.ID)
       .then(res => {
+        console.dir(res);
+        console.log('THEN docx ----------');
         res.send({
           status: 'success',
           msg: res
         })
       })
       .catch(err => {
+        console.log('ERROR docx ----------');
         res.send({
           status: 'err',
           msg: err
@@ -60,14 +65,19 @@ app.route("/docx")
 
 app.route("/pdf")
   .post((req, res) => {
+    console.log('START pdf ----------');
+    console.log(req.body.params.company, req.body.params.address, req.body.params.ein, req.body.params.fullName, req.body.params.phone, req.body.params.ID);
     filePDF(req.body.params.company, req.body.params.address, req.body.params.ein, req.body.params.fullName, req.body.params.phone, req.body.params.ID)
       .then(res => {
+        console.dir(res);
+        console.log('THEN pdf ----------');
         res.send({
           status: 'success',
           msg: res
         })
       })
       .catch(err => {
+        console.log('ERR pdf ----------');
         res.send({
           status: 'err',
           msg: err
