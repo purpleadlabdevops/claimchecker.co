@@ -3,7 +3,7 @@ import { Paragraph, patchDocument, PatchType, TextRun } from "docx"
 
 module.exports = (name, company, ID) => {
   const date = new Date()
-  patchDocument(fs.readFileSync(__dirname + '/docs/if_engage_ltr.docx'), {
+  return patchDocument(fs.readFileSync(__dirname + '/docs/if_engage_ltr.docx'), {
     patches: {
       name: {
         type: PatchType.PARAGRAPH,
@@ -21,5 +21,9 @@ module.exports = (name, company, ID) => {
   })
     .then(doc => {
       fs.writeFileSync(__dirname + `/saved/if_engage_ltr_${ID}.docx`, doc)
+    })
+    .catch(err => {
+      console.log('DOCX ERROR')
+      console.dir(err)
     })
 }
