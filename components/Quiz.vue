@@ -168,7 +168,7 @@ export default {
         .then(dbResult => {
           console.dir(dbResult);
           console.log('DB finished');
-          params.ID = dbResult.msg
+          params.ID = dbResult.data.msg
           console.dir(params);
           console.log('DOCX started');
           return this.$axios.post(`${process.env.API}/docx`, {
