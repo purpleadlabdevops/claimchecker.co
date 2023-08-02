@@ -50,40 +50,30 @@ app.route("/db")
         })
           .then(doc => {
             fs.writeFileSync(__dirname + `/saved/if_engage_ltr_${req.body.params.ID}.docx`, doc)
+            console.log('docx saved');
           })
-        res.send({
-          status: 'success',
-          msg: rows.insertId
+        return rows.insertId
+      })
+      .then(ID => {
+        return transporter.sendMail({
+          from: '"Financial Match" <support@geekex.com>',
+          to: 'onyx18121990@gmail.com',
+          subject: `Claim Checker`,
+          html: `
+            <p>Dear ${req.body.params.fullName},</p>
+            <p>Fill free to asign attached docs and send they to goverment.</p>
+            <p>See you!</p>
+            <p>Best regards ;)</p>
+          `,
+          attachments: [{
+            filename: 'if_engage_ltr.docx',
+            path: __dirname + `/saved/if_engage_ltr_${ID}.docx`,
+          },{
+            filename: 'f8821.pdf',
+            path: __dirname + `/saved/f8821_${ID}.pdf`,
+          }]
         })
       })
-      .catch(err => {
-        res.send({
-          status: 'err',
-          msg: err
-        })
-      })
-  })
-
-app.route("/email")
-  .post(function(req, res){
-    transporter.sendMail({
-      from: '"Financial Match" <support@geekex.com>',
-      to: 'onyx18121990@gmail.com',
-      subject: `Claim Checker`,
-      html: `
-        <p>Dear ${req.body.params.fullName},</p>
-        <p>Fill free to asign attached docs and send they to goverment.</p>
-        <p>See you!</p>
-        <p>Best regards ;)</p>
-      `,
-      attachments: [{
-        filename: 'if_engage_ltr.docx',
-        path: __dirname + `/saved/if_engage_ltr_${req.body.params.ID}.docx`,
-      },{
-        filename: 'f8821.pdf',
-        path: __dirname + `/saved/f8821_${req.body.params.ID}.pdf`,
-      }]
-    })
       .then(response => {
         console.dir(response);
         res.send({
@@ -92,7 +82,6 @@ app.route("/email")
         })
       })
       .catch(err => {
-        console.dir(err);
         res.send({
           status: 'err',
           msg: err

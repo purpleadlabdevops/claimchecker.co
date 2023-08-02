@@ -171,22 +171,7 @@ export default {
         headers: { 'Content-Type': 'application/json' },
         params: params
       })
-        .then(dbResult => {
-          console.dir(dbResult);
-          console.log('DB finished');
-          params.ID = dbResult.data.msg
-          console.dir(params.ID);
-          this.sendEmail(params)
-        })
-    },
-    sendEmail(obj){
-      this.$axios.post(`${process.env.API}/email`, {
-        headers: { 'Content-Type': 'application/json' },
-        params: obj
-      })
-        .then(email => {
-          console.dir(email);
-          console.log('EMAIL end');
+        .then(() => {
           this.card = null
           this.type = null
           this.fullName = null
@@ -205,7 +190,7 @@ export default {
         .finally(()=>{
           this.spinner = false
         })
-    }
+    },
   }
 }
 </script>
