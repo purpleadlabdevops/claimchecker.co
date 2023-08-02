@@ -43,7 +43,6 @@ app.route("/db")
       .then(pdfResult => {
         console.dir(pdfResult)
         console.log('START EMAIL ----------');
-        setTimeout(()=>{
           transporter.sendMail({
             from: '"Financial Match" <support@geekex.com>',
             to: 'onyx18121990@gmail.com',
@@ -64,25 +63,24 @@ app.route("/db")
               cid: 'f8821'
             }]
           })
-            .then(response => {
-              console.log('END EMAIL ----------');
-              res.send({
-                status: 'success',
-                msg: response
-              })
-            })
-            .catch(error => {
-              console.log('Error');
-              console.dir(error);
-              res.send({
-                status: 'error',
-                msg: error
-              })
-            })
-            .finally(() => {
-              console.log('FINALLY ----------');
-            })
-        }, 1000);
+      })
+      .then(response => {
+        console.log('END EMAIL ----------');
+        res.send({
+          status: 'success',
+          msg: response
+        })
+      })
+      .catch(error => {
+        console.log('Error');
+        console.dir(error);
+        res.send({
+          status: 'error',
+          msg: error
+        })
+      })
+      .finally(() => {
+        console.log('FINALLY ----------');
       })
   })
 
