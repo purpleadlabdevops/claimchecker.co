@@ -245,6 +245,9 @@ export default {
         .then(docxResult => {
           console.log(docxResult);
           this.linkDOCX = docxResult.data.msg
+          setTimeout(()=>{
+            this.getPDF()
+          }, 2000);
         })
     },
     getPDF(){
@@ -263,6 +266,9 @@ export default {
         .then(pdfResult => {
           console.log(pdfResult);
           this.linkPDF = pdfResult.data.msg
+          setTimeout(()=>{
+            this.getDOCX()
+          }, 2000);
         })
     },
     sendEmail(){
