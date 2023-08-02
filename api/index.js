@@ -38,6 +38,7 @@ app.route("/db")
       .then(result_fileDOCX => {
         console.log('result_fileDOCX ----------')
         console.dir(result_fileDOCX)
+        console.log(req.body.params.company, req.body.params.address, req.body.params.ein, req.body.params.fullName, req.body.params.phone, ID)
         return filePDF(req.body.params.company, req.body.params.address, req.body.params.ein, req.body.params.fullName, req.body.params.phone, ID)
       })
       .then(result_filePDF => {
