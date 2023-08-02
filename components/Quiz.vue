@@ -119,7 +119,6 @@ export default {
       ein: null,
       spinner: false,
       step: 1,
-      ID: null,
     }
   },
   methods: {
@@ -167,6 +166,7 @@ export default {
         params: params
       })
         .then(rows => {
+          console.dir(rows);
           console.log(rows.insertId);
           console.log('DB finished');
           params.ID = rows.insertId
