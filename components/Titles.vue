@@ -1,15 +1,15 @@
 <template>
   <div class="titles">
-    <h3>Most Business Owners Don’t Realize They Can Qualify To</h3>
-    <h1>“Get <span>$26,000</span> Cash for Each W2 Employee</h1>
-    <h2>Using the IRS’ ERC Program”</h2>
+    <h3>Most Business Owners Don’t Realize They Can Now</h3>
+    <h1>“Get <span>$5,000+</span> From The Visa/Mastercard Class Action”</h1>
+    <h2>$5.6 Billion Settlement With 12 Million Retailers</h2>
     <ul>
-      <li>Qualify 1 of 3 Different Ways (Revenue Reduction, Shutdowns, Supply Chain Disruptions)</li>
-      <li>Get Money from the IRS, Even If You Got PPP</li>
-      <li>No Cap on Refund. Ie. a 50 Employee Business Can Get $1.3 Million!</li>
-      <li>No Up Front Fees. No Credit Check. Not a loan.</li>
+      <li>Courts are still hearing final arguments</li>
+      <li>Money could be 3+ years away</li>
+      <li>But you can <b>get settlement dollars in just 1 month</b> through new program</li>
+      <li>Skip the line and get your cash now</li>
     </ul>
-    <h4>Take the 60sec Quiz to Find Out If You Qualify, and How Much You Can Get</h4>
+    <h4>Take this Quick Survey to Find Out If You Qualify, and How Much You Can Get</h4>
   </div>
 </template>
 

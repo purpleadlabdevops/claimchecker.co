@@ -1,38 +1,28 @@
 <template>
   <div class="quiz">
-    <form class="quiz__form" @submit.prevent="submit">
+    <div class="quiz__step notQualify" v-if="notQualify">
+      <h4>You Do Not Qualify</h4>
+      <h5>Unfortunately, based on your answers it appears we can not help you at this time.</h5>
+    </div>
+    <form class="quiz__form" @submit.prevent="submit" v-else>
+
       <div class="quiz__step quiz__step-1" :class="step === 1 ? 'active':''" :data-passed="step > 1 ? true:false">
-        <h3>Step 1: <b>Did you accept Visa / MC?</b></h3>
+        <h3>Did You Accept Payments From VISA OR MasterCard Between 2004-2019?</h3>
         <div class="quiz__inner">
-          <div class="field">
-            <input
-              type="radio"
-              v-model="card"
-              id="card__YES"
-              value="YES" />
-            <label for="card__YES">YES</label>
-          </div>
-          <div class="field">
-            <input
-              type="radio"
-              v-model="card"
-              id="card__NO"
-              value="NO" />
-            <label for="card__NO">NO</label>
-          </div>
-          <div class="field"><button class="btn btn-blue" @click="toStep2" type="button" :disabled="!card">Next step</button></div>
+          <button type="button" @click="toStep2('YES')" class="quiz__btn">YES</button>
+          <button type="button" @click="notQualify = true" class="quiz__btn">NO</button>
         </div>
       </div>
 
       <div class="quiz__step quiz__step-2" :class="step === 2 ? 'active':''" :data-passed="step > 2 ? true:false">
-        <h3>Step 2: <b>What type of business do you have?</b></h3>
+        <h3>What industry do you work in?</h3>
         <div class="quiz__inner">
           <div class="field">
             <input
               type="text"
               v-model="type"
               id="type"
-              placeholder="Partnership, LLC, Corporation, ..."
+              placeholder="Your Industry"
               required />
           </div>
           <div class="field"><button class="btn btn-blue" @click="toStep3" type="button" :disabled="!type">Next step</button></div>
@@ -40,7 +30,7 @@
       </div>
 
       <div class="quiz__step quiz__step-3" :class="step === 3 ? 'active':''" :data-passed="step > 3 ? true:false">
-        <h3>Step 3: Personal info</h3>
+        <h3>Personal info</h3>
         <div class="quiz__inner">
           <div class="field">
             <input
@@ -74,7 +64,7 @@
       </div>
 
       <div class="quiz__step quiz__step-4" :class="step === 4 ? 'active':''" :data-passed="step > 4 ? true:false">
-        <h3>Step 4: <b>Special Info</b></h3>
+        <h3>Business info</h3>
         <div class="quiz__inner">
           <div class="field">
             <input
@@ -89,7 +79,7 @@
               type="text"
               v-model="address"
               id="address"
-              placeholder="Mailing address"
+              placeholder="Business Address"
               required />
           </div>
           <div class="field">
@@ -106,17 +96,16 @@
               value="SUBMIT"
               :disabled="spinner" />
           </div>
+          <div class="quiz__small">We'll email you Docusign agreement to e-sign. <br> This is to make sure we have the access to make a settlement on your behalf. <br> Without this, we're powerless to get you your cash payout in just 1 month. <br> Just e-sign the Docusign agreement, and you're good to go.</div>
         </div>
       </div>
+
+      <div class="spinner" v-if="spinner">
+        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="50" cy="50" r="46" />
+        </svg>
+      </div>
     </form>
-    <!-- <div>
-      <button class="btn" @click="getFiles">getFiles</button>
-      <button class="btn" @click="getDOCX">getDOCX</button>
-      <a v-if="linkDOCX" :href="linkDOCX" download>saveDOCX</a>
-      <button class="btn" @click="getPDF">getPDF</button>
-      <a v-if="linkPDF" :href="linkPDF" download>savePDF</a>
-      <button class="btn" v-if="linkDOCX && linkPDF" @click="sendEmail">sendEmail</button>
-    </div> -->
   </div>
 </template>
 
@@ -135,7 +124,7 @@ export default {
       spinner: false,
       step: 1,
       ID: null,
-
+      notQualify: false,
       linkDOCX: null,
       linkPDF: null
     }
@@ -151,7 +140,8 @@ export default {
     validateEmail(email){
       return email.match(/^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/);
     },
-    toStep2(){
+    toStep2(value){
+      this.card = value
       this.step = 2
     },
     toStep3(){
@@ -273,6 +263,7 @@ export default {
     margin: 0 auto res(25, 40);
     padding-top: 8px;
     width: 100%;
+    position: relative;
   }
   h3{
     background: rgba(255, 255, 255, .3);
@@ -319,6 +310,17 @@ export default {
         color: var(--text-white);
       }
     }
+    &-1{
+      .quiz__inner{
+        display: flex;
+        justify-content: space-between;
+        .quiz__btn{
+          @media(min-width:768px){
+            width: calc(50% - 10px);
+          }
+        }
+      }
+    }
   }
   input[type="radio"]{
     display: none;
@@ -362,6 +364,35 @@ export default {
   }
   .field:not(:first-child) {
     margin-top: 30px;
+  }
+  &__btn{
+    border: none;
+    font-weight: 500;
+    font-size: res(18, 24);
+    color: var(--text-black);
+    background: #fff;
+    box-shadow: 0 4px 10px rgba(1,1,1,.3), inset 0 -4px 0 #f8f8f8;
+    border-radius: 15px;
+    display: block;
+    width: 340px;
+    max-width: 100%;
+    transition: .5s ease-in-out;
+    padding: res(15, 30) 0;
+  }
+  h4{
+    font-size: res(20, 30);
+    padding: res(15, 30) 15px res(15, 30);
+    text-align: center;
+  }
+  h5{
+    font-size: res(16, 20);
+    padding: 0 15px res(15, 30);
+    text-align: center;
+    font-weight: 400;
+  }
+  &__small{
+    font-size: 10px;
+    margin-top: 15px;
   }
 }
 
