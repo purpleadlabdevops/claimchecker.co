@@ -44,27 +44,11 @@ app.route("/db")
 app.route("/file-docx")
   .post((req, res) => {
     fileDOCX(req.body.params.fullName, req.body.params.company, req.body.params.ID)
-      .then(res => {
-        res.send({
-          status: 'success',
-          msg: res
-        })
-      })
   })
 
 app.route("/file-pdf")
   .post((req, res) => {
-    console.log('START pdf ----------');
-    console.log(req.body.params.company, req.body.params.address, req.body.params.ein, req.body.params.fullName, req.body.params.phone, req.body.params.ID);
     filePDF(req.body.params.company, req.body.params.address, req.body.params.ein, req.body.params.fullName, req.body.params.phone, req.body.params.ID)
-      .then(res => {
-        console.dir(res);
-        console.log('THEN pdf ----------');
-        res.send({
-          status: 'success',
-          msg: res
-        })
-      })
   })
 
 app.route("/email")

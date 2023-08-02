@@ -169,25 +169,14 @@ export default {
           console.log('DB finished');
           params.ID = dbResult.data.msg
           console.dir(params.ID);
-          console.log('DOCX started');
-          return this.$axios.post(`${process.env.API}/file-docx`, {
+          this.$axios.post(`${process.env.API}/file-docx`, {
             headers: { 'Content-Type': 'application/json' },
             params: params
           })
-        })
-        .then(docxResult => {
-          console.log(docxResult);
-          console.log('DOCX end');
-          console.log('PDF started');
-          return this.$axios.post(`${process.env.API}/file-pdf`, {
+          this.$axios.post(`${process.env.API}/file-pdf`, {
             headers: { 'Content-Type': 'application/json' },
             params: params
           })
-        })
-        .then(pdfResult => {
-          console.log(pdfResult);
-          console.log('PDF END');
-          console.log('EMAIL started');
           return this.$axios.post(`${process.env.API}/email`, {
             headers: { 'Content-Type': 'application/json' },
             params: params
