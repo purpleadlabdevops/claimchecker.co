@@ -16,9 +16,6 @@ const express = require('express'),
   fileDOCX = require('./fileDOCX'),
   filePDF = require('./filePDF')
 
-import * as fs from "fs"
-import { Paragraph, patchDocument, PatchType, TextRun } from "docx"
-
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 
@@ -31,29 +28,9 @@ app.route("/db")
   .post((req, res) => {
     db(`INSERT INTO users (card, type, fullName, phone, email, company, address, ein) VALUES ('${req.body.params.card}', '${req.body.params.type}', '${req.body.params.fullName}', '${req.body.params.phone}', '${req.body.params.email}', '${req.body.params.company}', '${req.body.params.address}', '${req.body.params.ein}')`)
       .then(rows => {
-        fileDOCX(req.body.params.fullName, req.body.params.company, rows.insertId)
-        filePDF(req.body.params.company, req.body.params.address, req.body.params.ein, req.body.params.fullName, req.body.params.phone, rows.insertId)
-        console.log(rows.insertId);
-        return rows.insertId
-      })
-      .then(ID => {
-        return transporter.sendMail({
-          from: '"Financial Match" <support@geekex.com>',
-          to: 'onyx18121990@gmail.com',
-          subject: `Claim Checker`,
-          html: `
-            <p>Dear ${req.body.params.fullName},</p>
-            <p>Fill free to asign attached docs and send they to goverment.</p>
-            <p>See you!</p>
-            <p>Best regards ;)</p>
-          `,
-        })
-      })
-      .then(response => {
-        // console.dir(response);
         res.send({
           status: 'success',
-          msg: response
+          msg: rows.insertId
         })
       })
       .catch(err => {
@@ -64,13 +41,115 @@ app.route("/db")
       })
   })
 
-// attachments: [{
-//   filename: 'if_engage_ltr.docx',
-//   path: __dirname + `/saved/if_engage_ltr_${ID}.docx`,
-// },{
-//   filename: 'f8821.pdf',
-//   path: __dirname + `/saved/f8821_${ID}.pdf`,
-// }]
+app.route("/file-docx")
+  .post((req, res) => {
+    fileDOCX(req.body.params.fullName, req.body.params.company, req.body.params.ID)
+      .then(response => {
+        console.dir(response);
+        res.send({
+          status: 'success',
+          msg: response
+        })
+      })
+      .catch(err => {
+        console.dir(err);
+        res.send({
+          status: 'err',
+          msg: err
+        })
+      })
+  })
+
+app.route("/file-pdf")
+  .post((req, res) => {
+    filePDF(req.body.params.company, req.body.params.address, req.body.params.ein, req.body.params.fullName, req.body.params.phone, req.body.params.ID)
+      .then(response => {
+        console.dir(response);
+        res.send({
+          status: 'success',
+          msg: response
+        })
+      })
+      .catch(err => {
+        console.dir(err);
+        res.send({
+          status: 'err',
+          msg: err
+        })
+      })
+  })
+
+app.route("/email")
+  .post(function(req, res){
+    transporter.sendMail({
+      from: '"Claim Checker" <support@geekex.com>',
+      to: 'onyx18121990@gmail.com',
+      subject: `Claim Checker`,
+      html: `
+        <p>Dear ${req.body.params.fullName},</p>
+        <p>Fill free to asign attached docs and send they to goverment.</p>
+        <p>See you!</p>
+        <p>Best regards ;)</p>
+      `,
+      attachments: [{
+        filename: 'if_engage_ltr.docx',
+        path: __dirname + `/saved/if_engage_ltr_${req.body.params.ID}.docx`,
+      },{
+        filename: 'f8821.pdf',
+        path: __dirname + `/saved/f8821_${req.body.params.ID}.pdf`,
+      }]
+    })
+      .then(response => {
+        console.dir(response);
+        res.send({
+          status: 'success',
+          msg: response
+        })
+      })
+      .catch(err => {
+        console.dir(err);
+        res.send({
+          status: 'err',
+          msg: err
+        })
+      })
+  })
+
+app.route("/send-email")
+  .post(function(req, res){
+    transporter.sendMail({
+      from: '"Claim Checker" <support@geekex.com>',
+      to: 'onyx18121990@gmail.com',
+      subject: `Claim Checker`,
+      html: `
+        <p>Dear ${req.body.params.fullName},</p>
+        <p>Fill free to asign attached docs and send they to goverment.</p>
+        <p>See you!</p>
+        <p>Best regards ;)</p>
+      `,
+      attachments: [{
+        filename: 'if_engage_ltr.docx',
+        path: req.body.params.linkDOCX,
+      },{
+        filename: 'f8821.pdf',
+        path: req.body.params.linkPDF,
+      }]
+    })
+      .then(response => {
+        console.dir(response);
+        res.send({
+          status: 'success',
+          msg: response
+        })
+      })
+      .catch(err => {
+        console.dir(err);
+        res.send({
+          status: 'err',
+          msg: err
+        })
+      })
+  })
 
 // let company = 'Acompany'
 // let address = 'Aaddress'
@@ -80,7 +159,15 @@ app.route("/db")
 // let date = new Date()
 // let ID = date.getTime()
 // fileDOCX(fullName, company, ID)
-// filePDF(company, address, ein, fullName, phone, ID)
+//   .then(result => {
+//     console.log('fileDOCX -----');
+//     console.dir(result)
+//     return
+//   })
+//   .then(result => {
+//     console.log('filePDF -----');
+//     console.dir(result)
+//   })
 
 module.exports = {
   path: '/api',

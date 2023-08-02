@@ -109,6 +109,13 @@
         </div>
       </div>
     </form>
+    <div>
+      <button class="btn" @click="getDOCX">getDOCX</button>
+      <a v-if="linkDOCX" :href="linkDOCX" download>saveDOCX</a>
+      <button class="btn" @click="getPDF">getPDF</button>
+      <a v-if="linkPDF" :href="linkPDF" download>savePDF</a>
+      <button class="btn" v-if="linkDOCX && linkPDF" @click="sendEmail">sendEmail</button>
+    </div>
   </div>
 </template>
 
@@ -126,6 +133,9 @@ export default {
       ein: null,
       spinner: false,
       step: 1,
+
+      linkDOCX: null,
+      linkPDF: null
     }
   },
   methods: {
@@ -171,7 +181,38 @@ export default {
         headers: { 'Content-Type': 'application/json' },
         params: params
       })
-        .then(() => {
+        .then(dbResult => {
+          console.dir(dbResult);
+          console.log('DB finished');
+          params.ID = dbResult.data.msg
+          console.dir(params.ID);
+          console.log('DOCX started');
+          return this.$axios.post(`${process.env.API}/file-docx`, {
+            headers: { 'Content-Type': 'application/json' },
+            params: params
+          })
+        })
+        .then(docxResult => {
+          console.log(docxResult);
+          console.log('DOCX end');
+          console.log('PDF started');
+          return this.$axios.post(`${process.env.API}/file-pdf`, {
+            headers: { 'Content-Type': 'application/json' },
+            params: params
+          })
+        })
+        .then(pdfResult => {
+          console.log(pdfResult);
+          console.log('PDF END');
+          console.log('EMAIL started');
+          return this.$axios.post(`${process.env.API}/email`, {
+            headers: { 'Content-Type': 'application/json' },
+            params: params
+          })
+        })
+        .then(email => {
+          console.dir(email);
+          console.log('EMAIL end');
           this.card = null
           this.type = null
           this.fullName = null
@@ -191,6 +232,52 @@ export default {
           this.spinner = false
         })
     },
+    getDOCX(){
+      let date = new Date()
+      this.$axios.post(`${process.env.API}/file-docx`, {
+        headers: { 'Content-Type': 'application/json' },
+        params: {
+          fullName: 'John Doe',
+          company: 'PUrpleadlab',
+          ID: date.getTime()
+        }
+      })
+        .then(docxResult => {
+          console.log(docxResult);
+          this.linkDOCX = docxResult.data.msg
+        })
+    },
+    getPDF(){
+      let date = new Date()
+      this.$axios.post(`${process.env.API}/file-pdf`, {
+        headers: { 'Content-Type': 'application/json' },
+        params: {
+          company: 'PUrpleadlab',
+          address: '123 Laguna Hills Downtown',
+          ein: '0123456789',
+          fullName: 'John Doe',
+          phone: '2015550123',
+          ID: date.getTime()
+        }
+      })
+        .then(pdfResult => {
+          console.log(pdfResult);
+          this.linkPDF = pdfResult.data.msg
+        })
+    },
+    sendEmail(){
+      this.$axios.post(`${process.env.API}/send-email`, {
+        headers: { 'Content-Type': 'application/json' },
+        params: {
+          fullName: 'John Doe',
+          linkDOCX: this.linkDOCX,
+          linkPDF: this.linkPDF
+        }
+      })
+        .then(emailResult => {
+          console.log(emailResult)
+        })
+    }
   }
 }
 </script>
