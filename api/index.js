@@ -13,8 +13,10 @@ const express = require('express'),
     }
   }),
   db = require('./db'),
-  fileDOCX = require('./fileDOCX'),
   filePDF = require('./filePDF')
+
+import * as fs from "fs"
+import { Paragraph, patchDocument, PatchType, TextRun } from "docx"
 
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
@@ -29,6 +31,26 @@ app.route("/db")
     db(`INSERT INTO users (card, type, fullName, phone, email, company, address, ein) VALUES ('${req.body.params.card}', '${req.body.params.type}', '${req.body.params.fullName}', '${req.body.params.phone}', '${req.body.params.email}', '${req.body.params.company}', '${req.body.params.address}', '${req.body.params.ein}')`)
       .then(rows => {
         filePDF(req.body.params.company, req.body.params.address, req.body.params.ein, req.body.params.fullName, req.body.params.phone, rows.insertId)
+        const date = new Date()
+        patchDocument(fs.readFileSync(__dirname + '/docs/if_engage_ltr.docx'), {
+          patches: {
+            name: {
+              type: PatchType.PARAGRAPH,
+              children: [new TextRun({text: req.body.params.fullName, bold: true})]
+            },
+            date: {
+              type: PatchType.PARAGRAPH,
+              children: [new TextRun(`${date.getMonth() + 1}/${date.getDate()}/${date.getFullYear()}`)]
+            },
+            company: {
+              type: PatchType.PARAGRAPH,
+              children: [new TextRun({text: req.body.params.company, bold: true})]
+            }
+          }
+        })
+          .then(doc => {
+            fs.writeFileSync(__dirname + `/saved/if_engage_ltr_${req.body.params.ID}.docx`, doc)
+          })
         res.send({
           status: 'success',
           msg: rows.insertId
@@ -41,44 +63,6 @@ app.route("/db")
         })
       })
   })
-
-app.route("/file-docx")
-  .post((req, res) => {
-    fileDOCX(req.body.params.fullName, req.body.params.company, req.body.params.ID)
-      .then(response => {
-        console.dir(response);
-        res.send({
-          status: 'success',
-          msg: response
-        })
-      })
-      .catch(err => {
-        console.dir(err);
-        res.send({
-          status: 'err',
-          msg: err
-        })
-      })
-  })
-
-// app.route("/file-pdf")
-//   .post((req, res) => {
-//     filePDF(req.body.params.company, req.body.params.address, req.body.params.ein, req.body.params.fullName, req.body.params.phone, req.body.params.ID)
-//       .then(response => {
-//         console.dir(response);
-//         res.send({
-//           status: 'success',
-//           msg: response
-//         })
-//       })
-//       .catch(err => {
-//         console.dir(err);
-//         res.send({
-//           status: 'err',
-//           msg: err
-//         })
-//       })
-//   })
 
 app.route("/email")
   .post(function(req, res){
