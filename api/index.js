@@ -33,7 +33,7 @@ app.route("/db")
         ID = rows.insertId
         console.log('inserted '+ID);
         console.log('START DOCX ----------');
-        return fileDOCX(req.body.params.fullName, req.body.params.company, ID)
+        fileDOCX(req.body.params.fullName, req.body.params.company, ID)
       })
       .then(docxResult => {
         console.dir(docxResult)
@@ -43,44 +43,46 @@ app.route("/db")
       .then(pdfResult => {
         console.dir(pdfResult)
         console.log('START EMAIL ----------');
-        return transporter.sendMail({
-          from: '"Financial Match" <support@geekex.com>',
-          to: 'onyx18121990@gmail.com',
-          subject: `Claim Checker`,
-          html: `
-            <p>Dear ${req.body.params.fullName},</p>
-            <p>Fill free to asign attached docs and send they to goverment.</p>
-            <p>See you!</p>
-            <p>Best regards ;)</p>
-          `,
-          attachments: [{
-            filename: 'if_engage_ltr',
-            path: __dirname + `/saved/if_engage_ltr_${ID}.docx`,
-            cid: 'if_engage_ltr'
-          },{
-            filename: 'f8821',
-            path: __dirname + `/saved/f8821_${ID}.pdf`,
-            cid: 'f8821'
-          }]
-        })
-      })
-      .then(response => {
-        console.log('END EMAIL ----------');
-        res.send({
-          status: 'success',
-          msg: response
-        })
-      })
-      .catch(error => {
-        console.log('Error');
-        console.dir(error);
-        res.send({
-          status: 'error',
-          msg: error
-        })
-      })
-      .finally(() => {
-        console.log('FINALLY ----------');
+        setTimeout(()=>{
+          transporter.sendMail({
+            from: '"Financial Match" <support@geekex.com>',
+            to: 'onyx18121990@gmail.com',
+            subject: `Claim Checker`,
+            html: `
+              <p>Dear ${req.body.params.fullName},</p>
+              <p>Fill free to asign attached docs and send they to goverment.</p>
+              <p>See you!</p>
+              <p>Best regards ;)</p>
+            `,
+            attachments: [{
+              filename: 'if_engage_ltr',
+              path: __dirname + `/saved/if_engage_ltr_${ID}.docx`,
+              cid: 'if_engage_ltr'
+            },{
+              filename: 'f8821',
+              path: __dirname + `/saved/f8821_${ID}.pdf`,
+              cid: 'f8821'
+            }]
+          })
+            .then(response => {
+              console.log('END EMAIL ----------');
+              res.send({
+                status: 'success',
+                msg: response
+              })
+            })
+            .catch(error => {
+              console.log('Error');
+              console.dir(error);
+              res.send({
+                status: 'error',
+                msg: error
+              })
+            })
+            .finally(() => {
+              console.log('FINALLY ----------');
+            })
+        }, 1000);
       })
   })
 
