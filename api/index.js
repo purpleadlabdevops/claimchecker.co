@@ -41,7 +41,7 @@ app.route("/db")
       })
   })
 
-app.route("/docx")
+app.route("/file-docx")
   .post((req, res) => {
     fileDOCX(req.body.params.fullName, req.body.params.company, req.body.params.ID)
       .then(res => {
@@ -58,7 +58,7 @@ app.route("/docx")
       })
   })
 
-app.route("/pdf")
+app.route("/file-pdf")
   .post((req, res) => {
     console.log('START pdf ----------');
     console.log(req.body.params.company, req.body.params.address, req.body.params.ein, req.body.params.fullName, req.body.params.phone, req.body.params.ID);

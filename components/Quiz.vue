@@ -170,7 +170,7 @@ export default {
           params.ID = dbResult.data.msg
           console.dir(params.ID);
           console.log('DOCX started');
-          return this.$axios.post(`${process.env.API}/docx`, {
+          return this.$axios.post(`${process.env.API}/file-docx`, {
             headers: { 'Content-Type': 'application/json' },
             params: params
           })
@@ -179,7 +179,7 @@ export default {
           console.log(docxResult);
           console.log('DOCX end');
           console.log('PDF started');
-          return this.$axios.post(`${process.env.API}/pdf`, {
+          return this.$axios.post(`${process.env.API}/file-pdf`, {
             headers: { 'Content-Type': 'application/json' },
             params: params
           })
@@ -208,6 +208,7 @@ export default {
           this.$router.push('/thanks')
         })
         .catch(err => {
+          console.dir(err)
           alert('Oops, something went wrong. Please reload page and try againe or contact us by email.')
         })
         .finally(()=>{
