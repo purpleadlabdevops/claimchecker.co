@@ -109,14 +109,14 @@
         </div>
       </div>
     </form>
-    <div>
+    <!-- <div>
       <button class="btn" @click="getFiles">getFiles</button>
       <button class="btn" @click="getDOCX">getDOCX</button>
       <a v-if="linkDOCX" :href="linkDOCX" download>saveDOCX</a>
       <button class="btn" @click="getPDF">getPDF</button>
       <a v-if="linkPDF" :href="linkPDF" download>savePDF</a>
       <button class="btn" v-if="linkDOCX && linkPDF" @click="sendEmail">sendEmail</button>
-    </div>
+    </div> -->
   </div>
 </template>
 
@@ -134,6 +134,7 @@ export default {
       ein: null,
       spinner: false,
       step: 1,
+      ID: null,
 
       linkDOCX: null,
       linkPDF: null
@@ -167,83 +168,34 @@ export default {
       e.preventDefault()
       console.log('start submit');
       this.spinner = true
-      const params = {
-        card: this.card,
-        type: this.type,
-        fullName: this.fullName,
-        phone: this.phone,
-        email: this.email,
-        company: this.company,
-        address: this.address,
-        ein: this.ein
-      }
       console.log('DB started');
       this.$axios.post(`${process.env.API}/db`, {
         headers: { 'Content-Type': 'application/json' },
-        params: params
+        params: {
+          card: this.card,
+          type: this.type,
+          fullName: this.fullName,
+          phone: this.phone,
+          email: this.email,
+          company: this.company,
+          address: this.address,
+          ein: this.ein
+        }
       })
         .then(dbResult => {
           console.dir(dbResult);
-          console.log('DB finished');
-          params.ID = dbResult.data.msg
-          console.dir(params.ID);
-          console.log('DOCX started');
-          return this.$axios.post(`${process.env.API}/file-docx`, {
-            headers: { 'Content-Type': 'application/json' },
-            params: params
-          })
+          this.ID = dbResult.data.msg
+          this.getDOCX()
         })
-        .then(docxResult => {
-          console.log(docxResult);
-          console.log('DOCX end');
-          console.log('PDF started');
-          return this.$axios.post(`${process.env.API}/file-pdf`, {
-            headers: { 'Content-Type': 'application/json' },
-            params: params
-          })
-        })
-        .then(pdfResult => {
-          console.log(pdfResult);
-          console.log('PDF END');
-          console.log('EMAIL started');
-          return this.$axios.post(`${process.env.API}/email`, {
-            headers: { 'Content-Type': 'application/json' },
-            params: params
-          })
-        })
-        .then(email => {
-          console.dir(email);
-          console.log('EMAIL end');
-          this.card = null
-          this.type = null
-          this.fullName = null
-          this.phone = null
-          this.email = null
-          this.company = null
-          this.address = null
-          this.ein = null
-          this.step = 1
-          this.$router.push('/thanks')
-        })
-        .catch(err => {
-          console.dir(err)
-          alert('Oops, something went wrong. Please reload page and try againe or contact us by email.')
-        })
-        .finally(()=>{
-          this.spinner = false
-        })
-    },
-    getFiles(){
-      this.getDOCX()
     },
     getDOCX(){
       let date = new Date()
       this.$axios.post(`${process.env.API}/file-docx`, {
         headers: { 'Content-Type': 'application/json' },
         params: {
-          fullName: 'John Doe',
-          company: 'PUrpleadlab',
-          ID: date.getTime()
+          fullName: this.fullName,
+          company: this.company,
+          ID: this.ID
         }
       })
         .then(docxResult => {
@@ -259,12 +211,12 @@ export default {
       this.$axios.post(`${process.env.API}/file-pdf`, {
         headers: { 'Content-Type': 'application/json' },
         params: {
-          company: 'PUrpleadlab',
-          address: '123 Laguna Hills Downtown',
-          ein: '0123456789',
-          fullName: 'John Doe',
-          phone: '2015550123',
-          ID: date.getTime()
+          company: this.company,
+          address: this.address,
+          ein: this.ein,
+          fullName: this.fullName,
+          phone: this.phone,
+          ID: this.ID,
         }
       })
         .then(pdfResult => {
@@ -279,13 +231,26 @@ export default {
       this.$axios.post(`${process.env.API}/send-email`, {
         headers: { 'Content-Type': 'application/json' },
         params: {
-          fullName: 'John Doe',
+          fullName: this.fullName,
           linkDOCX: this.linkDOCX,
           linkPDF: this.linkPDF
         }
       })
         .then(emailResult => {
           console.log(emailResult)
+          this.card = null
+          this.type = null
+          this.fullName = null
+          this.phone = null
+          this.email = null
+          this.company = null
+          this.address = null
+          this.ein = null
+          this.step = 1
+          this.$router.push('/thanks')
+        })
+        .finally(()=>{
+          this.spinner = false
         })
     }
   }
