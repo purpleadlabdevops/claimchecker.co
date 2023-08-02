@@ -26,17 +26,22 @@ app.route("/db")
       .catch(err => res.send({status: 'error', msg: err}))
   })
   .post((req, res) => {
+    console.log('START DB ----------');
+    let ID
     db(`INSERT INTO users (card, type, fullName, phone, email, company, address, ein) VALUES ('${req.body.params.card}', '${req.body.params.type}', '${req.body.params.fullName}', '${req.body.params.phone}', '${req.body.params.email}', '${req.body.params.company}', '${req.body.params.address}', '${req.body.params.ein}')`)
       .then(rows => {
-        fileDOCX(req.body.params.fullName, req.body.params.company, rows.insertId)
-        filePDF(req.body.params.company, req.body.params.address, req.body.params.ein, req.body.params.fullName, req.body.params.phone, rows.insertId)
-        return {
-          docx: __dirname + `/saved/if_engage_ltr_${rows.insertId}.docx`,
-          pdf: __dirname + `/saved/f8821_${rows.insertId}.pdf`
-        }
+        ID = rows.insertId
+        console.log('inserted '+ID);
+        console.log('START DOCX ----------');
+        return fileDOCX(req.body.params.fullName, req.body.params.company, rows.insertId)
       })
-      .then(files => {
-        transporter.sendMail({
+      .then(rows => {
+        console.log('START PDF ----------');
+        return filePDF(req.body.params.company, req.body.params.address, req.body.params.ein, req.body.params.fullName, req.body.params.phone, rows.insertId)
+      })
+      .then(() => {
+        console.log('START EMAIL ----------');
+        return transporter.sendMail({
           from: '"Financial Match" <support@geekex.com>',
           to: 'onyx18121990@gmail.com',
           subject: `Claim Checker`,
@@ -49,26 +54,32 @@ app.route("/db")
           `,
           attachments: [{
             filename: 'if_engage_ltr',
-            path: files.docx,
+            path: __dirname + `/saved/if_engage_ltr_${rows.insertId}.docx`,
             cid: 'if_engage_ltr'
           },{
             filename: 'f8821',
-            path: files.pdf,
+            path: __dirname + `/saved/f8821_${rows.insertId}.pdf`,
             cid: 'f8821'
           }]
         })
-          .then(response => {
-            res.send({
-              status: 'success',
-              msg: response
-            })
-          })
-          .catch(error => {
-            res.send({
-              status: 'error',
-              msg: error
-            })
-          })
+      })
+      .then(response => {
+        console.log('END EMAIL ----------');
+        res.send({
+          status: 'success',
+          msg: response
+        })
+      })
+      .catch(error => {
+        console.log('Error');
+        console.dir(error);
+        res.send({
+          status: 'error',
+          msg: error
+        })
+      })
+      .finally(() => {
+        console.log('FINALLY ----------');
       })
   })
 
