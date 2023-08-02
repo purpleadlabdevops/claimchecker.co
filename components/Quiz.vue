@@ -169,14 +169,25 @@ export default {
           console.log('DB finished');
           params.ID = dbResult.data.msg
           console.dir(params.ID);
-          this.$axios.post(`${process.env.API}/file-docx`, {
+          console.log('DOCX started');
+          return this.$axios.post(`${process.env.API}/file-docx`, {
             headers: { 'Content-Type': 'application/json' },
             params: params
           })
-          this.$axios.post(`${process.env.API}/file-pdf`, {
+        })
+        .then(docxResult => {
+          console.log(docxResult);
+          console.log('DOCX end');
+          console.log('PDF started');
+          return this.$axios.post(`${process.env.API}/file-pdf`, {
             headers: { 'Content-Type': 'application/json' },
             params: params
           })
+        })
+        .then(pdfResult => {
+          console.log(pdfResult);
+          console.log('PDF END');
+          console.log('EMAIL started');
           return this.$axios.post(`${process.env.API}/email`, {
             headers: { 'Content-Type': 'application/json' },
             params: params
@@ -242,8 +253,7 @@ export default {
     }
     &.active{
       transition: 1s ease-in-out .5s;
-      background: var(--bg-white);
-      box-shadow: 0 0 32px var(--text-black);
+      background: #dbeae9;
       max-height: 1000px;
       opacity: 1;
       padding: 30px 15px;
@@ -266,6 +276,7 @@ export default {
   input[type="radio"]{
     display: none;
     & + label{
+      background: #fff;
       border: 2px solid var(--bg-green);
       padding: 10px;
       border-radius: 8px;
@@ -276,10 +287,14 @@ export default {
       align-items: center;
       font-size: 26px;
       font-weight: 600;
+      cursor: pointer;
     }
     &:checked + label{
       background: var(--bg-green);
       color: var(--text-white);
+    }
+    &:hover{
+      opacity: .7;
     }
   }
 }

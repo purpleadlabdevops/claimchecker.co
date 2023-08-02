@@ -137,9 +137,9 @@ button, a, [type="submit"]{
       border-color: var(--fm-mint);
     }
     &:disabled{
-      background: var(--bg-lightgray);
-      border-color: var(--bg-lightgray);
-      opacity: .7;
+      background: var(--brand-blue);
+      border-color: var(--brand-blue);
+      opacity: .5;
       pointer-events: none;
       cursor: default;
     }
@@ -250,5 +250,23 @@ button, a, [type="submit"]{
     @media(min-width:992px){
       justify-content: space-between;
     }
+  }
+}
+.accent-btn {
+  box-shadow: 8px 8px 0px #c9a828;
+  transition: 0.3s ease all;
+  font-size: 24px;
+  font-weight: 400;
+  background-color: #eac73c;
+  padding: 20px 40px;
+  border-radius: 5px;
+  text-decoration: none;
+  display: inline-block;
+  line-height: 1;
+  color: #fff;
+  fill: #fff;
+  text-align: center;
+  &:hover {
+    box-shadow: 1px 1px 0px #c9a828;
   }
 }
