@@ -3,7 +3,7 @@
     <form class="quiz__form" @submit.prevent="submit">
       <div class="quiz__step quiz__step-1" :class="step === 1 ? 'active':''" :data-passed="step > 1 ? true:false">
         <h3>Step 1: <b>Did you accept Visa / MC?</b></h3>
-        <div class="field__flex">
+        <div class="quiz__inner">
           <div class="field">
             <input
               type="radio"
@@ -20,85 +20,92 @@
               value="NO" />
             <label for="card__NO">NO</label>
           </div>
+          <div class="field"><button class="btn btn-blue" @click="toStep2" type="button" :disabled="!card">Next step</button></div>
         </div>
-        <div class="field"><button class="btn btn-blue" @click="toStep2" type="button" :disabled="!card">Next step</button></div>
       </div>
 
       <div class="quiz__step quiz__step-2" :class="step === 2 ? 'active':''" :data-passed="step > 2 ? true:false">
         <h3>Step 2: <b>What type of business do you have?</b></h3>
-        <div class="field">
-          <input
-            type="text"
-            v-model="type"
-            id="type"
-            required />
+        <div class="quiz__inner">
+          <div class="field">
+            <input
+              type="text"
+              v-model="type"
+              id="type"
+              placeholder="Partnership, LLC, Corporation, ..."
+              required />
+          </div>
+          <div class="field"><button class="btn btn-blue" @click="toStep3" type="button" :disabled="!type">Next step</button></div>
         </div>
-        <div class="field"><button class="btn btn-blue" @click="toStep3" type="button" :disabled="!type">Next step</button></div>
       </div>
 
       <div class="quiz__step quiz__step-3" :class="step === 3 ? 'active':''" :data-passed="step > 3 ? true:false">
         <h3>Step 3: Personal info</h3>
-        <div class="field">
-          <input
-            type="text"
-            v-model="fullName"
-            id="fullName"
-            placeholder="Your Name"
-            required />
+        <div class="quiz__inner">
+          <div class="field">
+            <input
+              type="text"
+              v-model="fullName"
+              id="fullName"
+              placeholder="Your Name"
+              required />
+          </div>
+          <div class="field">
+            <input
+              type="tel"
+              placeholder="Phone"
+              v-model="phone"
+              @input="phoneInput"
+              minlength="14"
+              maxlength="14"
+              id="phone"
+              required>
+          </div>
+          <div class="field">
+            <input
+              type="email"
+              v-model="email"
+              id="email"
+              placeholder="Your Email"
+              required />
+          </div>
+          <div class="field"><button class="btn btn-blue" @click="toStep4" type="button" :disabled="!fullName && !phone && !email">Next step</button></div>
         </div>
-        <div class="field">
-          <input
-            type="tel"
-            placeholder="Phone"
-            v-model="phone"
-            @input="phoneInput"
-            minlength="14"
-            maxlength="14"
-            id="phone"
-            required>
-        </div>
-        <div class="field">
-          <input
-            type="email"
-            v-model="email"
-            id="email"
-            placeholder="Your Email"
-            required />
-        </div>
-        <div class="field"><button class="btn btn-blue" @click="toStep4" type="button" :disabled="!fullName && !phone && !email">Next step</button></div>
       </div>
 
       <div class="quiz__step quiz__step-4" :class="step === 4 ? 'active':''" :data-passed="step > 4 ? true:false">
         <h3>Step 4: <b>Special Info</b></h3>
-        <div class="field">
-          <input
-            type="text"
-            v-model="company"
-            id="company"
-            placeholder="Company Name"
-            required />
-        </div>
-        <div class="field">
-          <input
-            type="text"
-            v-model="address"
-            id="address"
-            placeholder="Mailing address"
-            required />
-        </div>
-        <div class="field">
-          <input
-            type="text"
-            v-model="ein"
-            id="ein"
-            placeholder="EIN"
-            required />
-        </div>
-        <div class="field">
-          <input
-            type="submit"
-            value="SUBMIT"
-            :disabled="spinner" />
+        <div class="quiz__inner">
+          <div class="field">
+            <input
+              type="text"
+              v-model="company"
+              id="company"
+              placeholder="Company Name"
+              required />
+          </div>
+          <div class="field">
+            <input
+              type="text"
+              v-model="address"
+              id="address"
+              placeholder="Mailing address"
+              required />
+          </div>
+          <div class="field">
+            <input
+              type="text"
+              v-model="ein"
+              id="ein"
+              placeholder="EIN"
+              required />
+          </div>
+          <div class="field">
+            <input
+              type="submit"
+              value="SUBMIT"
+              :disabled="spinner" />
+          </div>
         </div>
       </div>
     </form>
@@ -237,38 +244,47 @@ export default {
     width: 100%;
   }
   h3{
-    font-size: res(14, 24);
-  }
-  &__step{
-    background: var(--bg-lightgray);
+    background: rgba(255, 255, 255, .3);
+    font-size: 16px;
     padding: 15px;
-    border-radius: 16px;
-    overflow: hidden;
-    max-height: 50px;
-    transition: .5s ease-in-out;
-    opacity: .6;
     @media(min-width:992px){
-      max-height: 60px;
+      font-size: 20px;
       padding: 15px 30px;
     }
+  }
+  &__inner{
+    overflow: hidden;
+    transition: .5s ease-in-out;
+    // opacity: .6;
+    max-height: 0px;
+    padding: 0 15px;
+    @media(min-width:992px){
+      padding: 0 30px;
+    }
+  }
+  &__step{
+    background: #dbeae9;
+    border-radius: 16px;
+    overflow: hidden;
     &.active{
-      transition: 1s ease-in-out .5s;
-      background: #dbeae9;
-      max-height: 1000px;
-      opacity: 1;
-      padding: 30px 15px;
-      @media(min-width:992px){
-        padding: 30px;
+      .quiz__inner{
+        transition: 1s ease-in-out .5s;
+        max-height: 1000px;
+        opacity: 1;
+        padding-top: 15px;
+        padding-bottom: 15px;
+        @media(min-width:992px){
+          padding-top: 30px;
+          padding-bottom: 30px;
+        }
       }
     }
     &:not(:first-child){
       margin-top: 16px;
     }
     &[data-passed="true"]{
-      background: var(--fm-mint);
-      color: var(--text-white);
-      opacity: .9;
       h3{
+        background: var(--fm-mint);
         color: var(--text-white);
       }
     }
@@ -276,26 +292,45 @@ export default {
   input[type="radio"]{
     display: none;
     & + label{
-      background: #fff;
-      border: 2px solid var(--bg-green);
-      padding: 10px;
-      border-radius: 8px;
-      width: 100px;
-      height: 100px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      font-size: 26px;
+      font-size: 18px;
       font-weight: 600;
       cursor: pointer;
+      position: relative;
+      padding-left: 30px;
+      &:before, &:after{
+        content: "";
+        border-radius: 50%;
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+      }
+      &:before{
+        width: 20px;
+        height: 20px;
+        background: #fff;
+        border: 2px solid var(--bg-green);
+        left: 0;
+      }
+      &:after{
+        width: 16px;
+        height: 16px;
+        background: var(--bg-green);
+        left: 4px;
+        opacity: 0;
+        transition: .2s ease;
+      }
     }
     &:checked + label{
-      background: var(--bg-green);
-      color: var(--text-white);
+      &:after{
+        opacity: 1;
+      }
     }
     &:hover{
       opacity: .7;
     }
+  }
+  .field:not(:first-child) {
+    margin-top: 30px;
   }
 }
 
