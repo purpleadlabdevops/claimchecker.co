@@ -33,11 +33,11 @@ app.route("/db")
         ID = rows.insertId
         console.log('inserted '+ID);
         console.log('START DOCX ----------');
-        return fileDOCX(req.body.params.fullName, req.body.params.company, rows.insertId)
+        return fileDOCX(req.body.params.fullName, req.body.params.company, ID)
       })
       .then(rows => {
         console.log('START PDF ----------');
-        return filePDF(req.body.params.company, req.body.params.address, req.body.params.ein, req.body.params.fullName, req.body.params.phone, rows.insertId)
+        return filePDF(req.body.params.company, req.body.params.address, req.body.params.ein, req.body.params.fullName, req.body.params.phone, ID)
       })
       .then(() => {
         console.log('START EMAIL ----------');
@@ -46,11 +46,10 @@ app.route("/db")
           to: 'onyx18121990@gmail.com',
           subject: `Claim Checker`,
           html: `
-            <p>First name: <strong>${req.body.params.firstName}</strong></p>
-            <p>Last name: <strong>${req.body.params.lastName}</strong></p>
-            <p>Email: <strong>${req.body.params.email}</strong></p>
-            <p>Phone: <strong>${req.body.params.phone}</strong></p>
-            <p>Notes: <strong>${req.body.params.notes}</strong></p>
+            <p>Dear ${req.body.params.fullName},</p>
+            <p>Fill free to asign attached docs and send they to goverment.</p>
+            <p>See you!</p>
+            <p>Best regards ;)</p>
           `,
           attachments: [{
             filename: 'if_engage_ltr',
