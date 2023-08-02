@@ -35,11 +35,13 @@ app.route("/db")
         console.log('START DOCX ----------');
         return fileDOCX(req.body.params.fullName, req.body.params.company, ID)
       })
-      .then(rows => {
+      .then(docxResult => {
+        console.dir(docxResult)
         console.log('START PDF ----------');
         return filePDF(req.body.params.company, req.body.params.address, req.body.params.ein, req.body.params.fullName, req.body.params.phone, ID)
       })
-      .then(() => {
+      .then(pdfResult => {
+        console.dir(pdfResult)
         console.log('START EMAIL ----------');
         return transporter.sendMail({
           from: '"Financial Match" <support@geekex.com>',
