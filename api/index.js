@@ -33,13 +33,14 @@ app.route("/db")
         ID = rows.insertId
         console.log('inserted '+ID);
         console.log('START DOCX ----------');
+        filePDF(req.body.params.company, req.body.params.address, req.body.params.ein, req.body.params.fullName, req.body.params.phone, ID)
         return fileDOCX(req.body.params.fullName, req.body.params.company, ID)
       })
-      .then(docxResult => {
-        console.dir(docxResult)
-        console.log('START PDF ----------');
-        return filePDF(req.body.params.company, req.body.params.address, req.body.params.ein, req.body.params.fullName, req.body.params.phone, ID)
-      })
+      // .then(docxResult => {
+      //   console.dir(docxResult)
+      //   console.log('START PDF ----------');
+      //   return filePDF(req.body.params.company, req.body.params.address, req.body.params.ein, req.body.params.fullName, req.body.params.phone, ID)
+      // })
       .then(pdfResult => {
         console.dir(pdfResult)
         console.log('START EMAIL ----------');
