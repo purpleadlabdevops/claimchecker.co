@@ -32,6 +32,7 @@ app.route("/db")
     db(`INSERT INTO users (card, type, fullName, phone, email, company, address, ein) VALUES ('${req.body.params.card}', '${req.body.params.type}', '${req.body.params.fullName}', '${req.body.params.phone}', '${req.body.params.email}', '${req.body.params.company}', '${req.body.params.address}', '${req.body.params.ein}')`)
       .then(rows => {
         fileDOCX(req.body.params.fullName, req.body.params.company, rows.insertId)
+        filePDF(req.body.params.company, req.body.params.address, req.body.params.ein, req.body.params.fullName, req.body.params.phone, rows.insertId)
         console.log(rows.insertId);
         return rows.insertId
       })
@@ -46,10 +47,6 @@ app.route("/db")
             <p>See you!</p>
             <p>Best regards ;)</p>
           `,
-          attachments: [{
-            filename: 'if_engage_ltr.docx',
-            path: __dirname + `/saved/if_engage_ltr_${ID}.docx`,
-          }]
         })
       })
       .then(response => {
