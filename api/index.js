@@ -40,6 +40,16 @@ app.route("/db")
         console.dir(result_fileDOCX)
         console.log(req.body.params.company, req.body.params.address, req.body.params.ein, req.body.params.fullName, req.body.params.phone, ID)
         return filePDF(req.body.params.company, req.body.params.address, req.body.params.ein, req.body.params.fullName, req.body.params.phone, ID)
+          .then(reesult => {
+            console.log('filePDF result')
+            console.dir(reesult)
+            return result
+          })
+          .catch(err => {
+            console.log('filePDF err')
+            console.dir(err)
+            throw err
+          })
       })
       .then(result_filePDF => {
         console.log('result_filePDF ----------')
