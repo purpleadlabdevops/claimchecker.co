@@ -123,15 +123,7 @@ let phone = 'Aphone'
 let date = new Date()
 let ID = date.getTime()
 fileDOCX(fullName, company, ID)
-  .then(result => {
-    console.log('fileDOCX -----');
-    console.dir(result)
-    return filePDF(company, address, ein, fullName, phone, ID)
-  })
-  .then(result => {
-    console.log('filePDF -----');
-    console.dir(result)
-  })
+filePDF(company, address, ein, fullName, phone, ID)
 
 module.exports = {
   path: '/api',
