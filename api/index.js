@@ -32,12 +32,11 @@ app.route("/db")
       .then(rows => {
         ID = rows.insertId
         console.log('inserted '+ID);
-        console.log('START DOCX ----------');
+        console.log('START FILES ----------');
         filePDF(req.body.params.company, req.body.params.address, req.body.params.ein, req.body.params.fullName, req.body.params.phone, ID)
-        return fileDOCX(req.body.params.fullName, req.body.params.company, ID)
-      })
-      .then(() => {
-        console.log('START EMAIL ----------');
+        fileDOCX(req.body.params.fullName, req.body.params.company, ID)
+        setTimeout(()=>{
+          console.log('START EMAIL ----------');
           transporter.sendMail({
             from: '"Financial Match" <support@geekex.com>',
             to: 'onyx18121990@gmail.com',
@@ -58,24 +57,25 @@ app.route("/db")
               cid: 'f8821'
             }]
           })
-      })
-      .then(response => {
-        console.log('END EMAIL ----------');
-        res.send({
-          status: 'success',
-          msg: response
-        })
-      })
-      .catch(error => {
-        console.log('Error');
-        console.dir(error);
-        res.send({
-          status: 'error',
-          msg: error
-        })
-      })
-      .finally(() => {
-        console.log('FINALLY ----------');
+            .then(response => {
+              console.log('END EMAIL ----------');
+              res.send({
+                status: 'success',
+                msg: response
+              })
+            })
+            .catch(error => {
+              console.log('Error');
+              console.dir(error);
+              res.send({
+                status: 'error',
+                msg: error
+              })
+            })
+            .finally(() => {
+              console.log('FINALLY ----------');
+            })
+        }, 5000);
       })
   })
 
