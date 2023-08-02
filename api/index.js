@@ -28,6 +28,7 @@ app.route("/db")
   .post((req, res) => {
     db(`INSERT INTO users (card, type, fullName, phone, email, company, address, ein) VALUES ('${req.body.params.card}', '${req.body.params.type}', '${req.body.params.fullName}', '${req.body.params.phone}', '${req.body.params.email}', '${req.body.params.company}', '${req.body.params.address}', '${req.body.params.ein}')`)
       .then(res => {
+        console.dir(res)
         res.send({
           status: 'success',
           msg: res
