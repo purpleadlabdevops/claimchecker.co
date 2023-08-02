@@ -176,19 +176,24 @@ export default {
           console.log('DB finished');
           params.ID = dbResult.data.msg
           console.dir(params.ID);
-          console.log('DOCX started');
-          return this.$axios.post(`${process.env.API}/file-docx`, {
-            headers: { 'Content-Type': 'application/json' },
-            params: params
-          })
+          setTimeout(()=>{
+            this.secondRequest(params)
+          }, 1000);
         })
+    },
+    secondRequest(obj){
+      console.log('DOCX started');
+      this.$axios.post(`${process.env.API}/file-docx`, {
+        headers: { 'Content-Type': 'application/json' },
+        params: obj
+      })
         .then(docxResult => {
           console.log(docxResult);
           console.log('DOCX end');
           console.log('EMAIL started');
           return this.$axios.post(`${process.env.API}/email`, {
             headers: { 'Content-Type': 'application/json' },
-            params: params
+            params: obj
           })
         })
         .then(email => {
@@ -212,7 +217,7 @@ export default {
         .finally(()=>{
           this.spinner = false
         })
-    },
+    }
   }
 }
 </script>
