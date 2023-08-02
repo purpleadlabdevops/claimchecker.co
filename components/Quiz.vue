@@ -178,7 +178,7 @@ export default {
           console.dir(params.ID);
           setTimeout(()=>{
             this.secondRequest(params)
-          }, 5000);
+          }, 30000);
         })
     },
     secondRequest(obj){
