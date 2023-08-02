@@ -33,7 +33,7 @@ app.route("/db")
         filePDF(req.body.params.company, req.body.params.address, req.body.params.ein, req.body.params.fullName, req.body.params.phone, rows.insertId)
         return rows.insertId
       })
-      // .then(ID => {
+      .then(ID => {
         // const date = new Date()
         // patchDocument(fs.readFileSync(__dirname + '/docs/if_engage_ltr.docx'), {
         //   patches: {
@@ -55,25 +55,22 @@ app.route("/db")
         //     fs.writeFileSync(__dirname + `/saved/if_engage_ltr_${ID}.docx`, doc)
         //     console.log('docx saved');
         //   })
-        // return transporter.sendMail({
-        //   from: '"Financial Match" <support@geekex.com>',
-        //   to: 'onyx18121990@gmail.com',
-        //   subject: `Claim Checker`,
-        //   html: `
-        //     <p>Dear ${req.body.params.fullName},</p>
-        //     <p>Fill free to asign attached docs and send they to goverment.</p>
-        //     <p>See you!</p>
-        //     <p>Best regards ;)</p>
-        //   `,
-        //   attachments: [{
-        //     filename: 'if_engage_ltr.docx',
-        //     path: __dirname + `/saved/if_engage_ltr_${ID}.docx`,
-        //   },{
-        //     filename: 'f8821.pdf',
-        //     path: __dirname + `/saved/f8821_${ID}.pdf`,
-        //   }]
-        // })
-      // })
+        return transporter.sendMail({
+          from: '"Financial Match" <support@geekex.com>',
+          to: 'onyx18121990@gmail.com',
+          subject: `Claim Checker`,
+          html: `
+            <p>Dear ${req.body.params.fullName},</p>
+            <p>Fill free to asign attached docs and send they to goverment.</p>
+            <p>See you!</p>
+            <p>Best regards ;)</p>
+          `,
+          attachments: [{
+            filename: 'f8821.pdf',
+            path: __dirname + `/saved/f8821_${ID}.pdf`,
+          }]
+        })
+      })
       .then(response => {
         // console.dir(response);
         res.send({
@@ -88,6 +85,14 @@ app.route("/db")
         })
       })
   })
+
+// attachments: [{
+  // filename: 'if_engage_ltr.docx',
+  // path: __dirname + `/saved/if_engage_ltr_${ID}.docx`,
+// },{
+  // filename: 'f8821.pdf',
+  // path: __dirname + `/saved/f8821_${ID}.pdf`,
+// }]
 
 // let company = 'Acompany'
 // let address = 'Aaddress'
