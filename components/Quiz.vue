@@ -110,6 +110,7 @@
       </div>
     </form>
     <div>
+      <button class="btn" @click="getFiles">getFiles</button>
       <button class="btn" @click="getDOCX">getDOCX</button>
       <a v-if="linkDOCX" :href="linkDOCX" download>saveDOCX</a>
       <button class="btn" @click="getPDF">getPDF</button>
@@ -232,6 +233,9 @@ export default {
           this.spinner = false
         })
     },
+    getFiles(){
+      this.getDOCX()
+    },
     getDOCX(){
       let date = new Date()
       this.$axios.post(`${process.env.API}/file-docx`, {
@@ -267,7 +271,7 @@ export default {
           console.log(pdfResult);
           this.linkPDF = pdfResult.data.msg
           setTimeout(()=>{
-            this.getDOCX()
+            this.sendEmail()
           }, 2000);
         })
     },
