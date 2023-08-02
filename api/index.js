@@ -31,6 +31,9 @@ app.route("/db")
     db(`INSERT INTO users (card, type, fullName, phone, email, company, address, ein) VALUES ('${req.body.params.card}', '${req.body.params.type}', '${req.body.params.fullName}', '${req.body.params.phone}', '${req.body.params.email}', '${req.body.params.company}', '${req.body.params.address}', '${req.body.params.ein}')`)
       .then(rows => {
         filePDF(req.body.params.company, req.body.params.address, req.body.params.ein, req.body.params.fullName, req.body.params.phone, rows.insertId)
+        return rows.insertId
+      })
+      .then(ID => {
         const date = new Date()
         patchDocument(fs.readFileSync(__dirname + '/docs/if_engage_ltr.docx'), {
           patches: {
@@ -49,12 +52,9 @@ app.route("/db")
           }
         })
           .then(doc => {
-            fs.writeFileSync(__dirname + `/saved/if_engage_ltr_${req.body.params.ID}.docx`, doc)
+            fs.writeFileSync(__dirname + `/saved/if_engage_ltr_${ID}.docx`, doc)
             console.log('docx saved');
           })
-        return rows.insertId
-      })
-      .then(ID => {
         return transporter.sendMail({
           from: '"Financial Match" <support@geekex.com>',
           to: 'onyx18121990@gmail.com',
