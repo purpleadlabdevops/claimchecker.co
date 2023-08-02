@@ -26,62 +26,88 @@ app.route("/db")
       .catch(err => res.send({status: 'error', msg: err}))
   })
   .post((req, res) => {
-    console.log('START DB ----------');
-    let ID
     db(`INSERT INTO users (card, type, fullName, phone, email, company, address, ein) VALUES ('${req.body.params.card}', '${req.body.params.type}', '${req.body.params.fullName}', '${req.body.params.phone}', '${req.body.params.email}', '${req.body.params.company}', '${req.body.params.address}', '${req.body.params.ein}')`)
-      .then(rows => {
-        ID = rows.insertId
-        console.log('inserted '+ID);
-        console.log('START DOCX ----------');
-        return fileDOCX(req.body.params.fullName, req.body.params.company, ID)
-                .then(res => filePDF(req.body.params.company, req.body.params.address, req.body.params.ein, req.body.params.fullName, req.body.params.phone, ID))
-      })
-      // .then(docxResult => {
-      //   console.dir(docxResult)
-      //   console.log('START PDF ----------');
-      //   return filePDF(req.body.params.company, req.body.params.address, req.body.params.ein, req.body.params.fullName, req.body.params.phone, ID)
-      // })
-      .then(pdfResult => {
-        console.dir(pdfResult)
-        console.log('START EMAIL ----------');
-        transporter.sendMail({
-          from: '"Financial Match" <support@geekex.com>',
-          to: 'onyx18121990@gmail.com',
-          subject: `Claim Checker`,
-          html: `
-            <p>Dear ${req.body.params.fullName},</p>
-            <p>Fill free to asign attached docs and send they to goverment.</p>
-            <p>See you!</p>
-            <p>Best regards ;)</p>
-          `,
-          attachments: [{
-            filename: 'if_engage_ltr',
-            path: __dirname + `/saved/if_engage_ltr_${ID}.docx`,
-            cid: 'if_engage_ltr'
-          },{
-            filename: 'f8821',
-            path: __dirname + `/saved/f8821_${ID}.pdf`,
-            cid: 'f8821'
-          }]
-        })
-      })
-      .then(response => {
-        console.log('END EMAIL ----------');
+      .then(res => {
         res.send({
           status: 'success',
-          msg: response
+          msg: res
         })
       })
-      .catch(error => {
-        console.log('Error');
-        console.dir(error);
+      .catch(err => {
         res.send({
-          status: 'error',
-          msg: error
+          status: 'err',
+          msg: err
         })
       })
-      .finally(() => {
-        console.log('FINALLY ----------');
+  })
+
+app.route("/docx")
+  .post((req, res) => {
+    fileDOCX(req.body.params.fullName, req.body.params.company, req.body.params.ID)
+      .then(res => {
+        res.send({
+          status: 'success',
+          msg: res
+        })
+      })
+      .catch(err => {
+        res.send({
+          status: 'err',
+          msg: err
+        })
+      })
+  })
+
+app.route("/pdf")
+  .post((req, res) => {
+    filePDF(req.body.params.company, req.body.params.address, req.body.params.ein, req.body.params.fullName, req.body.params.phone, req.body.params.ID)
+      .then(res => {
+        res.send({
+          status: 'success',
+          msg: res
+        })
+      })
+      .catch(err => {
+        res.send({
+          status: 'err',
+          msg: err
+        })
+      })
+  })
+
+app.route("/email")
+  .post((req, res) => {
+    transporter.sendMail({
+      from: '"Financial Match" <support@geekex.com>',
+      to: 'onyx18121990@gmail.com',
+      subject: `Claim Checker`,
+      html: `
+        <p>Dear ${req.body.params.fullName},</p>
+        <p>Fill free to asign attached docs and send they to goverment.</p>
+        <p>See you!</p>
+        <p>Best regards ;)</p>
+      `,
+      attachments: [{
+        filename: 'if_engage_ltr',
+        path: __dirname + `/saved/if_engage_ltr_${req.body.params.ID}.docx`,
+        cid: 'if_engage_ltr'
+      },{
+        filename: 'f8821',
+        path: __dirname + `/saved/f8821_${req.body.params.ID}.pdf`,
+        cid: 'f8821'
+      }]
+    })
+      .then(res => {
+        res.send({
+          status: 'success',
+          msg: res
+        })
+      })
+      .catch(err => {
+        res.send({
+          status: 'err',
+          msg: err
+        })
       })
   })
 

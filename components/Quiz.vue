@@ -119,6 +119,7 @@ export default {
       ein: null,
       spinner: false,
       step: 1,
+      ID: null,
     }
   },
   methods: {
@@ -148,38 +149,54 @@ export default {
     submit(e){
       e.preventDefault()
       this.spinner = true
+      const params = {
+        card: this.card,
+        type: this.type,
+        fullName: this.fullName,
+        phone: this.phone,
+        email: this.email,
+        company: this.company,
+        address: this.address,
+        ein: this.ein
+      }
       this.$axios.post(`${process.env.API}/db`, {
         headers: { 'Content-Type': 'application/json' },
-        params: {
-          card: this.card,
-          type: this.type,
-          fullName: this.fullName,
-          phone: this.phone,
-          email: this.email,
-          company: this.company,
-          address: this.address,
-          ein: this.ein,
-        }
+        params: params
       })
-        .then(result => {
-          console.log('Result----------')
-          console.dir(result)
-          if(result.data.status == "error"){
-            throw result.data.status
-          } else{
-            setTimeout(()=>{
-              this.card = null
-              this.type = null
-              this.fullName = null
-              this.phone = null
-              this.email = null
-              this.company = null
-              this.address = null
-              this.ein = null
-              this.step = 1
-              this.$router.push('/thanks')
-            }, 500);
-          }
+        .then(rows => {
+          console.log(rows.insertId);
+          params.ID = rows.insertId
+          return this.$axios.post(`${process.env.API}/docx`, {
+            headers: { 'Content-Type': 'application/json' },
+            params: params
+          })
+        })
+        .then(docxResult => {
+          console.log(docxResult);
+          return this.$axios.post(`${process.env.API}/pdf`, {
+            headers: { 'Content-Type': 'application/json' },
+            params: params
+          })
+        })
+        .then(pdfResult => {
+          console.log(pdfResult);
+          return this.$axios.post(`${process.env.API}/email`, {
+            headers: { 'Content-Type': 'application/json' },
+            params: params
+          })
+        })
+        .then(email => {
+          console.dir(email);
+          this.card = null
+          this.type = null
+          this.fullName = null
+          this.phone = null
+          this.email = null
+          this.company = null
+          this.address = null
+          this.ein = null
+          this.step = 1
+          this.$router.push('/thanks')
         })
         .catch(err => {
           alert('Oops, something went wrong. Please reload page and try againe or contact us by email.')
