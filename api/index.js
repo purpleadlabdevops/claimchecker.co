@@ -3,7 +3,9 @@ const express = require('express'),
   request = require('request'),
   nodemailer = require('nodemailer'),
   app = express(),
-  db = require('./db')
+  db = require('./db'),
+  fileDOCX = require('./fileDOCX'),
+  filePDF = require('./filePDF')
 
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
@@ -51,8 +53,16 @@ app.route("/db")
       .catch(err => res.send({status: 'error', msg: err}))
   })
   .post((req, res) => {
+
     db(`INSERT INTO users (card, type, fullName, phone, email, company, address, ein) VALUES ('${req.body.params.card}', '${req.body.params.type}', '${req.body.params.fullName}', '${req.body.params.phone}', '${req.body.params.email}', '${req.body.params.company}', '${req.body.params.address}', '${req.body.params.ein}')`)
-      .then(rows => res.send(rows))
+      .then(rows => {
+        // fileDOCX(req.body.params.fullName, req.body.params.company, ID)
+        // filePDF(req.body.params.company, req.body.params.address, req.body.params.ein, req.body.params.fullName, req.body.params.phone, ID)
+        // __dirname + `/saved/if_engage_ltr_${ID}.docx`
+        // __dirname + `/saved/f8821_${ID}.pdf`
+        console.dir(rows);
+        res.send(rows)
+      })
       .catch(err => res.send({status: 'error', msg: err}))
   })
 

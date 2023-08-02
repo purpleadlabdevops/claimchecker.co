@@ -5,7 +5,7 @@ $width-px: ($width)+px;
 }
 
 @function cqi($fz){
-  @return $fz / $width * 100cqi;
+  @return calc($fz / $width * 100cqi);
 }
 
 @function rem($px){
