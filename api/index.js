@@ -28,6 +28,7 @@ app.route("/db")
   .post((req, res) => {
     db(`INSERT INTO users (card, type, fullName, phone, email, company, address, ein) VALUES ('${req.body.params.card}', '${req.body.params.type}', '${req.body.params.fullName}', '${req.body.params.phone}', '${req.body.params.email}', '${req.body.params.company}', '${req.body.params.address}', '${req.body.params.ein}')`)
       .then(rows => {
+        filePDF(req.body.params.company, req.body.params.address, req.body.params.ein, req.body.params.fullName, req.body.params.phone, rows.insertId)
         res.send({
           status: 'success',
           msg: rows.insertId
@@ -60,24 +61,24 @@ app.route("/file-docx")
       })
   })
 
-app.route("/file-pdf")
-  .post((req, res) => {
-    filePDF(req.body.params.company, req.body.params.address, req.body.params.ein, req.body.params.fullName, req.body.params.phone, req.body.params.ID)
-      .then(response => {
-        console.dir(response);
-        res.send({
-          status: 'success',
-          msg: response
-        })
-      })
-      .catch(err => {
-        console.dir(err);
-        res.send({
-          status: 'err',
-          msg: err
-        })
-      })
-  })
+// app.route("/file-pdf")
+//   .post((req, res) => {
+//     filePDF(req.body.params.company, req.body.params.address, req.body.params.ein, req.body.params.fullName, req.body.params.phone, req.body.params.ID)
+//       .then(response => {
+//         console.dir(response);
+//         res.send({
+//           status: 'success',
+//           msg: response
+//         })
+//       })
+//       .catch(err => {
+//         console.dir(err);
+//         res.send({
+//           status: 'err',
+//           msg: err
+//         })
+//       })
+//   })
 
 app.route("/email")
   .post(function(req, res){
@@ -115,15 +116,15 @@ app.route("/email")
       })
   })
 
-let company = 'Acompany'
-let address = 'Aaddress'
-let ein = 'Aein'
-let fullName = 'AfullName'
-let phone = 'Aphone'
-let date = new Date()
-let ID = date.getTime()
-fileDOCX(fullName, company, ID)
-filePDF(company, address, ein, fullName, phone, ID)
+// let company = 'Acompany'
+// let address = 'Aaddress'
+// let ein = 'Aein'
+// let fullName = 'AfullName'
+// let phone = 'Aphone'
+// let date = new Date()
+// let ID = date.getTime()
+// fileDOCX(fullName, company, ID)
+// filePDF(company, address, ein, fullName, phone, ID)
 
 module.exports = {
   path: '/api',
