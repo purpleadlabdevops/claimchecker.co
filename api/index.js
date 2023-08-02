@@ -43,19 +43,14 @@ app.route("/db")
 
 app.route("/docx")
   .post((req, res) => {
-    console.log('START docx ----------');
-    console.log(req.body.params.fullName, req.body.params.company, req.body.params.ID);
     fileDOCX(req.body.params.fullName, req.body.params.company, req.body.params.ID)
       .then(res => {
-        console.dir(res);
-        console.log('THEN docx ----------');
         res.send({
           status: 'success',
           msg: res
         })
       })
       .catch(err => {
-        console.log('ERROR docx ----------');
         res.send({
           status: 'err',
           msg: err

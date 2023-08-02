@@ -159,7 +159,6 @@ export default {
         address: this.address,
         ein: this.ein
       }
-      console.dir(params);
       console.log('DB started');
       this.$axios.post(`${process.env.API}/db`, {
         headers: { 'Content-Type': 'application/json' },
@@ -169,7 +168,7 @@ export default {
           console.dir(dbResult);
           console.log('DB finished');
           params.ID = dbResult.data.msg
-          console.dir(params);
+          console.dir(params.ID);
           console.log('DOCX started');
           return this.$axios.post(`${process.env.API}/docx`, {
             headers: { 'Content-Type': 'application/json' },
