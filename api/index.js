@@ -34,27 +34,27 @@ app.route("/db")
         return rows.insertId
       })
       .then(ID => {
-        const date = new Date()
-        patchDocument(fs.readFileSync(__dirname + '/docs/if_engage_ltr.docx'), {
-          patches: {
-            name: {
-              type: PatchType.PARAGRAPH,
-              children: [new TextRun({text: req.body.params.fullName, bold: true})]
-            },
-            date: {
-              type: PatchType.PARAGRAPH,
-              children: [new TextRun(`${date.getMonth() + 1}/${date.getDate()}/${date.getFullYear()}`)]
-            },
-            company: {
-              type: PatchType.PARAGRAPH,
-              children: [new TextRun({text: req.body.params.company, bold: true})]
-            }
-          }
-        })
-          .then(doc => {
-            fs.writeFileSync(__dirname + `/saved/if_engage_ltr_${ID}.docx`, doc)
-            console.log('docx saved');
-          })
+        // const date = new Date()
+        // patchDocument(fs.readFileSync(__dirname + '/docs/if_engage_ltr.docx'), {
+        //   patches: {
+        //     name: {
+        //       type: PatchType.PARAGRAPH,
+        //       children: [new TextRun({text: req.body.params.fullName, bold: true})]
+        //     },
+        //     date: {
+        //       type: PatchType.PARAGRAPH,
+        //       children: [new TextRun(`${date.getMonth() + 1}/${date.getDate()}/${date.getFullYear()}`)]
+        //     },
+        //     company: {
+        //       type: PatchType.PARAGRAPH,
+        //       children: [new TextRun({text: req.body.params.company, bold: true})]
+        //     }
+        //   }
+        // })
+        //   .then(doc => {
+        //     fs.writeFileSync(__dirname + `/saved/if_engage_ltr_${ID}.docx`, doc)
+        //     console.log('docx saved');
+        //   })
         return transporter.sendMail({
           from: '"Financial Match" <support@geekex.com>',
           to: 'onyx18121990@gmail.com',
