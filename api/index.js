@@ -33,8 +33,8 @@ app.route("/db")
         ID = rows.insertId
         console.log('inserted '+ID);
         console.log('START DOCX ----------');
-        filePDF(req.body.params.company, req.body.params.address, req.body.params.ein, req.body.params.fullName, req.body.params.phone, ID)
         return fileDOCX(req.body.params.fullName, req.body.params.company, ID)
+                .then(res => filePDF(req.body.params.company, req.body.params.address, req.body.params.ein, req.body.params.fullName, req.body.params.phone, ID))
       })
       // .then(docxResult => {
       //   console.dir(docxResult)
