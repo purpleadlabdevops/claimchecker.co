@@ -13,6 +13,7 @@ const express = require('express'),
     }
   }),
   db = require('./db'),
+  fileDOCX = require('./fileDOCX'),
   filePDF = require('./filePDF')
 
 import * as fs from "fs"
@@ -30,30 +31,10 @@ app.route("/db")
   .post((req, res) => {
     db(`INSERT INTO users (card, type, fullName, phone, email, company, address, ein) VALUES ('${req.body.params.card}', '${req.body.params.type}', '${req.body.params.fullName}', '${req.body.params.phone}', '${req.body.params.email}', '${req.body.params.company}', '${req.body.params.address}', '${req.body.params.ein}')`)
       .then(rows => {
+        fileDOCX(req.body.params.fullName, req.body.params.company, rows.insertId)
         return rows.insertId
       })
       .then(ID => {
-        // const date = new Date()
-        // patchDocument(fs.readFileSync(__dirname + '/docs/if_engage_ltr.docx'), {
-        //   patches: {
-        //     name: {
-        //       type: PatchType.PARAGRAPH,
-        //       children: [new TextRun({text: req.body.params.fullName, bold: true})]
-        //     },
-        //     date: {
-        //       type: PatchType.PARAGRAPH,
-        //       children: [new TextRun(`${date.getMonth() + 1}/${date.getDate()}/${date.getFullYear()}`)]
-        //     },
-        //     company: {
-        //       type: PatchType.PARAGRAPH,
-        //       children: [new TextRun({text: req.body.params.company, bold: true})]
-        //     }
-        //   }
-        // })
-        //   .then(doc => {
-        //     fs.writeFileSync(__dirname + `/saved/if_engage_ltr_${ID}.docx`, doc)
-        //     console.log('docx saved');
-        //   })
         return transporter.sendMail({
           from: '"Financial Match" <support@geekex.com>',
           to: 'onyx18121990@gmail.com',
