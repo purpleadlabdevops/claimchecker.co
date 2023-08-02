@@ -50,12 +50,6 @@ app.route("/file-docx")
           msg: res
         })
       })
-      .catch(err => {
-        res.send({
-          status: 'err',
-          msg: err
-        })
-      })
   })
 
 app.route("/file-pdf")
@@ -69,13 +63,6 @@ app.route("/file-pdf")
         res.send({
           status: 'success',
           msg: res
-        })
-      })
-      .catch(err => {
-        console.log('ERR pdf ----------');
-        res.send({
-          status: 'err',
-          msg: err
         })
       })
   })
