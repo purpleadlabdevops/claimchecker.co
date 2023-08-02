@@ -33,27 +33,12 @@ app.route("/db")
         ID = rows.insertId
         console.log('inserted '+ID);
         console.log('START FILES ----------');
+        filePDF(req.body.params.company, req.body.params.address, req.body.params.ein, req.body.params.fullName, req.body.params.phone, ID)
         return fileDOCX(req.body.params.fullName, req.body.params.company, ID)
       })
-      .then(result_fileDOCX => {
-        console.log('result_fileDOCX ----------')
-        console.dir(result_fileDOCX)
-        console.log(req.body.params.company, req.body.params.address, req.body.params.ein, req.body.params.fullName, req.body.params.phone, ID)
-        return filePDF(req.body.params.company, req.body.params.address, req.body.params.ein, req.body.params.fullName, req.body.params.phone, ID)
-          .then(reesult => {
-            console.log('filePDF result')
-            console.dir(reesult)
-            return result
-          })
-          .catch(err => {
-            console.log('filePDF err')
-            console.dir(err)
-            throw err
-          })
-      })
-      .then(result_filePDF => {
-        console.log('result_filePDF ----------')
-        console.dir(result_filePDF)
+      .then(files => {
+        console.log('END files ----------')
+        console.dir(files)
         console.log('START EMAIL ----------');
         transporter.sendMail({
           from: '"Financial Match" <support@geekex.com>',
