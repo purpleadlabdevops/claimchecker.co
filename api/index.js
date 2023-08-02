@@ -33,51 +33,75 @@ app.route("/db")
         ID = rows.insertId
         console.log('inserted '+ID);
         console.log('START FILES ----------');
-        filePDF(req.body.params.company, req.body.params.address, req.body.params.ein, req.body.params.fullName, req.body.params.phone, ID)
-        fileDOCX(req.body.params.fullName, req.body.params.company, ID)
-        setTimeout(()=>{
-          console.log('START EMAIL ----------');
-          transporter.sendMail({
-            from: '"Financial Match" <support@geekex.com>',
-            to: 'onyx18121990@gmail.com',
-            subject: `Claim Checker`,
-            html: `
-              <p>Dear ${req.body.params.fullName},</p>
-              <p>Fill free to asign attached docs and send they to goverment.</p>
-              <p>See you!</p>
-              <p>Best regards ;)</p>
-            `,
-            attachments: [{
-              filename: 'if_engage_ltr',
-              path: __dirname + `/saved/if_engage_ltr_${ID}.docx`,
-              cid: 'if_engage_ltr'
-            },{
-              filename: 'f8821',
-              path: __dirname + `/saved/f8821_${ID}.pdf`,
-              cid: 'f8821'
-            }]
-          })
-            .then(response => {
-              console.log('END EMAIL ----------');
-              res.send({
-                status: 'success',
-                msg: response
-              })
-            })
-            .catch(error => {
-              console.log('Error');
-              console.dir(error);
-              res.send({
-                status: 'error',
-                msg: error
-              })
-            })
-            .finally(() => {
-              console.log('FINALLY ----------');
-            })
-        }, 5000);
+        return fileDOCX(req.body.params.fullName, req.body.params.company, ID)
+      })
+      .then(result_fileDOCX => {
+        console.log('result_fileDOCX ----------')
+        console.dir(result_fileDOCX)
+        return filePDF(req.body.params.company, req.body.params.address, req.body.params.ein, req.body.params.fullName, req.body.params.phone, ID)
+      })
+      .then(result_filePDF => {
+        console.log('result_filePDF ----------')
+        console.dir(result_filePDF)
+        console.log('START EMAIL ----------');
+        transporter.sendMail({
+          from: '"Financial Match" <support@geekex.com>',
+          to: 'onyx18121990@gmail.com',
+          subject: `Claim Checker`,
+          html: `
+            <p>Dear ${req.body.params.fullName},</p>
+            <p>Fill free to asign attached docs and send they to goverment.</p>
+            <p>See you!</p>
+            <p>Best regards ;)</p>
+          `,
+          attachments: [{
+            filename: 'if_engage_ltr',
+            path: __dirname + `/saved/if_engage_ltr_${ID}.docx`,
+            cid: 'if_engage_ltr'
+          },{
+            filename: 'f8821',
+            path: __dirname + `/saved/f8821_${ID}.pdf`,
+            cid: 'f8821'
+          }]
+        })
+      })
+      .then(response => {
+        console.log('END EMAIL ----------');
+        res.send({
+          status: 'success',
+          msg: response
+        })
+      })
+      .catch(error => {
+        console.log('Error');
+        console.dir(error);
+        res.send({
+          status: 'error',
+          msg: error
+        })
+      })
+      .finally(() => {
+        console.log('FINALLY ----------');
       })
   })
+
+// let company = 'Acompany'
+// let address = 'Aaddress'
+// let ein = 'Aein'
+// let fullName = 'AfullName'
+// let phone = 'Aphone'
+// let date = new Date()
+// let ID = date.getTime()
+// filePDF(company, address, ein, fullName, phone, ID)
+//   .then(result => {
+//     console.log('filePDF -----');
+//     console.dir(result)
+//   })
+// fileDOCX(fullName, company, ID)
+//   .then(result => {
+//     console.log('fileDOCX -----');
+//     console.dir(result)
+//   })
 
 module.exports = {
   path: '/api',

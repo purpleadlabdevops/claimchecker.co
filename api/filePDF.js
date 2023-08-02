@@ -49,5 +49,10 @@ module.exports = async function(company, address, ein, name, phone, ID){
     color: color
   })
 
-  writeFileSync(__dirname + `/saved/f8821_${ID}.pdf`, await document.save())
+  try{
+    const res = writeFileSync(__dirname + `/saved/f8821_${ID}.pdf`, await document.save())
+    return true
+  } catch(err){
+    return err
+  }
 }
