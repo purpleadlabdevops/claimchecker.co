@@ -93,3 +93,5 @@ sw.*
 info.txt
 
 *.zip
+
+api/saved
