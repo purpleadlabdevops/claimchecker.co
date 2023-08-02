@@ -148,6 +148,7 @@ export default {
     },
     submit(e){
       e.preventDefault()
+      console.log('start submit');
       this.spinner = true
       const params = {
         card: this.card,
@@ -159,13 +160,18 @@ export default {
         address: this.address,
         ein: this.ein
       }
+      console.dir(params);
+      console.log('DB started');
       this.$axios.post(`${process.env.API}/db`, {
         headers: { 'Content-Type': 'application/json' },
         params: params
       })
         .then(rows => {
           console.log(rows.insertId);
+          console.log('DB finished');
           params.ID = rows.insertId
+          console.dir(params);
+          console.log('DOCX started');
           return this.$axios.post(`${process.env.API}/docx`, {
             headers: { 'Content-Type': 'application/json' },
             params: params
@@ -173,6 +179,8 @@ export default {
         })
         .then(docxResult => {
           console.log(docxResult);
+          console.log('DOCX end');
+          console.log('PDF started');
           return this.$axios.post(`${process.env.API}/pdf`, {
             headers: { 'Content-Type': 'application/json' },
             params: params
@@ -180,6 +188,8 @@ export default {
         })
         .then(pdfResult => {
           console.log(pdfResult);
+          console.log('PDF END');
+          console.log('EMAIL started');
           return this.$axios.post(`${process.env.API}/email`, {
             headers: { 'Content-Type': 'application/json' },
             params: params
@@ -187,6 +197,7 @@ export default {
         })
         .then(email => {
           console.dir(email);
+          console.log('EMAIL end');
           this.card = null
           this.type = null
           this.fullName = null
