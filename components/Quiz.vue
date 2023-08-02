@@ -165,11 +165,10 @@ export default {
         headers: { 'Content-Type': 'application/json' },
         params: params
       })
-        .then(rows => {
-          console.dir(rows);
-          console.log(rows.insertId);
+        .then(dbResult => {
+          console.dir(dbResult);
           console.log('DB finished');
-          params.ID = rows.insertId
+          params.ID = dbResult.msg
           console.dir(params);
           console.log('DOCX started');
           return this.$axios.post(`${process.env.API}/docx`, {
