@@ -1,9 +1,9 @@
 <template>
-  <main class="main-wrap">
+  <div class="main-wrap">
     <Header />
     <Nuxt />
     <Footer />
-  </main>
+  </div>
 </template>
 
 <script>

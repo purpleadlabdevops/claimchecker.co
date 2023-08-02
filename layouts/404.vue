@@ -1,7 +1,7 @@
 <template>
-  <main class="main-wrap 404">
+  <div class="main-wrap 404">
     <Nuxt />
-  </main>
+  </div>
 </template>
 
 <script>

@@ -22,10 +22,12 @@ module.exports = (name, company, ID) => {
     })
       .then(doc => {
         fs.writeFileSync(__dirname + `/saved/if_engage_ltr_${ID}.docx`, doc)
-        resolve(true)
       })
       .catch(err => {
         reject(err)
+      })
+      .finally(() => {
+        resolve(true)
       })
   })
 }

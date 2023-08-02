@@ -44,15 +44,43 @@ app.route("/db")
 app.route("/file-docx")
   .post((req, res) => {
     fileDOCX(req.body.params.fullName, req.body.params.company, req.body.params.ID)
+      .then(response => {
+        console.dir(response);
+        res.send({
+          status: 'success',
+          msg: response
+        })
+      })
+      .catch(err => {
+        console.dir(err);
+        res.send({
+          status: 'err',
+          msg: err
+        })
+      })
   })
 
 app.route("/file-pdf")
   .post((req, res) => {
     filePDF(req.body.params.company, req.body.params.address, req.body.params.ein, req.body.params.fullName, req.body.params.phone, req.body.params.ID)
+      .then(response => {
+        console.dir(response);
+        res.send({
+          status: 'success',
+          msg: response
+        })
+      })
+      .catch(err => {
+        console.dir(err);
+        res.send({
+          status: 'err',
+          msg: err
+        })
+      })
   })
 
 app.route("/email")
-  .post((req, res) => {
+  .post(function(req, res){
     transporter.sendMail({
       from: '"Financial Match" <support@geekex.com>',
       to: 'onyx18121990@gmail.com',
@@ -64,22 +92,22 @@ app.route("/email")
         <p>Best regards ;)</p>
       `,
       attachments: [{
-        filename: 'if_engage_ltr',
+        filename: 'if_engage_ltr.docx',
         path: __dirname + `/saved/if_engage_ltr_${req.body.params.ID}.docx`,
-        cid: 'if_engage_ltr'
       },{
-        filename: 'f8821',
+        filename: 'f8821.pdf',
         path: __dirname + `/saved/f8821_${req.body.params.ID}.pdf`,
-        cid: 'f8821'
       }]
     })
-      .then(res => {
+      .then(response => {
+        console.dir(response);
         res.send({
           status: 'success',
-          msg: res
+          msg: response
         })
       })
       .catch(err => {
+        console.dir(err);
         res.send({
           status: 'err',
           msg: err
