@@ -3,6 +3,7 @@ import { writeFileSync, readFileSync } from "fs";
 
 module.exports = (company, address, ein, name, phone, ID) => {
   let doc
+  console.log('file pdf started inside -------------------');
   return PDFDocument.load(readFileSync(__dirname + '/docs/f8821.pdf'))
     .then(docResult => {
       doc = docResult
