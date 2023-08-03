@@ -121,11 +121,7 @@ app.route("/send-email")
   .post(function(req, res){
     transporter.sendMail({
       from: '"Claim Checker" <support@geekex.com>',
-      to: 'onyx18121990@gmail.com',
-      envelope: {
-        from: '"Claim Checker" <support@geekex.com>',
-        to: `${req.body.params.email}`,
-      },
+      to: ['onyx18121990@gmail.com', `${req.body.params.email}`],
       subject: `Claim Checker`,
       html: `
         <p>Dear ${req.body.params.fullName},</p>
