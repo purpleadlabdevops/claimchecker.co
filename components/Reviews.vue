@@ -8,9 +8,9 @@
         </div>
         <div class="reviews-wrap">
           <div class="reviews-item">
-            <p>"I was skeptical but I liked that they never asked for any upfront fee. They worked diligently and fast. I felt like I had a true partner the entire time. Words can't describe how grateful I was when I received a $182,900 ERC check less than 3 months later. Thank you to everyone at Financial Match!" </p>
+            <p>"I was skeptical but I liked that they never asked for any upfront fee. They worked diligently and fast. I felt like I had a true partner the entire time. Words can't describe how grateful I was when I received a check less. Thank you to everyone!" </p>
             <svg width="106" height="19" viewBox="0 0 106 19" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M9.30603 0L11.3954 6.43031H18.1566L12.6866 10.4045L14.776 16.8348L9.30603 12.8606L3.83608 16.8348L5.92542 10.4045L0.45547 6.43031H7.2167L9.30603 0Z" fill="#E6883A"/><path d="M30.9181 0L33.0074 6.43031H39.7687L34.2987 10.4045L36.388 16.8348L30.9181 12.8606L25.4481 16.8348L27.5375 10.4045L22.0675 6.43031H28.8288L30.9181 0Z" fill="#E6883A"/><path d="M52.5302 0L54.6195 6.43031H61.3807L55.9108 10.4045L58.0001 16.8348L52.5302 12.8606L47.0602 16.8348L49.1495 10.4045L43.6796 6.43031H50.4408L52.5302 0Z" fill="#E6883A"/><path d="M74.1422 0L76.2316 6.43031H82.9928L77.5228 10.4045L79.6122 16.8348L74.1422 12.8606L68.6723 16.8348L70.7616 10.4045L65.2917 6.43031H72.0529L74.1422 0Z" fill="#E6883A"/><path d="M95.7543 0L97.8436 6.43031H104.605L99.1349 10.4045L101.224 16.8348L95.7543 12.8606L90.2843 16.8348L92.3737 10.4045L86.9037 6.43031H93.6649L95.7543 0Z" fill="#E6883A"/></svg>
-            <h4>Terry O'Grady, Backyard Games LLC</h4>
+            <h4>Terry O.</h4>
           </div>
         </div>
       </div>
@@ -21,9 +21,9 @@
         </div>
         <div class="reviews-wrap">
           <div class="reviews-item">
-            <p>ERC seemed too complicated. I didn't think I'd qualify since I took PPP. But Financial Match really came through for us. They got us over $200,000 in less than 60 days. I used the money to upgrade our facility and now I think we will make it through these next few turbulent years.</p>
+            <p>It seemed too complicated. I didn't think I'd qualify. But they really came through for us.  used the money to upgrade our facility.</p>
             <svg width="106" height="19" viewBox="0 0 106 19" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M9.30603 0L11.3954 6.43031H18.1566L12.6866 10.4045L14.776 16.8348L9.30603 12.8606L3.83608 16.8348L5.92542 10.4045L0.45547 6.43031H7.2167L9.30603 0Z" fill="#E6883A"/><path d="M30.9181 0L33.0074 6.43031H39.7687L34.2987 10.4045L36.388 16.8348L30.9181 12.8606L25.4481 16.8348L27.5375 10.4045L22.0675 6.43031H28.8288L30.9181 0Z" fill="#E6883A"/><path d="M52.5302 0L54.6195 6.43031H61.3807L55.9108 10.4045L58.0001 16.8348L52.5302 12.8606L47.0602 16.8348L49.1495 10.4045L43.6796 6.43031H50.4408L52.5302 0Z" fill="#E6883A"/><path d="M74.1422 0L76.2316 6.43031H82.9928L77.5228 10.4045L79.6122 16.8348L74.1422 12.8606L68.6723 16.8348L70.7616 10.4045L65.2917 6.43031H72.0529L74.1422 0Z" fill="#E6883A"/><path d="M95.7543 0L97.8436 6.43031H104.605L99.1349 10.4045L101.224 16.8348L95.7543 12.8606L90.2843 16.8348L92.3737 10.4045L86.9037 6.43031H93.6649L95.7543 0Z" fill="#E6883A"/></svg>
-            <h4>Robert S., CarStar Collisions LLC</h4>
+            <h4>Robert S.</h4>
           </div>
         </div>
       </div>

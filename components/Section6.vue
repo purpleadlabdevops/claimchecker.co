@@ -5,36 +5,24 @@
       <div class="section6__steps">
         <div class="section6__step">
           <div class="section6__step-num">1</div>
-          <h4 class="section6__step-title">Take the Qualification Quiz</h4>
+          <h4 class="section6__step-title">Fill Out Survey For Settlement Claims Practice</h4>
         </div>
         <div class="section6__step">
           <div class="section6__step-num">2</div>
-          <h4 class="section6__step-title">
-            Fill Out Application (Online or Phone)
-          </h4>
+          <h4 class="section6__step-title">Find Out If You Qualify For Settlement</h4>
         </div>
         <div class="section6__step">
           <div class="section6__step-num">3</div>
-          <h4 class="section6__step-title">
-            Work With Our Team to Get Docs and Info
-          </h4>
+          <h4 class="section6__step-title">e-Sign The DocuSign Agreements</h4>
         </div>
         <div class="section6__step">
           <div class="section6__step-num">4</div>
-          <h4 class="section6__step-title">
-            Processing, Submission and Payment from IRS
-          </h4>
+          <h4 class="section6__step-title">Wait Roughly 15 Days For Funds To Appear</h4>
         </div>
       </div>
     </div>
   </section>
 </template>
-
-<script>
-export default {
-  name: 'Section6',
-}
-</script>
 
 <style lang="scss" scoped>
 .section6 {

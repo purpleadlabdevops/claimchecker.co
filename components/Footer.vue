@@ -19,6 +19,10 @@
 <style lang="scss" scoped>
 .main-footer {
   padding: 20px 0;
+  text-align: center;
+  @media(min-width:768px){
+    text-align: left;
+  }
   &__inner {
     @media(min-width:768px){
       display: flex;
@@ -29,15 +33,29 @@
   &__menu{
     a{
       display: block;
+      margin-bottom: 10px;
+      @media(min-width:768px){
+        margin-bottom: 0;
+      }
     }
   }
   &__logo {
-    max-width: 248px;
     text-align: center;
-    margin-right: 30px;
+    margin-bottom: 15px;
+    @media(min-width:768px){
+      margin-right: 30px;
+      margin-bottom: 0;
+    }
     img {
-      width: 100%;
+      width: res(150, 250);
       height: auto;
+      margin-bottom: 10px;
+      @media(min-width:768px){
+        margin-bottom: 0;
+      }
+    }
+    span{
+      display: block;
     }
   }
   a{

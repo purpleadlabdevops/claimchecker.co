@@ -9,14 +9,8 @@
             </figure>
           </div>
           <div class="section5__dscr">
-            <h4 class="section5__dscr-title">
-              Conservative and Honest Numbers for “Sleep Well at Night” ERC
-              Audit Protection
-            </h4>
-            <p class="section5__dscr-text">
-              Our team works with you during the entire ERC filing process. We
-              make sure all numbers are accurate and fit within ERC regulations.
-            </p>
+            <h4 class="section5__dscr-title">Conservative and Honest Numbers for Easy Settlement Processing And Approval</h4>
+            <p class="section5__dscr-text">Instead of waiting years for the claims administrator to begin processing claims, you’ll get an accurate payment total, for quick and easy approval!</p>
           </div>
         </div>
         <div class="section5__row">
@@ -26,13 +20,8 @@
             </figure>
           </div>
           <div class="section5__dscr">
-            <h4 class="section5__dscr-title">
-              Our Licensed Professionals Do All The Hard Work
-            </h4>
-            <p class="section5__dscr-text">
-              We have a dream team of ERC experts who take care of paperwork so
-              you can focus on running your business.
-            </p>
+            <h4 class="section5__dscr-title">Our Licensed Professionals Do All The Hard Work</h4>
+            <p class="section5__dscr-text">We have a dream team of class action settlement experts who take care of the paperwork so you can focus on running your business.</p>
           </div>
         </div>
         <div class="section5__row">
@@ -42,26 +31,14 @@
             </figure>
           </div>
           <div class="section5__dscr">
-            <h4 class="section5__dscr-title">
-              No Collateral, Personal Guarantee or Credit Check
-            </h4>
-            <p class="section5__dscr-text">
-              Because this is a tax credit from the IRS and not a loan, there
-              is no collateral, personal guarantees or credit check required to
-              receive the tax credit.
-            </p>
+            <h4 class="section5__dscr-title">No Up-Front Fees</h4>
+            <p class="section5__dscr-text">Settlement Claims Practice reviews and analyzes your data to help pinpoint the amount for your specific payout. No need for excess information.No up-front fees.</p>
           </div>
         </div>
       </div>
     </div>
   </section>
 </template>
-
-<script>
-export default {
-  name: 'Section5',
-}
-</script>
 
 <style lang="scss" scoped>
 .section5 {

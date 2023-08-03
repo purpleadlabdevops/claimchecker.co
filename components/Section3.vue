@@ -8,20 +8,8 @@
           </figure>
         </div>
         <div class="section3__grid-dscr-col">
-          <h4 class="section3__grid-title">
-            Employee Retention Tax Credit (ERC) Was Put Into Place with CARES
-            Act, But PPP Got All the Attention
-          </h4>
-          <p class="section3__grid-text">
-            The pandemic and related shutdown wreaked havoc on businesses, so
-            Congress passed multiple stimulus acts to distribute relief quickly.
-          </p>
-          <p class="section3__grid-text">
-            The two programs that got all the media attention were the PPP and
-            EIDL programs. Most didn’t even know about the ERC Program, and even
-            if so, didn’t think they qualified for it (even though it was as
-            good or better than PPP).
-          </p>
+          <h4 class="section3__grid-title">$5.6 Billion Antitrust Class Action Settlement With Millions Of Retailers Accused Visa and MasterCard of Fixing Credit and Debit Card Fees.</h4>
+          <p class="section3__grid-text">The overcharging of interchange fees on retailers and businesses that accepted Visa and Mastercard payments was rampant. This settlement is for eligible transactions that robbed retailers of profits. <br><br> Businesses and retailers that accepted Visa/Mastercard are eligible for compensation per the terms of the settlement agreement. The settlement is still on appeal, but has been moving through the courts for 7 years (and counting).</p>
         </div>
       </div>
 
@@ -32,15 +20,8 @@
           </figure>
         </div>
         <div class="section3__grid-dscr-col">
-          <h4 class="section3__grid-title">
-            Program Was Not Well Understood (even by many CPA’s), so Few Took Advantage
-          </h4>
-          <p class="section3__grid-text">
-            The ERC Program has been amended which can help more businesses qualify.
-          </p>
-          <p class="section3__grid-text">
-            Unlike PPP, there is no limit on max amount you can receive. ERC is getting more attention as business owners realize they can still take advantage.
-          </p>
+          <h4 class="section3__grid-title">Many Businesses Don’t Realize They Can Get Cash Now Without Waiting</h4>
+          <p class="section3__grid-text">This lawsuit is 7 years old, with at least 3 more years of litigation. <br><br> But, with our program, businesses can get cash today!</p>
         </div>
       </div>
 
@@ -51,30 +32,13 @@
           </figure>
         </div>
         <div class="section3__grid-dscr-col">
-          <h4 class="section3__grid-title">
-            Many Businesses Don’t Realize They Can Qualify (for $200k on
-            average), but the Window is Closing
-          </h4>
-          <p class="section3__grid-text">
-            Most businesses don’t realize they actually can qualify, or were
-            told incorrectly by their CPAs that they wouldn’t.
-          </p>
-          <p class="section3__grid-text">
-            It’s not really the CPA’s fault, as the rules were confusing (and
-            changed multiple times), and this is a very specialized one-time
-            program.
-          </p>
+          <h4 class="section3__grid-title">Many Businesses Don’t Realize They Can Qualify (for $5k on average) – But Must Act Now For Early Cash Payment</h4>
+          <p class="section3__grid-text">Most businesses have no idea they qualify for thousands of dollars. But this early-cashout program is available right now. <br><br> Get your estimated settlement amount and a quick cash payment, in roughly 1 month, but only if you act now.</p>
         </div>
       </div>
     </div>
   </section>
 </template>
-
-<script>
-export default {
-  name: 'Section3',
-}
-</script>
 
 <style lang="scss" scoped>
 .section3 {

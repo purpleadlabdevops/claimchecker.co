@@ -3,36 +3,21 @@
     <div class="container">
       <div class="section1__inner">
         <div class="section1__num-item">
-          <div class="section1__num">CPA’s</div>
-          <div class="section1__num-title">
-            Each account is overseen by a licensed CPA who provides full ERC
-            Audit protection
-          </div>
+          <div class="section1__num">Claim Estimator</div>
+          <div class="section1__num-title">Get claim value in just 15 days using simple data inputs</div>
         </div>
         <div class="section1__num-item">
-          <div class="section1__num" v-if="this.$route.name === 'lamtiktok'">Get Cash for Each W2 Employee</div>
-          <div class="section1__num" v-else>+$26,000</div>
-          <div class="section1__num-title">
-            Payout for each employee with NO cap on max credit received!
-          </div>
+          <div class="section1__num">2004-2019</div>
+          <div class="section1__num-title">The eligible transaction period for retailers and other businesses who used Visa and/or Mastercard</div>
         </div>
         <div class="section1__num-item">
-          <div class="section1__num">$200k</div>
-          <div class="section1__num-title">
-            Average Credit Size per <br />
-            ERC Application
-          </div>
+          <div class="section1__num">$5k</div>
+          <div class="section1__num-title">Average Settlement Size per <br> Application With NO MAXIMUM</div>
         </div>
       </div>
     </div>
   </section>
 </template>
-
-<script>
-export default {
-  name: 'Section1',
-}
-</script>
 
 <style lang="scss" scoped>
 .section1 {

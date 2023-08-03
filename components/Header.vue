@@ -58,7 +58,7 @@ export default {
     }
   }
   &__logo {
-    width: res(140, 250);
+    width: res(150, 250);
     display: block;
     img {
       height: auto;

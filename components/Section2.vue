@@ -2,59 +2,41 @@
   <section class="section2">
     <div class="container">
       <ul class="section2__list">
+
         <li class="section2__item">
           <figure class="section2__item-logo">
             <img src="@/assets/img/s2_1.png" alt="" />
           </figure>
           <div class="section2__item-dscr">
-            <h4 class="section2__item-title">
-              Up to $26,000 per W2 Employee Kept on Payroll
-            </h4>
-            <p class="section2__item-text">
-              Can qualify for multiple quarters in 2020 and 2021, up to $26,000
-              per W2 employee. Average credit is $200,000+
-            </p>
+            <h4 class="section2__item-title">Average $5,000 Payout With NO MAXIMUM</h4>
+            <p class="section2__item-text">Qualify for sales from January 2004 - January 2019. Get the funds you’re owed from Visa & Mastercard</p>
           </div>
         </li>
+
         <li class="section2__item">
           <figure class="section2__item-logo">
             <img src="@/assets/img/s2_2.png" alt="" />
           </figure>
           <div class="section2__item-dscr">
-            <h4 class="section2__item-title">
-              Can Qualify Even If You Got a PPP Loan
-            </h4>
-            <p class="section2__item-text">
-              There are many ways to qualify, even if your CPA didn’t think you
-              could qualify. We’re conservative, but qualify you for as much as
-              possible
-            </p>
+            <h4 class="section2__item-title">Retailers Qualify For Early Funds</h4>
+            <p class="section2__item-text">For clients who want to monetize their claims now, retailers and other businesses may be able to sell the claims today for cash</p>
           </div>
         </li>
+
         <li class="section2__item">
           <figure class="section2__item-logo">
             <img src="@/assets/img/s2_3.png" alt="" />
           </figure>
           <div class="section2__item-dscr">
-            <h4 class="section2__item-title">
-              Reasonable Fee Only After You Receive Credit
-            </h4>
-            <p class="section2__item-text">
-              We only get paid after you do. Most businesses are getting sent
-              checks by the IRS in 5-9 months
-            </p>
+            <h4 class="section2__item-title">Keep Funds Even If Settlement Falls Through</h4>
+            <p class="section2__item-text">Estimates are payments that won’t be sent for years (Maybe Never!) – In just a few weeks, get and keep your funds</p>
           </div>
         </li>
+
       </ul>
     </div>
   </section>
 </template>
-
-<script>
-export default {
-  name: 'Section2',
-}
-</script>
 
 <style lang="scss" scoped>
 .section2 {
