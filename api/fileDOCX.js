@@ -1,5 +1,5 @@
 import * as fs from "fs"
-import { Paragraph, patchDocument, PatchType, TextRun } from "docx"
+import {  ExternalHyperlink, HeadingLevel, ImageRun, Paragraph, patchDocument, PatchType, Table, TableCell, TableRow, TextDirection, TextRun, VerticalAlign } from "docx"
 
 module.exports = (name, company, ID) => {
   return new Promise((resolve, reject) => {
@@ -61,7 +61,14 @@ module.exports = (name, company, ID) => {
         txt11: {
           type: PatchType.PARAGRAPH,
           children: [new TextRun(`To the extent ${company} instructs Ryan to investigate the potential sale of a claim prior to final determination by the Claims Administrator; Ryan will attempt to locate a buyer, analyze ${company}’s data for purposes of estimation of value in a potential sale setting, review and analyze the offer of said buyer and assist in the collection of funds from the buyer. `)]
-        }
+        },
+        image1: {
+          type: PatchType.PARAGRAPH,
+          children: [new ImageRun({
+            data: fs.readFileSync(__dirname+'/saved/signature.png'),
+            transformation: { width: 100, height: 100 }
+          })]
+        },
       }
     })
       .then(doc => {

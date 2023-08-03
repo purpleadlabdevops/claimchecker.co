@@ -18,7 +18,9 @@ export default {
   styleResources: {
     scss: ['~/assets/scss/_functions.scss', '~/assets/scss/_mixins.scss']
   },
-  plugins: [],
+  plugins: [
+    { src: '~/plugins/signature-pad.js' }
+  ],
   css: ["~/assets/scss/global.scss"],
   components: true,
   router: {

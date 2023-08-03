@@ -91,10 +91,14 @@
               required />
           </div>
           <div class="field">
+            <p>Paint your signature and we will add it to the documents. <br> We will send you an electronic copy.</p>
+            <Signature v-if="!signature" />
+          </div>
+          <div class="field">
             <input
               type="submit"
               value="SUBMIT"
-              :disabled="spinner" />
+              :disabled="!spinner && !signature" />
           </div>
           <div class="quiz__small">We'll email you Docusign agreement to e-sign. <br> This is to make sure we have the access to make a settlement on your behalf. <br> Without this, we're powerless to get you your cash payout in just 1 month. <br> Just e-sign the Docusign agreement, and you're good to go.</div>
         </div>
@@ -106,6 +110,8 @@
         </svg>
       </div>
     </form>
+
+
   </div>
 </template>
 
@@ -126,7 +132,8 @@ export default {
       ID: null,
       notQualify: false,
       linkDOCX: null,
-      linkPDF: null
+      linkPDF: null,
+      signature: null,
     }
   },
   methods: {
@@ -185,7 +192,7 @@ export default {
         params: {
           fullName: this.fullName,
           company: this.company,
-          ID: this.ID
+          ID: this.ID,
         }
       })
         .then(docxResult => {
@@ -207,6 +214,7 @@ export default {
           fullName: this.fullName,
           phone: this.phone,
           ID: this.ID,
+          signature: this.signature
         }
       })
         .then(pdfResult => {
@@ -223,7 +231,8 @@ export default {
         params: {
           fullName: this.fullName,
           linkDOCX: this.linkDOCX,
-          linkPDF: this.linkPDF
+          linkPDF: this.linkPDF,
+          email: this.email
         }
       })
         .then(emailResult => {
