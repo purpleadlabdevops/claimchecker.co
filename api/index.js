@@ -166,34 +166,6 @@ app.route("/image")
     })
   })
 
-// let company = 'Acompany'
-// let address = 'Aaddress'
-// let ein = 'Aein'
-// let fullName = 'AfullName'
-// let phone = 'Aphone'
-// let date = new Date()
-// let ID = date.getTime()
-// fileDOCX(fullName, company, ID)
-//   .then(result => {
-//     console.log('fileDOCX -----');
-//     console.dir(result)
-//     return
-//   })
-//   .then(result => {
-//     console.log('filePDF -----');
-//     console.dir(result)
-//   })
-
-
-
-
-// api.document.fieldextract({
-//   token: 'your auth token',
-//   filepath: 'path to file',
-// }, (err, res) => {
-//   // handle error or process response data
-// });
-
 
 // request({
 //   url: `https://api-eval.signnow.com/oauth2/token`,
