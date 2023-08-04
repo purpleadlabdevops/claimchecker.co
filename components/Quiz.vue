@@ -107,6 +107,7 @@
       </div>
     </form>
 
+    <button class="btn" v-if="$route.query.test" @click="testRequest">Test request</button>
 
   </div>
 </template>
@@ -245,6 +246,11 @@ export default {
         .finally(()=>{
           this.spinner = false
         })
+    },
+    testRequest(){
+      this.$axios.post(`${process.env.API}/test`, {
+        headers: { 'Content-Type': 'application/json' },
+      })
     }
   }
 }

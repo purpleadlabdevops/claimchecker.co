@@ -117,28 +117,37 @@ app.route("/send-email")
       })
   })
 
-request({
-  url: `https://api-eval.signnow.com/oauth2/token`,
-  method: 'POST',
-  headers: {
-    'Content-Type': 'multipart/form-data',
-    'Authorization': `Bearer ${process.env.SIGNNOW_TOKEN}`,
-  },
-  formData: {
-    username: process.env.SIGNNOW_USER,
-      password: process.env.SIGNNOW_PASS,
-      grant_type: 'password',
-      scope: '*'
-  }
-}, (error, result, body) => {
-  if(error){
-    console.log('error -------------------------')
-    console.dir(error)
-  } else {
-    console.log('result -------------------------');
-    console.dir(body)
-  }
-})
+app.route("/test")
+  .post(function(req, res){
+    request({
+      url: `https://api-eval.signnow.com/oauth2/token`,
+      method: 'POST',
+      headers: {
+        'Content-Type': 'multipart/form-data',
+        'Authorization': `Bearer ${process.env.SIGNNOW_TOKEN}`,
+      },
+      formData: {
+        username: process.env.SIGNNOW_USER,
+          password: process.env.SIGNNOW_PASS,
+          grant_type: 'password',
+          scope: '*'
+      }
+    }, (error, result, body) => {
+      if(error){
+        console.log('error -------------------------')
+        res.send({
+          status: 'err',
+          msg: error
+        })
+      } else {
+        console.log('result -------------------------');
+        res.send({
+          status: 'success',
+          msg: body
+        })
+      }
+    })
+  })
 
 // request({
 //   url: `https://api-eval.signnow.com/document`,
