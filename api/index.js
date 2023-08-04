@@ -123,6 +123,7 @@ app.route("/test")
       url: 'https://api.signnow.com/oauth2/token' ,
       method: 'POST',
       headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
         'Authorization': `Bearer NmRmNDk4OGY5MDhhZDIzN2NiNjBhMGI5MmE0ZTFiZjk6NzcwZDc3Yjk2NDc0YTk0MGY1MTRjNjBlYWUxOGYwZWE`,
       },
       form: {
