@@ -1,7 +1,7 @@
 export default {
   target: 'server',
   head: {
-    title: 'Financial Match | Apply for Your ERC Credit Today!',
+    title: 'Claim Checker | Apply for Your ERC Credit Today!',
     htmlAttrs: {
       lang: 'en',
     },
@@ -18,9 +18,6 @@ export default {
   styleResources: {
     scss: ['~/assets/scss/_functions.scss', '~/assets/scss/_mixins.scss']
   },
-  plugins: [
-    { src: '~/plugins/signature-pad.js' }
-  ],
   css: ["~/assets/scss/global.scss"],
   components: true,
   router: {

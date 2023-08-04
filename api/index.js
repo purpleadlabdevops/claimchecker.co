@@ -1,7 +1,8 @@
 const express = require('express'),
   bodyParser = require('body-parser'),
-  request = require('request'),
   nodemailer = require('nodemailer'),
+  axios = require('axios'),
+  FormData = require('form-data'),
   fs = require('fs'),
   app = express(),
   transporter = nodemailer.createTransport({
@@ -119,36 +120,60 @@ app.route("/send-email")
 
 app.route("/test")
   .post(function(req, res){
-    request({
-      url: 'https://api.signnow.com/oauth2/token' ,
-      method: 'POST',
+
+    const form = new FormData();
+    form.append('username', '"tima23a@gmail.com"');
+    form.append('password', '"P@TiTTqAejw#6^Do"');
+    form.append('grant_type', '"password"');
+    form.append('scope', '"*"');
+
+    axios.post('https://api.signnow.com/oauth2/token', form, {
       headers: {
-        'Content-Type': 'application/x-www-form-urlencoded',
-        'Authorization': `Bearer NmRmNDk4OGY5MDhhZDIzN2NiNjBhMGI5MmE0ZTFiZjk6NzcwZDc3Yjk2NDc0YTk0MGY1MTRjNjBlYWUxOGYwZWE`,
-      },
-      form: {
-        username: 'tima23a@gmail.com',
-        password: 'P@TiTTqAejw#6^Do',
-        grant_type: 'password',
-        scope: '*'
-      }
-    }, (error, result, body) => {
-      if(error){
-        console.log('error -------------------------')
-        console.dir(error);
-        res.send({
-          status: 'err',
-          msg: error
-        })
-      } else {
-        console.log('result -------------------------');
-        console.dir(body)
-        res.send({
-          status: 'success',
-          msg: body
-        })
+        ...form.getHeaders(),
+        'Authorization': 'Basic NmRmNDk4OGY5MDhhZDIzN2NiNjBhMGI5MmE0ZTFiZjk6NzcwZDc3Yjk2NDc0YTk0MGY1MTRjNjBlYWUxOGYwZWE'
       }
     })
+      .then(response => response.toJSON())
+      .then(result => {
+        console.dir(result.data);
+      })
+      .catch(err => {
+        console.dir(err);
+      })
+
+
+
+
+    // request({
+    //   url: 'https://api.signnow.com/oauth2/token' ,
+    //   method: 'POST',
+    //   headers: {
+    //     'Content-Type': 'application/x-www-form-urlencoded',
+    //     'Authorization': `Bearer NmRmNDk4OGY5MDhhZDIzN2NiNjBhMGI5MmE0ZTFiZjk6NzcwZDc3Yjk2NDc0YTk0MGY1MTRjNjBlYWUxOGYwZWE`,
+    //   },
+    //   form: {
+    //     username: 'tima23a@gmail.com',
+    //     password: 'P@TiTTqAejw#6^Do',
+    //     grant_type: 'password',
+    //     scope: '*'
+    //   }
+    // }, (error, result, body) => {
+    //   if(error){
+    //     console.log('error -------------------------')
+    //     console.dir(error);
+    //     res.send({
+    //       status: 'err',
+    //       msg: error
+    //     })
+    //   } else {
+    //     console.log('result -------------------------');
+    //     console.dir(body)
+    //     res.send({
+    //       status: 'success',
+    //       msg: body
+    //     })
+    //   }
+    // })
   })
 
 // request({
