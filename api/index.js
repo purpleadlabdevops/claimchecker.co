@@ -123,10 +123,9 @@ app.route("/test")
       url: 'https://api.signnow.com/oauth2/token' ,
       method: 'POST',
       headers: {
-        'Content-Type': 'multipart/form-data',
         'Authorization': `Bearer NmRmNDk4OGY5MDhhZDIzN2NiNjBhMGI5MmE0ZTFiZjk6NzcwZDc3Yjk2NDc0YTk0MGY1MTRjNjBlYWUxOGYwZWE`,
       },
-      body: {
+      form: {
         username: 'tima23a@gmail.com',
         password: 'P@TiTTqAejw#6^Do',
         grant_type: 'password',
