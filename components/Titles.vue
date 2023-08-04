@@ -54,17 +54,13 @@
   ul{
     font-weight: 400;
     list-style: none;
-    padding-left: 10px;
-    margin-bottom: 10px;
-    @media(min-width:768px){
-      margin-bottom: 30px;
-      padding-left: 20px;
-    }
+    margin-bottom: res(10, 30);
     li {
-      margin: 15px 0;
+      margin: res(5, 15) 0;
       padding-left: 36px;
       position: relative;
       font-size: res(14, 18);
+      line-height: 24px;
       &:before {
         content: '';
         position: absolute;
@@ -79,7 +75,7 @@
   }
   h4 {
     color: var(--fm-mint);
-    font-size: res(16, 22);
+    font-size: res(18, 22);
     font-weight: 700;
     &:before {
       content: '\21E6';
@@ -87,7 +83,7 @@
       display: inline-block;
       margin-right: 15px;
     }
-    @include lg {
+    @media(max-width:991px){
       &:before {
         animation: bounce_h_3 3s infinite;
         transform: rotate(-90deg);

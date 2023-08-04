@@ -6,7 +6,7 @@
     </div>
     <form class="quiz__form" @submit.prevent="submit" v-else>
 
-      <div class="quiz__step quiz__step-1" :class="step === 1 ? 'active':''" :data-passed="step > 1 ? true:false">
+      <div class="quiz__step quiz__step-1" :class="step === 1 ? 'active':''" :data-passed="step > 1 ? true:false" :style="spinner ? 'filter: blur(2px);':''">
         <h3>Did You Accept Payments From VISA OR MasterCard Between 2004-2019?</h3>
         <div class="quiz__inner">
           <button type="button" @click="toStep2('YES')" class="quiz__btn">YES</button>
@@ -14,7 +14,7 @@
         </div>
       </div>
 
-      <div class="quiz__step quiz__step-2" :class="step === 2 ? 'active':''" :data-passed="step > 2 ? true:false">
+      <div class="quiz__step quiz__step-2" :class="step === 2 ? 'active':''" :data-passed="step > 2 ? true:false" :style="spinner ? 'filter: blur(2px);':''">
         <h3>What industry do you work in?</h3>
         <div class="quiz__inner">
           <div class="field">
@@ -29,7 +29,7 @@
         </div>
       </div>
 
-      <div class="quiz__step quiz__step-3" :class="step === 3 ? 'active':''" :data-passed="step > 3 ? true:false">
+      <div class="quiz__step quiz__step-3" :class="step === 3 ? 'active':''" :data-passed="step > 3 ? true:false" :style="spinner ? 'filter: blur(2px);':''">
         <h3>Personal info</h3>
         <div class="quiz__inner">
           <div class="field">
@@ -63,7 +63,7 @@
         </div>
       </div>
 
-      <div class="quiz__step quiz__step-4" :class="step === 4 ? 'active':''" :data-passed="step > 4 ? true:false">
+      <div class="quiz__step quiz__step-4" :class="step === 4 ? 'active':''" :data-passed="step > 4 ? true:false" :style="spinner ? 'filter: blur(2px);':''">
         <h3>Business info</h3>
         <div class="quiz__inner">
           <div class="field">
@@ -91,14 +91,10 @@
               required />
           </div>
           <div class="field">
-            <p>Paint your signature and we will add it to the documents. <br> We will send you an electronic copy.</p>
-            <Signature v-if="!signature" />
-          </div>
-          <div class="field">
             <input
               type="submit"
               value="SUBMIT"
-              :disabled="!spinner && !signature" />
+              :disabled="spinner" />
           </div>
           <div class="quiz__small">We'll email you Docusign agreement to e-sign. <br> This is to make sure we have the access to make a settlement on your behalf. <br> Without this, we're powerless to get you your cash payout in just 1 month. <br> Just e-sign the Docusign agreement, and you're good to go.</div>
         </div>
@@ -133,7 +129,6 @@ export default {
       notQualify: false,
       linkDOCX: null,
       linkPDF: null,
-      signature: null,
     }
   },
   methods: {
@@ -213,8 +208,7 @@ export default {
           ein: this.ein,
           fullName: this.fullName,
           phone: this.phone,
-          ID: this.ID,
-          signature: this.signature
+          ID: this.ID
         }
       })
         .then(pdfResult => {
@@ -260,7 +254,7 @@ export default {
 .quiz{
   width: 100%;
   @media(max-width:991px){
-    max-width: 500px;
+    max-width: 600px;
     margin-left: auto;
     margin-right: auto;
     order: 2;
@@ -285,8 +279,7 @@ export default {
   }
   &__inner{
     overflow: hidden;
-    transition: .5s ease-in-out;
-    // opacity: .6;
+    transition: .25s ease;
     max-height: 0px;
     padding: 0 15px;
     @media(min-width:992px){
@@ -299,7 +292,7 @@ export default {
     overflow: hidden;
     &.active{
       .quiz__inner{
-        transition: 1s ease-in-out .5s;
+        transition: .5s ease .25s;
         max-height: 1000px;
         opacity: 1;
         padding-top: 15px;

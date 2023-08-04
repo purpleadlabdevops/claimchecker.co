@@ -153,27 +153,20 @@ app.route("/send-email")
       })
   })
 
-app.route("/image")
-  .post(function(req, res){
-    const base64Data = req.body.params.data.replace(/^data:image\/png;base64,/, "")
-    fs.writeFileSync(__dirname+'/saved/signature.png', base64Data, 'base64', function(err) {
-      console.log('error -----------------');
-      console.log(err);
-    })
-  })
-
 // request({
 //   url: `https://api-eval.signnow.com/oauth2/token`,
 //   method: 'POST',
 //   headers: {
 //     'Content-Type': 'multipart/form-data',
+//     // 'Content-Type': 'application/x-www-form-urlencoded',
+//     // 'Content-Type': 'application/json',
 //     'Authorization': `Bearer ${process.env.SIGNNOW_TOKEN}`,
 //   },
 //   formData: {
 //     username: process.env.SIGNNOW_USER,
-//     password: process.env.SIGNNOW_PASS,
-//     grant_type: 'password',
-//     scope: '*'
+//       password: process.env.SIGNNOW_PASS,
+//       grant_type: 'password',
+//       scope: '*'
 //   }
 // }, (error, result, body) => {
 //   if(error){

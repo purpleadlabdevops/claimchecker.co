@@ -28,12 +28,12 @@ export default {
   h1 {
     font-size: res(30, 40);
     color: var(--fm-mint);
-    margin-bottom: 30px;
+    margin-bottom: res(15, 30);
   }
   h4 {
-    font-size: 24px;
-    margin-top: 30px;
-    margin-bottom: 30px;
+    font-size: res(18, 24);
+    margin-top: res(15, 30);
+    margin-bottom: res(15, 30);
   }
   &__btn {
     background: green;
