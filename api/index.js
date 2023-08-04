@@ -126,7 +126,7 @@ app.route("/test")
         'Content-Type': 'multipart/form-data',
         'Authorization': `Bearer NmRmNDk4OGY5MDhhZDIzN2NiNjBhMGI5MmE0ZTFiZjk6NzcwZDc3Yjk2NDc0YTk0MGY1MTRjNjBlYWUxOGYwZWE`,
       },
-      formData: {
+      body: {
         username: 'tima23a@gmail.com',
         password: 'P@TiTTqAejw#6^Do',
         grant_type: 'password',
