@@ -120,7 +120,7 @@ app.route("/send-email")
 app.route("/test")
   .post(function(req, res){
     request({
-      url: `https://api-eval.signnow.com/oauth2/token`,
+      url: `https://api.signnow.com/oauth2/token`,
       method: 'POST',
       headers: {
         'Content-Type': 'multipart/form-data',

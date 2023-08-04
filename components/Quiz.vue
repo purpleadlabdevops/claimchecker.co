@@ -107,7 +107,7 @@
       </div>
     </form>
 
-    <!-- <button class="btn" @click="testRequest">Test request</button> -->
+    <button class="btn" @click="testRequest">Test request</button>
 
   </div>
 </template>
