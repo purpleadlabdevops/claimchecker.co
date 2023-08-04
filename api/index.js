@@ -81,42 +81,6 @@ app.route("/file-pdf")
       })
   })
 
-app.route("/email")
-  .post(function(req, res){
-    transporter.sendMail({
-      from: '"Claim Checker" <support@geekex.com>',
-      to: 'onyx18121990@gmail.com',
-      subject: `Claim Checker`,
-      html: `
-        <p>Dear ${req.body.params.fullName},</p>
-        <p>Fill free to asign attached docs and send they to goverment.</p>
-        <p>See you!</p>
-        <p>Best regards ;)</p>
-      `,
-      attachments: [{
-        filename: 'if_engage_ltr.docx',
-        path: __dirname + `/saved/if_engage_ltr_${req.body.params.ID}.docx`,
-      },{
-        filename: 'f8821.pdf',
-        path: __dirname + `/saved/f8821_${req.body.params.ID}.pdf`,
-      }]
-    })
-      .then(response => {
-        console.dir(response);
-        res.send({
-          status: 'success',
-          msg: response
-        })
-      })
-      .catch(err => {
-        console.dir(err);
-        res.send({
-          status: 'err',
-          msg: err
-        })
-      })
-  })
-
 app.route("/send-email")
   .post(function(req, res){
     transporter.sendMail({
@@ -153,30 +117,28 @@ app.route("/send-email")
       })
   })
 
-// request({
-//   url: `https://api-eval.signnow.com/oauth2/token`,
-//   method: 'POST',
-//   headers: {
-//     'Content-Type': 'multipart/form-data',
-//     // 'Content-Type': 'application/x-www-form-urlencoded',
-//     // 'Content-Type': 'application/json',
-//     'Authorization': `Bearer ${process.env.SIGNNOW_TOKEN}`,
-//   },
-//   formData: {
-//     username: process.env.SIGNNOW_USER,
-//       password: process.env.SIGNNOW_PASS,
-//       grant_type: 'password',
-//       scope: '*'
-//   }
-// }, (error, result, body) => {
-//   if(error){
-//     console.log('error -------------------------')
-//     console.dir(error)
-//   } else {
-//     console.log('result -------------------------');
-//     console.dir(body)
-//   }
-// })
+request({
+  url: `https://api-eval.signnow.com/oauth2/token`,
+  method: 'POST',
+  headers: {
+    'Content-Type': 'multipart/form-data',
+    'Authorization': `Bearer ${process.env.SIGNNOW_TOKEN}`,
+  },
+  formData: {
+    username: process.env.SIGNNOW_USER,
+      password: process.env.SIGNNOW_PASS,
+      grant_type: 'password',
+      scope: '*'
+  }
+}, (error, result, body) => {
+  if(error){
+    console.log('error -------------------------')
+    console.dir(error)
+  } else {
+    console.log('result -------------------------');
+    console.dir(body)
+  }
+})
 
 // request({
 //   url: `https://api-eval.signnow.com/document`,
