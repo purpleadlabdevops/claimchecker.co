@@ -135,12 +135,14 @@ app.route("/test")
     }, (error, result, body) => {
       if(error){
         console.log('error -------------------------')
+        console.dir(error);
         res.send({
           status: 'err',
           msg: error
         })
       } else {
         console.log('result -------------------------');
+        console.dir(body)
         res.send({
           status: 'success',
           msg: body
