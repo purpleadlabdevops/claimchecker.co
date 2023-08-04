@@ -120,17 +120,17 @@ app.route("/send-email")
 app.route("/test")
   .post(function(req, res){
     request({
-      url: `https://api.signnow.com/oauth2/token`,
+      url: 'https://api.signnow.com/oauth2/token' ,
       method: 'POST',
       headers: {
         'Content-Type': 'multipart/form-data',
-        'Authorization': `Bearer ${process.env.SIGNNOW_TOKEN}`,
+        'Authorization': `Bearer NmRmNDk4OGY5MDhhZDIzN2NiNjBhMGI5MmE0ZTFiZjk6NzcwZDc3Yjk2NDc0YTk0MGY1MTRjNjBlYWUxOGYwZWE`,
       },
       formData: {
-        username: process.env.SIGNNOW_USER,
-          password: process.env.SIGNNOW_PASS,
-          grant_type: 'password',
-          scope: '*'
+        username: 'tima23a@gmail.com',
+        password: 'P@TiTTqAejw#6^Do',
+        grant_type: 'password',
+        scope: '*'
       }
     }, (error, result, body) => {
       if(error){
