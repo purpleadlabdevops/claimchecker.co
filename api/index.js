@@ -1,6 +1,5 @@
 const express = require('express'),
   bodyParser = require('body-parser'),
-  request = require('request'),
   nodemailer = require('nodemailer'),
   axios = require('axios'),
   FormData = require('form-data'),
@@ -134,6 +133,7 @@ app.route("/test")
         'Authorization': 'Basic NmRmNDk4OGY5MDhhZDIzN2NiNjBhMGI5MmE0ZTFiZjk6NzcwZDc3Yjk2NDc0YTk0MGY1MTRjNjBlYWUxOGYwZWE'
       }
     })
+      .then(response => response.toJSON())
       .then(result => {
         console.dir(result.data);
       })
