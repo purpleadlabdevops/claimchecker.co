@@ -2,6 +2,8 @@ const express = require('express'),
   bodyParser = require('body-parser'),
   request = require('request'),
   nodemailer = require('nodemailer'),
+  axios = require('axios'),
+  FormData = require('form-data'),
   fs = require('fs'),
   app = express(),
   transporter = nodemailer.createTransport({
@@ -15,8 +17,7 @@ const express = require('express'),
   }),
   db = require('./db'),
   fileDOCX = require('./fileDOCX'),
-  filePDF = require('./filePDF'),
-  fetchSign = require('./fetchSign')
+  filePDF = require('./filePDF')
 
 
 app.use(bodyParser.json())
@@ -120,7 +121,26 @@ app.route("/send-email")
 
 app.route("/test")
   .post(function(req, res){
-    fetchSign()
+
+    const form = new FormData();
+    form.append('username', '"tima23a@gmail.com"');
+    form.append('password', '"P@TiTTqAejw#6^Do"');
+    form.append('grant_type', '"password"');
+    form.append('scope', '"*"');
+
+    axios.post('https://api.signnow.com/oauth2/token', form, {
+      headers: {
+        ...form.getHeaders(),
+        'Authorization': 'Basic NmRmNDk4OGY5MDhhZDIzN2NiNjBhMGI5MmE0ZTFiZjk6NzcwZDc3Yjk2NDc0YTk0MGY1MTRjNjBlYWUxOGYwZWE'
+      }
+    })
+      .then(result => {
+        console.dir(result.data);
+      })
+      .catch(err => {
+        console.dir(err);
+      })
+
     // request({
     //   url: 'https://api.signnow.com/oauth2/token' ,
     //   method: 'POST',
