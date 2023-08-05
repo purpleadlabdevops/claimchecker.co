@@ -136,7 +136,11 @@ app.route("/signnow")
     })
       .then(tokenData => {
         console.log('tokenData.msg');
-        console.dir(tokenData.msg)
+        console.dir(tokenData.data)
+        res.send({
+          status: 'success',
+          msg: tokenData.data
+        })
 
         // const formDoc = new FormData();
         // formDoc.append('file', `${__dirname}/docs/if_engage_ltr.docx`)
@@ -150,14 +154,14 @@ app.route("/signnow")
         //   }
         // })
       })
-      .then(response => {
-        console.log('response');
-        // console.dir(response);
-        res.send({
-          status: 'success',
-          msg: response.data
-        })
-      })
+      // .then(response => {
+      //   console.log('response');
+      //   // console.dir(response);
+      //   res.send({
+      //     status: 'success',
+      //     msg: response.data
+      //   })
+      // })
       .catch(err => {
         console.log('error');
         // console.dir(err);
