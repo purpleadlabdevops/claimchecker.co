@@ -143,6 +143,7 @@ app.route("/signnow-token")
       })
       .catch(err => {
         console.log('error');
+        console.dir(err);
         res.send({
           status: 'error',
           msg: err
@@ -173,6 +174,7 @@ app.route("/signnow-document")
       })
       .catch(err => {
         console.log('error');
+        console.dir(err);
         res.send({
           status: 'error',
           msg: err
