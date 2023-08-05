@@ -122,8 +122,8 @@ app.route("/signnow-token")
   .get(function(req, res){
 
     const form = new FormData();
-    form.append('username', 'tima23a@gmail.com');
-    form.append('password', 'P@TiTTqAejw#6^Do');
+    form.append('username', `${process.env.SIGNNOW_USER}`);
+    form.append('password', `${process.env.SIGNNOW_PASS}`);
     form.append('grant_type', 'password');
     form.append('scope', '*');
 
@@ -160,6 +160,8 @@ app.route("/signnow-document")
 
     form.append('file', `${__dirname}/docs/if_engage_ltr.docx`)
 
+    console.dir(form);
+
     axios.post(`${process.env.SIGNNOW_URL}/document`, form, {
       headers: {
         ...form.getHeaders(),
@@ -168,7 +170,7 @@ app.route("/signnow-document")
     })
       .then(response => {
         console.log('response');
-        console.dir(response);
+        // console.dir(response);
         res.send({
           status: 'success',
           msg: response.data
@@ -176,7 +178,7 @@ app.route("/signnow-document")
       })
       .catch(err => {
         console.log('error');
-        console.dir(err);
+        // console.dir(err);
         res.send({
           status: 'error',
           msg: err
