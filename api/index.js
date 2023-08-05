@@ -120,36 +120,50 @@ app.route("/send-email")
 
 app.route("/signnow")
   .get(function(req, res){
-    const form = new FormData();
-    form.append('username', `${process.env.SIGNNOW_USER}`);
-    form.append('password', `P@TiTTqAejw#6^Do`);
-    form.append('grant_type', 'password');
-    form.append('scope', '*');
+    // const form = new FormData();
+    // form.append('username', `${process.env.SIGNNOW_USER}`);
+    // form.append('password', `P@TiTTqAejw#6^Do`);
+    // form.append('grant_type', 'password');
+    // form.append('scope', '*');
 
-    console.dir(form);
+    // console.dir(form);
 
-    axios.post(`${process.env.SIGNNOW_URL}/oauth2/token`, form, {
+    // axios.post(`${process.env.SIGNNOW_URL}/oauth2/token`, form, {
+    //   headers: {
+    //     ...form.getHeaders(),
+    //     'Authorization': `Basic ${process.env.SIGNNOW_TOKEN}`
+    //   }
+    // })
+    //   .then(tokenData => {
+    //     console.log('tokenData');
+    //     console.log(tokenData.data.access_token);
+
+    //     const formDoc = new FormData();
+    //     formDoc.append('url', 'https://claimchecker.co/f8821.pdf')
+
+    //     console.dir(formDoc);
+
+    //     return axios.post(`${process.env.SIGNNOW_URL}/v2/documents/url`, formDoc, {
+    //       headers: {
+    //         ...formDoc.getHeaders(),
+    //         'Accept': 'application/json',
+    //         'Authorization': `Basic b25822d995987d7420a038d49466129b8a7a41953c4e14fc37f8285bd78f579a`,
+    //         'Content-Type': 'multipart/form-data'
+    //       }
+    //     })
+    //   })
+    const formDoc = new FormData();
+    formDoc.append('url', 'https://claimchecker.co/f8821.pdf')
+
+    console.dir(formDoc);
+    axios.post(`${process.env.SIGNNOW_URL}/v2/documents/url`, formDoc, {
       headers: {
-        ...form.getHeaders(),
-        'Authorization': `Basic ${process.env.SIGNNOW_TOKEN}`
+        ...formDoc.getHeaders(),
+        'Accept': 'application/json',
+        'Authorization': `Basic b25822d995987d7420a038d49466129b8a7a41953c4e14fc37f8285bd78f579a`,
+        'Content-Type': 'multipart/form-data'
       }
     })
-      .then(tokenData => {
-        console.log('tokenData');
-        console.log(tokenData.data.access_token);
-
-        const formDoc = new FormData();
-        formDoc.append('url', 'https://claimchecker.co/f8821.pdf')
-
-        console.dir(formDoc);
-
-        return axios.post(`${process.env.SIGNNOW_URL}/v2/documents/url`, formDoc, {
-          headers: {
-            ...formDoc.getHeaders(),
-            'Authorization': `Basic ${tokenData.data.access_token}`,
-          }
-        })
-      })
       .then(response => {
         console.log('response')
         console.dir(response.data)
