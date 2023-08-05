@@ -131,7 +131,7 @@ app.route("/signnow")
     axios.post(`${process.env.SIGNNOW_URL}/oauth2/token`, form, {
       headers: {
         ...form.getHeaders(),
-        'Authorization': `Bearer ${process.env.SIGNNOW_TOKEN}`
+        'Authorization': `Basic ${process.env.SIGNNOW_TOKEN}`
       }
     })
       .then(tokenData => {
