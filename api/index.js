@@ -153,7 +153,7 @@ app.route("/signnow-document")
 
     const form = new FormData();
 
-    form.append('file', `${__dirname}/docs/if_engage_ltr.docx/`)
+    form.append('file', `${__dirname}/docs/if_engage_ltr.docx`)
 
     axios.post(`${process.env.SIGNNOW_URL}/document`, form, {
       headers: {
