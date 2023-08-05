@@ -135,10 +135,16 @@ app.route("/signnow-token")
     })
       .then(response => response.toJSON())
       .then(result => {
-        console.dir(result.data);
+        res.send({
+          status: 'success',
+          msg: result.data
+        })
       })
       .catch(err => {
-        console.dir(err);
+        res.send({
+          status: 'error',
+          msg: err
+        })
       })
   })
 
@@ -159,10 +165,16 @@ app.route("/signnow-document")
     })
       .then(response => response.toJSON())
       .then(result => {
-        console.dir(result.data);
+        res.send({
+          status: 'success',
+          msg: result.data
+        })
       })
       .catch(err => {
-        console.dir(err);
+        res.send({
+          status: 'error',
+          msg: err
+        })
       })
   })
 
