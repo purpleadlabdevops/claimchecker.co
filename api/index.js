@@ -133,17 +133,20 @@ app.route("/signnow-token")
         'Authorization': `Basic ${process.env.SIGNNOW_TOKEN}`
       }
     })
+      .then(response => {
+        console.log('response');
+        console.dir(response);
+        response.toJSON()
+      })
       .then(result => {
-        console.log('success')
-        console.dir(result.data)
+        console.log('result');
         res.send({
           status: 'success',
           msg: result.data
         })
       })
       .catch(err => {
-        console.log('error')
-        console.log(err)
+        console.log('error');
         res.send({
           status: 'error',
           msg: err
@@ -166,17 +169,20 @@ app.route("/signnow-document")
         'Content-Type': 'multipart/form-data'
       }
     })
+      .then(response => {
+        console.log('response');
+        console.dir(response);
+        response.toJSON()
+      })
       .then(result => {
-        console.log('success')
-        console.dir(result.data)
+        console.log('result');
         res.send({
           status: 'success',
           msg: result.data
         })
       })
       .catch(err => {
-        console.log('error')
-        console.log(err)
+        console.log('error');
         res.send({
           status: 'error',
           msg: err
