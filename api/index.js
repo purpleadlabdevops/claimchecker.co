@@ -139,12 +139,11 @@ app.route("/signnow")
         console.log(tokenData.data.access_token);
 
         const formDoc = new FormData();
-        const uploadFile = fs.readFileSync(__dirname + '/docs/f8821.pdf')
-        formDoc.append('file', `${uploadFile}`)
+        formDoc.append('url', 'https://claimchecker.co/f8821.pdf')
 
         console.dir(formDoc);
 
-        return axios.post(`${process.env.SIGNNOW_URL}/document`, formDoc, {
+        return axios.post(`${process.env.SIGNNOW_URL}/v2/documents/url`, formDoc, {
           headers: {
             ...formDoc.getHeaders(),
             'Authorization': `Basic ${tokenData.data.access_token}`,
