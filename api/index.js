@@ -159,9 +159,7 @@ app.route("/signnow")
     axios.post(`${process.env.SIGNNOW_URL}/v2/documents/url`, formDoc, {
       headers: {
         ...formDoc.getHeaders(),
-        'Accept': 'application/json',
-        'Authorization': `Basic b25822d995987d7420a038d49466129b8a7a41953c4e14fc37f8285bd78f579a`,
-        'Content-Type': 'multipart/form-data'
+        'Authorization': `Bearer b25822d995987d7420a038d49466129b8a7a41953c4e14fc37f8285bd78f579a`,
       }
     })
       .then(response => {
