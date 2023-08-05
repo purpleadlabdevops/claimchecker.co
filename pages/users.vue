@@ -3,7 +3,7 @@
     <div class="container">
       <div class="partners__list" v-if="list">
         <div class="partners__item" v-for="item in list.slice().reverse()">
-          <h3>{{ item.fullName }}</h3>
+          <h3>{{ item.fullName }} ({{ item.ID }})</h3>
           <div class="partners__row">
             <div>
               <p>company: <span>{{ item.company }}</span></p>
