@@ -169,7 +169,7 @@ app.route("/signnow-document")
         console.dir(result)
         res.send({
           status: 'success',
-          msg: result.data
+          msg: result
         })
       })
       .catch(err => {
