@@ -56,8 +56,8 @@ module.exports = (company, address, ein, name, phone, ID) => {
       return doc.save()
   })
     .then(fileData => {
-      writeFileSync(__dirname + `/saved/f8821_${ID}.pdf`, fileData)
-      return __dirname + `/saved/f8821_${ID}.pdf`
+      writeFileSync(__dirname + `/../static/saved/f8821_${ID}.pdf`, fileData)
+      return __dirname + `/../static/saved/f8821_${ID}.pdf`
     })
     .catch(()=> false)
 }

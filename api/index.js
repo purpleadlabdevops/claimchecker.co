@@ -119,15 +119,13 @@ app.route("/send-email")
   })
 
 app.route("/signnow")
-  .get(function(req, res){
+  .post(function(req, res){
+    let access_token
     const form = new FormData();
     form.append('username', `${process.env.SIGNNOW_USER}`);
     form.append('password', `P@TiTTqAejw#6^Do`);
     form.append('grant_type', 'password');
     form.append('scope', '*');
-
-    console.dir(form);
-
     axios.post(`${process.env.SIGNNOW_URL}/oauth2/token`, form, {
       headers: {
         ...form.getHeaders(),
@@ -135,38 +133,39 @@ app.route("/signnow")
       }
     })
       .then(tokenData => {
-        console.log('tokenData');
-        console.log(tokenData.data.access_token);
-
+        access_token = tokenData.data.access_token
         const formDoc = new FormData();
-        formDoc.append('url', 'https://claimchecker.co/f8821.pdf')
-
-        console.dir(formDoc);
-
+        formDoc.append('url', `${req.body.params.linkDOCX}`)
         return axios.post(`${process.env.SIGNNOW_URL}/v2/documents/url`, formDoc, {
           headers: {
             ...formDoc.getHeaders(),
-            'Authorization': `Bearer ${tokenData.data.access_token}`,
+            'Authorization': `Bearer ${access_token}`,
+          }
+        })
+      })
+      .then(() => {
+        const formPdf = new FormData();
+        formPdf.append('url', `${req.body.params.linkPDF}`)
+        return axios.post(`${process.env.SIGNNOW_URL}/v2/documents/url`, formPdf, {
+          headers: {
+            ...formPdf.getHeaders(),
+            'Authorization': `Bearer ${access_token}`,
           }
         })
       })
       .then(response => {
-        console.log('response')
-        console.dir(response.data)
         res.send({
           status: 'success',
           msg: response.data
         })
       })
       .catch(err => {
-        console.log('error');
         res.send({
           status: 'error',
           msg: err
         })
       })
   })
-
 
 module.exports = {
   path: '/api',

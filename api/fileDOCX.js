@@ -65,13 +65,13 @@ module.exports = (name, company, ID) => {
       }
     })
       .then(doc => {
-        fs.writeFileSync(__dirname + `/saved/if_engage_ltr_${ID}.docx`, doc)
+        fs.writeFileSync(__dirname + `/../static/saved/if_engage_ltr_${ID}.docx`, doc)
       })
       .catch(err => {
         reject(err)
       })
       .finally(() => {
-        resolve(__dirname + `/saved/if_engage_ltr_${ID}.docx`)
+        resolve(__dirname + `/../static/saved/if_engage_ltr_${ID}.docx`)
       })
   })
 }

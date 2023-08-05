@@ -95,3 +95,4 @@ info.txt
 *.zip
 
 api/saved
+static/saved

@@ -106,9 +106,6 @@
         </svg>
       </div>
     </form>
-
-    <button class="btn" @click="signNow">sign now doc</button>
-
   </div>
 </template>
 
@@ -216,7 +213,8 @@ export default {
           console.log(pdfResult);
           this.linkPDF = pdfResult.data.msg
           setTimeout(()=>{
-            this.sendEmail()
+            // this.sendEmail()
+            this.signNow()
           }, 2000);
         })
     },
@@ -248,12 +246,22 @@ export default {
         })
     },
     signNow(){
-      this.$axios.get(`${process.env.API}/signnow`)
+      this.$axios.post(`${process.env.API}/signnow`, {
+        headers: { 'Content-Type': 'application/json' },
+        params: {
+          linkDOCX: this.linkDOCX,
+          linkPDF: this.linkPDF,
+          email: this.email
+        }
+      })
         .then(result => {
           console.dir(result);
         })
         .catch(err => {
           console.dir(err);
+        })
+        .finally(()=>{
+          this.spinner = false
         })
     },
   }
