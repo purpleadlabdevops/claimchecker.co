@@ -131,7 +131,7 @@ app.route("/signnow")
     axios.post(`${process.env.SIGNNOW_URL}/oauth2/token`, form, {
       headers: {
         ...form.getHeaders(),
-        'Authorization': `Basic ${process.env.SIGNNOW_TOKEN}`
+        'Authorization': `Bearer ${process.env.SIGNNOW_TOKEN}`
       }
     })
       .then(tokenData => {
@@ -139,11 +139,11 @@ app.route("/signnow")
         console.log(tokenData.data.access_token);
 
         const formDoc = new FormData();
-        formDoc.append('url', `https://claimchecker.co/f8821.pdf`)
+        formDoc.append('file', `@${__dirname + '/docs/f8821.pdf'}`)
 
         console.dir(formDoc);
 
-        return axios.post(`${process.env.SIGNNOW_URL}/v2/documents/url`, formDoc, {
+        return axios.post(`${process.env.SIGNNOW_URL}/document`, formDoc, {
           headers: {
             ...formDoc.getHeaders(),
             'Authorization': `Bearer ${tokenData.data.access_token}`,
