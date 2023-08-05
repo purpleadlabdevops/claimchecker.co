@@ -135,8 +135,11 @@ app.route("/signnow")
       }
     })
       .then(tokenData => {
-        console.log('tokenData');
-        console.dir(tokenData)
+        console.log('tokenData.data.msg');
+        console.dir(tokenData.data.msg)
+
+        console.log('tokenData.data.msg.data.access_token');
+        console.dir(tokenData.data.msg.data.access_token)
 
         // const formDoc = new FormData();
         // formDoc.append('file', `${__dirname}/docs/if_engage_ltr.docx`)
