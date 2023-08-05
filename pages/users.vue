@@ -17,6 +17,8 @@
               <p>ein: <span>{{ item.ein }}</span></p>
             </div>
           </div>
+          <p><a :href="`https://claimchecker.co/saved/f8821_${item.ID}.pdf`" target="_blank">Open PDF</a></p>
+          <p><a :href="`https://claimchecker.co/saved/if_engage_ltr_${item.ID}.docx`" target="_blank">Open DOCX</a></p>
         </div>
       </div>
     </div>
