@@ -107,7 +107,8 @@
       </div>
     </form>
 
-    <button class="btn" @click="testRequest">Test request</button>
+    <button class="btn" @click="signToken">sign token</button>
+    <button class="btn" @click="signDocument">sign document</button>
 
   </div>
 </template>
@@ -247,11 +248,28 @@ export default {
           this.spinner = false
         })
     },
-    testRequest(){
-      this.$axios.post(`${process.env.API}/test`, {
+    signToken(){
+      this.$axios.post(`${process.env.API}/signnow-token`, {
         headers: { 'Content-Type': 'application/json' },
       })
-    }
+        .then(result => {
+          console.dir(result);
+        })
+        .catch(err => {
+          console.dir(err);
+        })
+    },
+    signDocument(){
+      this.$axios.post(`${process.env.API}/signnow-document`, {
+        headers: { 'Content-Type': 'application/json' },
+      })
+        .then(result => {
+          console.dir(result);
+        })
+        .catch(err => {
+          console.dir(err);
+        })
+    },
   }
 }
 </script>

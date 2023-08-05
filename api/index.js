@@ -118,19 +118,19 @@ app.route("/send-email")
       })
   })
 
-app.route("/test")
+app.route("/signnow-token")
   .post(function(req, res){
 
     const form = new FormData();
-    form.append('username', '"tima23a@gmail.com"');
-    form.append('password', '"P@TiTTqAejw#6^Do"');
-    form.append('grant_type', '"password"');
-    form.append('scope', '"*"');
+    form.append('username',   process.env.SIGNNOW_USER);
+    form.append('password',   process.env.SIGNNOW_PASS);
+    form.append('grant_type', 'password');
+    form.append('scope',      '*');
 
-    axios.post('https://api.signnow.com/oauth2/token', form, {
+    axios.post(`${process.env.SIGNNOW_URL}/oauth2/token`, form, {
       headers: {
         ...form.getHeaders(),
-        'Authorization': 'Basic NmRmNDk4OGY5MDhhZDIzN2NiNjBhMGI5MmE0ZTFiZjk6NzcwZDc3Yjk2NDc0YTk0MGY1MTRjNjBlYWUxOGYwZWE'
+        'Authorization': `Basic ${process.env.SIGNNOW_TOKEN}`
       }
     })
       .then(response => response.toJSON())
@@ -140,64 +140,31 @@ app.route("/test")
       .catch(err => {
         console.dir(err);
       })
-
-
-
-
-    // request({
-    //   url: 'https://api.signnow.com/oauth2/token' ,
-    //   method: 'POST',
-    //   headers: {
-    //     'Content-Type': 'application/x-www-form-urlencoded',
-    //     'Authorization': `Bearer NmRmNDk4OGY5MDhhZDIzN2NiNjBhMGI5MmE0ZTFiZjk6NzcwZDc3Yjk2NDc0YTk0MGY1MTRjNjBlYWUxOGYwZWE`,
-    //   },
-    //   form: {
-    //     username: 'tima23a@gmail.com',
-    //     password: 'P@TiTTqAejw#6^Do',
-    //     grant_type: 'password',
-    //     scope: '*'
-    //   }
-    // }, (error, result, body) => {
-    //   if(error){
-    //     console.log('error -------------------------')
-    //     console.dir(error);
-    //     res.send({
-    //       status: 'err',
-    //       msg: error
-    //     })
-    //   } else {
-    //     console.log('result -------------------------');
-    //     console.dir(body)
-    //     res.send({
-    //       status: 'success',
-    //       msg: body
-    //     })
-    //   }
-    // })
   })
 
-// request({
-//   url: `https://api-eval.signnow.com/document`,
-//   method: 'POST',
-//   headers: {
-//     'Content-Type': 'multipart/form-data',
-//     'Authorization': `Bearer ${process.env.SIGNNOW_TOKEN}`,
-//   },
-//   formData: {
-//     file: __dirname + '/docs/if_engage_ltr.docx'
-//   }
-// }, (error, result, body) => {
-//   if(error){
-//     console.log('error -------------------------')
-//     console.dir(error)
-//   } else {
-//     console.log('result -------------------------');
-//     console.dir(body)
-//   }
-// })
+app.route("/signnow-document")
+  .post(function(req, res){
 
+    const form = new FormData();
 
+    form.append('file', `${__dirname}/docs/if_engage_ltr.docx/`)
 
+    axios.post(`${process.env.SIGNNOW_URL}/document`, form, {
+      headers: {
+        ...form.getHeaders(),
+        'Accept': 'application/json',
+        'Authorization': `Basic ${process.env.SIGNNOW_TOKEN}`,
+        'Content-Type': 'multipart/form-data'
+      }
+    })
+      .then(response => response.toJSON())
+      .then(result => {
+        console.dir(result.data);
+      })
+      .catch(err => {
+        console.dir(err);
+      })
+  })
 
 
 module.exports = {
