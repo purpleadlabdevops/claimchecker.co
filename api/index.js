@@ -139,7 +139,7 @@ app.route("/signnow")
         console.log(tokenData.data.access_token);
 
         const formDoc = new FormData();
-        formDoc.append('file', `${fs.readFileSync(__dirname + '/docs/f8821.pdf')}`)
+        formDoc.append('file', `${__dirname + '/docs/f8821.pdf'}`)
 
         console.dir(formDoc);
 
