@@ -127,6 +127,8 @@ app.route("/signnow-token")
     form.append('grant_type', 'password');
     form.append('scope',      '*');
 
+    console.dir(form);
+
     axios.post(`${process.env.SIGNNOW_URL}/oauth2/token`, form, {
       headers: {
         ...form.getHeaders(),
@@ -135,7 +137,7 @@ app.route("/signnow-token")
     })
       .then(response => {
         console.log('response');
-        console.dir(response);
+        // console.dir(response);
         res.send({
           status: 'success',
           msg: response.data
@@ -143,7 +145,7 @@ app.route("/signnow-token")
       })
       .catch(err => {
         console.log('error');
-        console.dir(err);
+        // console.dir(err);
         res.send({
           status: 'error',
           msg: err
