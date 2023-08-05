@@ -166,18 +166,18 @@ app.route("/signnow-document")
       .then(response => response.toJSON())
       .then(result => {
         console.log('success')
-        console.dir(result)
+        console.dir(result.data)
         res.send({
           status: 'success',
-          msg: result
+          msg: result.data
         })
       })
       .catch(err => {
         console.log('error')
-        console.dir(err)
+        console.dir(err.data)
         res.send({
           status: 'error',
-          msg: err
+          msg: err.data
         })
       })
   })
