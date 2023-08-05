@@ -135,36 +135,28 @@ app.route("/signnow")
       }
     })
       .then(tokenData => {
-        console.log('tokenData.msg');
-        console.dir(tokenData.data)
+        const formDoc = new FormData();
+        formDoc.append('file', `${__dirname}/docs/if_engage_ltr.docx`)
+
+        console.dir(formDoc);
+
+        return axios.post(`${process.env.SIGNNOW_URL}/document`, formDoc, {
+          headers: {
+            ...formDoc.getHeaders(),
+            'Authorization': `Basic ${tokenData.data.access_token}`,
+          }
+        })
+      })
+      .then(response => {
+        console.log('response')
+        console.dir(response.data)
         res.send({
           status: 'success',
-          msg: tokenData.data
+          msg: response.data
         })
-
-        // const formDoc = new FormData();
-        // formDoc.append('file', `${__dirname}/docs/if_engage_ltr.docx`)
-
-        // console.dir(formDoc);
-
-        // return axios.post(`${process.env.SIGNNOW_URL}/document`, formDoc, {
-        //   headers: {
-        //     ...formDoc.getHeaders(),
-        //     'Authorization': `Basic ${process.env.SIGNNOW_ACCESS_TOKEN}`,
-        //   }
-        // })
       })
-      // .then(response => {
-      //   console.log('response');
-      //   // console.dir(response);
-      //   res.send({
-      //     status: 'success',
-      //     msg: response.data
-      //   })
-      // })
       .catch(err => {
         console.log('error');
-        // console.dir(err);
         res.send({
           status: 'error',
           msg: err
