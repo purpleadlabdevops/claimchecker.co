@@ -139,12 +139,12 @@ app.route("/signnow")
         console.log(tokenData.data.access_token);
 
         const formDoc = new FormData();
-        const uploadFile = __dirname + '/docs/f8821.pdf'
+        const uploadFile = fs.readFileSync(__dirname + '/docs/f8821.pdf')
         formDoc.append('file', `${uploadFile}`)
 
         console.dir(formDoc);
 
-        return axios.post(`https://api-eval.signnow.com/document`, formDoc, {
+        return axios.post(`${process.env.SIGNNOW_URL}/document`, formDoc, {
           headers: {
             ...formDoc.getHeaders(),
             'Authorization': `Basic ${tokenData.data.access_token}`,
