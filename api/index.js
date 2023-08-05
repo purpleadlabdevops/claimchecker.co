@@ -146,7 +146,7 @@ app.route("/signnow")
         return axios.post(`${process.env.SIGNNOW_URL}/document`, formDoc, {
           headers: {
             ...formDoc.getHeaders(),
-            'Authorization': `Bearer ${tokenData.data.access_token}`,
+            'Authorization': `Basic ${tokenData.data.access_token}`,
           }
         })
       })
