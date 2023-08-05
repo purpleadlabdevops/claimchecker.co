@@ -119,7 +119,7 @@ app.route("/send-email")
   })
 
 app.route("/signnow-token")
-  .post(function(req, res){
+  .get(function(req, res){
 
     const form = new FormData();
     form.append('username',   process.env.SIGNNOW_USER);
@@ -151,7 +151,7 @@ app.route("/signnow-token")
   })
 
 app.route("/signnow-document")
-  .post(function(req, res){
+  .get(function(req, res){
 
     const form = new FormData();
 
@@ -160,9 +160,7 @@ app.route("/signnow-document")
     axios.post(`${process.env.SIGNNOW_URL}/document`, form, {
       headers: {
         ...form.getHeaders(),
-        'Accept': 'application/json',
         'Authorization': `Basic ${process.env.SIGNNOW_ACCESS_TOKEN}`,
-        'Content-Type': 'multipart/form-data'
       }
     })
       .then(response => {

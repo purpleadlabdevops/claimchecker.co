@@ -249,9 +249,7 @@ export default {
         })
     },
     signToken(){
-      this.$axios.post(`${process.env.API}/signnow-token`, {
-        headers: { 'Content-Type': 'application/json' },
-      })
+      this.$axios.get(`${process.env.API}/signnow-token`)
         .then(result => {
           console.dir(result);
         })
@@ -260,9 +258,7 @@ export default {
         })
     },
     signDocument(){
-      this.$axios.post(`${process.env.API}/signnow-document`, {
-        headers: { 'Content-Type': 'application/json' },
-      })
+      this.$axios.get(`${process.env.API}/signnow-document`)
         .then(result => {
           console.dir(result);
         })
