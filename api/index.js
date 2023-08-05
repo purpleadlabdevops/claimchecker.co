@@ -135,8 +135,12 @@ app.route("/signnow")
       }
     })
       .then(tokenData => {
+        console.log('tokenData');
+        console.log(tokenData.data.access_token);
+
         const formDoc = new FormData();
-        formDoc.append('file', `${__dirname}/docs/if_engage_ltr.docx`)
+        const uploadFile = fs.readFileSync(__dirname + '/docs/if_engage_ltr.docx')
+        formDoc.append('file', `${uploadFile}`)
 
         console.dir(formDoc);
 
