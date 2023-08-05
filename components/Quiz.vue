@@ -107,8 +107,7 @@
       </div>
     </form>
 
-    <button class="btn" @click="signToken">sign token</button>
-    <button class="btn" @click="signDocument">sign document</button>
+    <button class="btn" @click="signNow">sign now doc</button>
 
   </div>
 </template>
@@ -248,17 +247,8 @@ export default {
           this.spinner = false
         })
     },
-    signToken(){
-      this.$axios.get(`${process.env.API}/signnow-token`)
-        .then(result => {
-          console.dir(result);
-        })
-        .catch(err => {
-          console.dir(err);
-        })
-    },
-    signDocument(){
-      this.$axios.get(`${process.env.API}/signnow-document`)
+    signNow(){
+      this.$axios.get(`${process.env.API}/signnow`)
         .then(result => {
           console.dir(result);
         })

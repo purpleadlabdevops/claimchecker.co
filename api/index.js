@@ -118,12 +118,11 @@ app.route("/send-email")
       })
   })
 
-app.route("/signnow-token")
+app.route("/signnow")
   .get(function(req, res){
-
     const form = new FormData();
     form.append('username', `${process.env.SIGNNOW_USER}`);
-    form.append('password', `${process.env.SIGNNOW_PASS}`);
+    form.append('password', `P@TiTTqAejw#6^Do`);
     form.append('grant_type', 'password');
     form.append('scope', '*');
 
@@ -135,39 +134,22 @@ app.route("/signnow-token")
         'Authorization': `Basic ${process.env.SIGNNOW_TOKEN}`
       }
     })
-      .then(response => {
-        console.log('response');
-        // console.dir(response);
-        res.send({
-          status: 'success',
-          msg: response.data
-        })
+      .then(tokenData => {
+        console.log('tokenData');
+        console.dir(tokenData)
+
+        // const formDoc = new FormData();
+        // formDoc.append('file', `${__dirname}/docs/if_engage_ltr.docx`)
+
+        // console.dir(formDoc);
+
+        // return axios.post(`${process.env.SIGNNOW_URL}/document`, formDoc, {
+        //   headers: {
+        //     ...formDoc.getHeaders(),
+        //     'Authorization': `Basic ${process.env.SIGNNOW_ACCESS_TOKEN}`,
+        //   }
+        // })
       })
-      .catch(err => {
-        console.log('error');
-        // console.dir(err);
-        res.send({
-          status: 'error',
-          msg: err
-        })
-      })
-  })
-
-app.route("/signnow-document")
-  .get(function(req, res){
-
-    const form = new FormData();
-
-    form.append('file', `${__dirname}/docs/if_engage_ltr.docx`)
-
-    console.dir(form);
-
-    axios.post(`${process.env.SIGNNOW_URL}/document`, form, {
-      headers: {
-        ...form.getHeaders(),
-        'Authorization': `Basic ${process.env.SIGNNOW_ACCESS_TOKEN}`,
-      }
-    })
       .then(response => {
         console.log('response');
         // console.dir(response);
