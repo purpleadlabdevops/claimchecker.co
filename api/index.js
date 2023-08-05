@@ -153,7 +153,7 @@ app.route("/signnow-document")
       headers: {
         ...form.getHeaders(),
         'Accept': 'application/json',
-        'Authorization': `Basic ${process.env.SIGNNOW_TOKEN}`,
+        'Authorization': `Basic ${process.env.SIGNNOW_ACCESS_TOKEN}`,
         'Content-Type': 'multipart/form-data'
       }
     })
