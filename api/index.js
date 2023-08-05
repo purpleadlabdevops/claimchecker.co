@@ -122,10 +122,10 @@ app.route("/signnow-token")
   .get(function(req, res){
 
     const form = new FormData();
-    form.append('username',   process.env.SIGNNOW_USER);
-    form.append('password',   process.env.SIGNNOW_PASS);
+    form.append('username', 'tima23a@gmail.com');
+    form.append('password', 'P@TiTTqAejw#6^Do');
     form.append('grant_type', 'password');
-    form.append('scope',      '*');
+    form.append('scope', '*');
 
     console.dir(form);
 
