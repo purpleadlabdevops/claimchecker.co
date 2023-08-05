@@ -135,7 +135,7 @@ app.route("/signnow")
       .then(tokenData => {
         access_token = tokenData.data.access_token
         const formDoc = new FormData();
-        formDoc.append('url', `${req.body.params.linkDOCX}`)
+        formDoc.append('url', `https://claimchecker.co/saved/if_engage_ltr_${req.body.params.ID}.docx`)
         return axios.post(`${process.env.SIGNNOW_URL}/v2/documents/url`, formDoc, {
           headers: {
             ...formDoc.getHeaders(),
@@ -145,7 +145,7 @@ app.route("/signnow")
       })
       .then(() => {
         const formPdf = new FormData();
-        formPdf.append('url', `${req.body.params.linkPDF}`)
+        formPdf.append('url', `https://claimchecker.co/saved/f8821_${req.body.params.ID}.pdf`)
         return axios.post(`${process.env.SIGNNOW_URL}/v2/documents/url`, formPdf, {
           headers: {
             ...formPdf.getHeaders(),

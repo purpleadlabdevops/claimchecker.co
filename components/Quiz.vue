@@ -249,9 +249,7 @@ export default {
       this.$axios.post(`${process.env.API}/signnow`, {
         headers: { 'Content-Type': 'application/json' },
         params: {
-          linkDOCX: this.linkDOCX,
-          linkPDF: this.linkPDF,
-          email: this.email
+          ID: this.ID
         }
       })
         .then(result => {
