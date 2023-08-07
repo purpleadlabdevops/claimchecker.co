@@ -254,6 +254,16 @@ export default {
       })
         .then(result => {
           console.dir(result);
+          this.card = null
+          this.type = null
+          this.fullName = null
+          this.phone = null
+          this.email = null
+          this.company = null
+          this.address = null
+          this.ein = null
+          this.step = 1
+          this.$router.push('/thanks')
         })
         .catch(err => {
           console.dir(err);

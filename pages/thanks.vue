@@ -15,6 +15,16 @@
 <script>
 export default {
   layout: 'home',
+  mounted(){
+    EF.conversion({
+      offer_id: 200
+    })
+      .then(res => {
+        console.log('EF.conversion')
+        console.dir(res)
+        localStorage.EF_CONV = true
+      })
+  }
 }
 </script>
 
