@@ -1,14 +1,14 @@
 export default {
   target: 'server',
   head: {
-    title: 'Claim Checker | Apply for Your ERC Credit Today!',
+    title: 'Claim Checker',
     htmlAttrs: {
       lang: 'en',
     },
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { hid: 'description', name: 'description', content: 'Financial Match | Apply for Your ERC Credit Today!' },
+      { hid: 'description', name: 'description', content: 'Claim Checker' },
       { name: 'format-detection', content: 'telephone=no' },
       { name: "facebook-domain-verification", content: "kiopg5rxifn74adikb3gbcqtbnreck" }
     ],

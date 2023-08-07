@@ -46,7 +46,7 @@ app.route("/db")
 
 app.route("/file-docx")
   .post((req, res) => {
-    fileDOCX(req.body.params.fullName, req.body.params.company, req.body.params.ID, req.body.params.signature)
+    fileDOCX(req.body.params.fullName, req.body.params.company, req.body.params.ID, req.body.params.address)
       .then(response => {
         console.dir(response);
         res.send({
@@ -65,7 +65,7 @@ app.route("/file-docx")
 
 app.route("/file-pdf")
   .post((req, res) => {
-    filePDF(req.body.params.company, req.body.params.address, req.body.params.ein, req.body.params.fullName, req.body.params.phone, req.body.params.ID, req.body.params.signature)
+    filePDF(req.body.params.company, req.body.params.address, req.body.params.ein, req.body.params.fullName, req.body.params.phone, req.body.params.ID)
       .then(response => {
         console.dir(response);
         res.send({

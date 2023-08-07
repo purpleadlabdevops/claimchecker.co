@@ -4,7 +4,7 @@
       <div class="reviews-row">
         <div class="reviews-video" @click="videoOpen('terry')">
           <img src="@/assets/img/logos/img-13.png">
-          <svg width="73" height="73" viewBox="0 0 73 73" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="36.5" cy="36.5" r="36.5" fill="#40696E" fill-opacity="0.6"/><path d="M53.075 34.8113C54.375 35.5618 54.375 37.4382 53.075 38.1888L29.675 51.6987C28.375 52.4493 26.75 51.5111 26.75 50.01L26.75 22.99C26.75 21.4889 28.375 20.5507 29.675 21.3013L53.075 34.8113Z" fill="white"/></svg>
+          <!-- <svg width="73" height="73" viewBox="0 0 73 73" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="36.5" cy="36.5" r="36.5" fill="#40696E" fill-opacity="0.6"/><path d="M53.075 34.8113C54.375 35.5618 54.375 37.4382 53.075 38.1888L29.675 51.6987C28.375 52.4493 26.75 51.5111 26.75 50.01L26.75 22.99C26.75 21.4889 28.375 20.5507 29.675 21.3013L53.075 34.8113Z" fill="white"/></svg> -->
         </div>
         <div class="reviews-wrap">
           <div class="reviews-item">
@@ -17,7 +17,7 @@
       <div class="reviews-row">
         <div class="reviews-video" @click="videoOpen('robert')">
           <img src="@/assets/img/logos/img-14.png">
-          <svg width="73" height="73" viewBox="0 0 73 73" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="36.5" cy="36.5" r="36.5" fill="#40696E" fill-opacity="0.6"/><path d="M53.075 34.8113C54.375 35.5618 54.375 37.4382 53.075 38.1888L29.675 51.6987C28.375 52.4493 26.75 51.5111 26.75 50.01L26.75 22.99C26.75 21.4889 28.375 20.5507 29.675 21.3013L53.075 34.8113Z" fill="white"/></svg>
+          <!-- <svg width="73" height="73" viewBox="0 0 73 73" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="36.5" cy="36.5" r="36.5" fill="#40696E" fill-opacity="0.6"/><path d="M53.075 34.8113C54.375 35.5618 54.375 37.4382 53.075 38.1888L29.675 51.6987C28.375 52.4493 26.75 51.5111 26.75 50.01L26.75 22.99C26.75 21.4889 28.375 20.5507 29.675 21.3013L53.075 34.8113Z" fill="white"/></svg> -->
         </div>
         <div class="reviews-wrap">
           <div class="reviews-item">
@@ -28,7 +28,7 @@
         </div>
       </div>
     </div>
-    <Video v-if="video" :name="videoName"/>
+    <!-- <Video v-if="video" :name="videoName"/> -->
   </section>
 </template>
 <script>
@@ -50,13 +50,7 @@ export default {
 <style lang="scss" scoped>
 .reviews{
   background: rgb(243, 255, 255);
-  padding-top: 30px;
-  @media(min-width:768px){
-    padding-top: 60px;
-  }
-  @media(min-width:1200px){
-    padding-top: 90px;
-  }
+  padding: res(50, 100) 0;
   &-row{
     @media(min-width:768px){
       display: flex;
@@ -96,6 +90,8 @@ export default {
   &-item{
     p{
       margin: 0 0 15px;
+      font-size: res(18, 24);
+      line-height: 1.4;
     }
     svg{
       display: block;
@@ -103,6 +99,7 @@ export default {
     }
     h4{
       margin: 0;
+      font-size: res(18, 24);
     }
     &:not(:first-child){
       margin-top: 30px;

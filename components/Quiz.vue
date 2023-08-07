@@ -186,6 +186,7 @@ export default {
           fullName: this.fullName,
           company: this.company,
           ID: this.ID,
+          address: this.address,
         }
       })
         .then(docxResult => {

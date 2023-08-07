@@ -1,7 +1,7 @@
 import * as fs from "fs"
 import {  ExternalHyperlink, HeadingLevel, ImageRun, Paragraph, patchDocument, PatchType, Table, TableCell, TableRow, TextDirection, TextRun, VerticalAlign } from "docx"
 
-module.exports = (name, company, ID) => {
+module.exports = (name, company, ID, address) => {
   return new Promise((resolve, reject) => {
     const date = new Date()
     patchDocument(fs.readFileSync(__dirname + '/docs/if_engage_ltr.docx'), {
@@ -61,6 +61,10 @@ module.exports = (name, company, ID) => {
         txt11: {
           type: PatchType.PARAGRAPH,
           children: [new TextRun(`To the extent ${company} instructs Ryan to investigate the potential sale of a claim prior to final determination by the Claims Administrator; Ryan will attempt to locate a buyer, analyze ${company}’s data for purposes of estimation of value in a potential sale setting, review and analyze the offer of said buyer and assist in the collection of funds from the buyer. `)]
+        },
+        address: {
+          type: PatchType.PARAGRAPH,
+          children: [new TextRun(address)]
         }
       }
     })

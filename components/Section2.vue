@@ -40,11 +40,8 @@
 
 <style lang="scss" scoped>
 .section2 {
-  padding: 100px 0;
   background: var(--text-white);
-  @include sm {
-    padding: 30px 0;
-  }
+  padding: res(50, 100) 0;
 }
 .section2__list {
   display: flex;
