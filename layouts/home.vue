@@ -3,7 +3,7 @@
     <Header />
     <Nuxt />
     <Sponsors />
-    <Section1 />
+    <Estimate />
     <Reviews />
     <Section2 />
     <Section3 />

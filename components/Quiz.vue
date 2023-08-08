@@ -340,10 +340,18 @@ export default {
     }
     &-1{
       .quiz__inner{
-        display: flex;
-        justify-content: space-between;
+        @media(min-width:576px){
+          display: flex;
+          justify-content: space-between;
+        }
         .quiz__btn{
-          @media(min-width:768px){
+          width: 100%;
+          @media(max-width:575px){
+            &:not(:first-child){
+              margin-top: 15px;
+            }
+          }
+          @media(min-width:576px){
             width: calc(50% - 10px);
           }
         }
