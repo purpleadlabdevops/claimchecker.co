@@ -17,6 +17,7 @@
 export default {
   layout: 'home',
   mounted(){
+    fbq('track', 'PageView');
     fbq('track', 'Lead');
     EF.conversion({
       offer_id: 200
