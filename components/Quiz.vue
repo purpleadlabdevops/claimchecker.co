@@ -96,7 +96,6 @@
               value="SUBMIT"
               :disabled="spinner" />
           </div>
-          <div class="quiz__small">We'll email you Docusign agreement to e-sign. <br> This is to make sure we have the access to make a settlement on your behalf. <br> Without this, we're powerless to get you your cash payout in just 1 month. <br> Just e-sign the Docusign agreement, and you're good to go.</div>
         </div>
       </div>
 

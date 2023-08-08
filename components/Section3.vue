@@ -28,7 +28,7 @@
       <div class="section3__grid-row">
         <div class="section3__grid-img-col">
           <figure>
-            <img src="@/assets/img/s3_4.jpg" alt="" />
+            <img src="@/assets/img/s3_3.jpg" alt="" />
           </figure>
         </div>
         <div class="section3__grid-dscr-col">

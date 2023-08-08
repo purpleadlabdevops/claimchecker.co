@@ -16,6 +16,11 @@ export default {
     script: [
       {
         ssr: false,
+        async: true,
+        src: '/js/fb.js'
+      },
+      {
+        ssr: false,
         defer: true,
         hid: 'everflow',
         src: 'https://www.bls29trk.com/scripts/sdk/everflow.js',
