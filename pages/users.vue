@@ -14,6 +14,7 @@
             <div>
               <p>card: <span>{{ item.card }}</span></p>
               <p>type: <span>{{ item.type }}</span></p>
+              <p>revenue: <span>{{ item.revenue }}</span></p>
               <p>ein: <span>{{ item.ein }}</span></p>
             </div>
           </div>

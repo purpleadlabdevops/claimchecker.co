@@ -15,9 +15,10 @@
       </div>
 
       <div class="quiz__step quiz__step-2" :class="step === 2 ? 'active':''" :data-passed="step > 2 ? true:false" :style="spinner ? 'filter: blur(2px);':''">
-        <h3>What industry do you work in?</h3>
+        <h3>Answer to some questions</h3>
         <div class="quiz__inner">
           <div class="field">
+            <h6>What industry do you work in?</h6>
             <input
               type="text"
               v-model="type"
@@ -25,7 +26,16 @@
               placeholder="Your Industry"
               required />
           </div>
-          <div class="field"><button class="btn btn-blue" @click="toStep3" type="button" :disabled="!type">Next step</button></div>
+          <div class="field">
+            <h6>Approximately how much credit card revenue does your business process a year? (rough estimate)</h6>
+            <input
+              type="text"
+              v-model="revenue"
+              id="type"
+              placeholder="Your monthly revenue"
+              required />
+          </div>
+          <div class="field"><button class="btn btn-blue" @click="toStep3" type="button" :disabled="!(type && revenue)">Next step</button></div>
         </div>
       </div>
 
@@ -114,6 +124,7 @@ export default {
     return{
       card: null,
       type: null,
+      revenue: null,
       fullName: null,
       phone: null,
       email: null,
@@ -163,6 +174,7 @@ export default {
         params: {
           card: this.card,
           type: this.type,
+          revenue: this.revenue,
           fullName: this.fullName,
           phone: this.phone,
           email: this.email,
@@ -301,6 +313,15 @@ export default {
     @media(min-width:992px){
       font-size: 20px;
       padding: 15px 30px;
+    }
+  }
+  h6{
+    font-size: 14px;
+    text-align: left;
+    margin-bottom: 10px;
+    font-weight: 500;
+    @media(min-width:992px){
+      font-size: 16px;
     }
   }
   &__inner{
