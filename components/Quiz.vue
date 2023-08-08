@@ -32,7 +32,7 @@
               type="text"
               v-model="revenue"
               id="type"
-              placeholder="Your monthly revenue"
+              placeholder="Your yearly revenue"
               required />
           </div>
           <div class="field"><button class="btn btn-blue" @click="toStep3" type="button" :disabled="!(type && revenue)">Next step</button></div>
