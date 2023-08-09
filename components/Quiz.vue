@@ -27,12 +27,12 @@
               required />
           </div>
           <div class="field">
-            <h6>Approximately how much credit card revenue does your business process a year? (rough estimate)</h6>
+            <h6>Approximately how much credit card revenue does your business process a monthly? (rough estimate)</h6>
             <input
               type="text"
               v-model="revenue"
               id="type"
-              placeholder="Your yearly revenue"
+              placeholder="Your monthly revenue"
               required />
           </div>
           <div class="field"><button class="btn btn-blue" @click="toStep3" type="button" :disabled="!(type && revenue)">Next step</button></div>
