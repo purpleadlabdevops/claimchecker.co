@@ -93,12 +93,17 @@
               required />
           </div>
           <div class="field">
+            <h6>EIN</h6>
             <input
               type="text"
               v-model="ein"
               id="ein"
-              placeholder="EIN"
+              placeholder="XX-XXXXXXX"
+              minlength="10"
+              maxlength="10"
+              @input="einMask"
               required />
+            <div class="quiz__small">Your EIN is used to make sure you have a real operating business. We keep information 100% secure and NEVER share it</div>
           </div>
           <div class="field">
             <input
@@ -140,6 +145,12 @@ export default {
     }
   },
   methods: {
+    einMask(e){
+      // XX-XXXXXXX
+      let arr = this.ein.replace(/[^\dA-Z]/g, '').replace(/[\s]/g, '').split('');
+      if (arr.length > 2) arr.splice(2, 0, '-');
+      this.ein = arr.toString().replace(/[,]/g, '');
+    },
     phoneInput(e) {
       let arr = this.phone.replace(/[^\dA-Z]/g, '').replace(/[\s]/g, '').split('');
       if (arr.length > 0) arr.splice(0, 0, '(');
@@ -449,7 +460,7 @@ export default {
   }
   &__small{
     font-size: 10px;
-    margin-top: 15px;
+    margin-top: 5px;
   }
 }
 
