@@ -27,13 +27,14 @@
               required />
           </div>
           <div class="field">
-            <h6>Approximately how much credit card revenue does your business process a monthly? (rough estimate)</h6>
-            <input
-              type="text"
-              v-model="revenue"
-              id="type"
-              placeholder="Your monthly revenue"
-              required />
+            <h6>Approximately how much credit card revenue does your business process a <b>MONTHLY</b>? (rough estimate)</h6>
+            <select v-model="revenue" required>
+              <option>Under 10k$</option>
+              <option>10k-50k$</option>
+              <option>50k$-100k$</option>
+              <option>100k$-500k$</option>
+              <option>Over 500k$ a month</option>
+            </select>
           </div>
           <div class="field"><button class="btn btn-blue" @click="toStep3" type="button" :disabled="!(type && revenue)">Next step</button></div>
         </div>
