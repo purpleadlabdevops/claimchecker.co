@@ -7,7 +7,7 @@
     <form class="quiz__form" @submit.prevent="submit" v-else>
 
       <div class="quiz__step quiz__step-1" :class="step === 1 ? 'active':''" :data-passed="step > 1 ? true:false" :style="spinner ? 'filter: blur(2px);':''">
-        <h3>Did You Accept Payments From VISA OR MasterCard Between 2004-2019?</h3>
+        <h3 v-html="card.q"></h3>
         <div class="quiz__inner">
           <button type="button" @click="toStep2('YES')" class="quiz__btn">YES</button>
           <button type="button" @click="notQualify = true" class="quiz__btn">NO</button>
@@ -18,17 +18,17 @@
         <h3>Answer to some questions</h3>
         <div class="quiz__inner">
           <div class="field">
-            <h6>What industry do you work in?</h6>
+            <h6 v-html="type.q"></h6>
             <input
               type="text"
-              v-model="type"
+              v-model="type.a"
               id="type"
               placeholder="Your Industry"
               required />
           </div>
           <div class="field">
-            <h6>Approximately how much credit card revenue does your business process a <b>MONTHLY</b>? (rough estimate)</h6>
-            <select v-model="revenue" required>
+            <h6 v-html="revenue.q"></h6>
+            <select v-model="revenue.a" required>
               <option>Under 10k$</option>
               <option>10k-50k$</option>
               <option>50k$-100k$</option>
@@ -36,7 +36,15 @@
               <option>Over 500k$ a month</option>
             </select>
           </div>
-          <div class="field"><button class="btn btn-blue" @click="toStep3" type="button" :disabled="!(type && revenue)">Next step</button></div>
+          <div class="field">
+            <h6 v-html="how_old.q"></h6>
+            <input
+              type="number"
+              v-model="how_old.a"
+              id="type"
+              required />
+          </div>
+          <div class="field"><button class="btn btn-blue" @click="toStep3" type="button" :disabled="!(type.a && revenue.a && how_old.a)">Next step</button></div>
         </div>
       </div>
 
@@ -128,9 +136,22 @@
 export default {
   data(){
     return{
-      card: null,
-      type: null,
-      revenue: null,
+      card: {
+        q: `Did You Accept Payments From VISA OR MasterCard Between 2004-2019?`,
+        a: null
+      },
+      type: {
+        q: `What industry do you work in?`,
+        a: null
+      },
+      revenue: {
+        q: `Approximately how much credit card revenue does your business process a <b>MONTHLY</b>? (rough estimate)`,
+        a: null
+      },
+      how_old: {
+        q: `Approximately how old is your business (in years)?`,
+        a: null
+      },
       fullName: null,
       phone: null,
       email: null,
@@ -163,7 +184,7 @@ export default {
       return email.match(/^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/);
     },
     toStep2(value){
-      this.card = value
+      this.card.a = value
       this.step = 2
     },
     toStep3(){
@@ -184,15 +205,17 @@ export default {
       this.$axios.post(`${process.env.API}/db`, {
         headers: { 'Content-Type': 'application/json' },
         params: {
-          card: this.card,
-          type: this.type,
-          revenue: this.revenue,
           fullName: this.fullName,
           phone: this.phone,
           email: this.email,
           company: this.company,
           address: this.address,
-          ein: this.ein
+          ein: this.ein,
+          questions: JSON.stringify({
+            card: this.card,
+            type: this.type,
+            revenue: this.revenue,
+          })
         }
       })
         .then(dbResult => {

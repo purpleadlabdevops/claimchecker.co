@@ -6,17 +6,24 @@
           <h3>{{ item.fullName }} ({{ item.ID }})</h3>
           <div class="partners__row">
             <div>
-              <p>company: <span>{{ item.company }}</span></p>
-              <p>email: <span>{{ item.email }}</span></p>
-              <p>phone: <span>{{ item.phone }}</span></p>
-              <p>address: <span>{{ item.address }}</span></p>
+              <p>company: <b>{{ item.company }}</b></p>
+              <p>email: <b>{{ item.email }}</b></p>
+              <p>phone: <b>{{ item.phone }}</b></p>
             </div>
             <div>
-              <p>card: <span>{{ item.card }}</span></p>
-              <p>type: <span>{{ item.type }}</span></p>
-              <p>revenue: <span>{{ item.revenue }}</span></p>
-              <p>ein: <span>{{ item.ein }}</span></p>
+              <p>address: <b>{{ item.address }}</b></p>
+              <p>ein: <b>{{ item.ein }}</b></p>
             </div>
+          </div>
+          <div>
+            <p v-if="item.card">card: <b>{{ item.card }}</b></p>
+            <p v-if="item.type">type: <b>{{ item.type }}</b></p>
+            <p v-if="item.revenue">revenue: <b>{{ item.revenue }}</b></p>
+          </div>
+          <div v-if="item.questions">
+            <p v-for="question in Object.values(JSON.parse(item.questions))">
+              <span v-html="question.q"></span>: <br><b v-html="question.a"></b>
+            </p>
           </div>
           <!-- <p><a :href="`https://claimchecker.co/saved/f8821_${item.ID}.pdf`" target="_blank">Open PDF</a></p>
           <p><a :href="`https://claimchecker.co/saved/if_engage_ltr_${item.ID}.docx`" target="_blank">Open DOCX</a></p> -->
@@ -38,7 +45,7 @@ export default {
       headers: { 'Content-Type': 'application/json' },
     })
       .then(dbResult => {
-        console.dir(dbResult)
+        console.dir(dbResult.data)
         this.list = dbResult.data
       })
   }
@@ -73,10 +80,6 @@ export default {
     line-height: 1.4;
     color: var(--text-black);
     margin-bottom: 5px;
-    span{
-      font-weight: 600;
-      font-size: 16px;
-    }
   }
   &__row{
     @media(min-width:768px){

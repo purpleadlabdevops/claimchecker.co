@@ -8,7 +8,7 @@ module.exports = query => {
                database: process.env.DB_NAME,
                user:     process.env.DB_USER,
                password: process.env.DB_PASS,
-               // port: 8889
+               port: 8889
              })
 
     conn.connect()
