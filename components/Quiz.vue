@@ -265,33 +265,6 @@ export default {
           }, 2000);
         })
     },
-    sendEmail(){
-      this.$axios.post(`${process.env.API}/send-email`, {
-        headers: { 'Content-Type': 'application/json' },
-        params: {
-          fullName: this.fullName,
-          linkDOCX: this.linkDOCX,
-          linkPDF: this.linkPDF,
-          email: this.email
-        }
-      })
-        .then(emailResult => {
-          console.log(emailResult)
-          this.card = null
-          this.type = null
-          this.fullName = null
-          this.phone = null
-          this.email = null
-          this.company = null
-          this.address = null
-          this.ein = null
-          this.step = 1
-          this.$router.push('/thanks')
-        })
-        .finally(()=>{
-          this.spinner = false
-        })
-    },
     signNow(){
       this.$axios.post(`${process.env.API}/signnow`, {
         headers: { 'Content-Type': 'application/json' },
@@ -307,15 +280,16 @@ export default {
             }
           })
           console.dir(result);
-          this.card = null
-          this.type = null
           this.fullName = null
           this.phone = null
           this.email = null
           this.company = null
           this.address = null
           this.ein = null
-          this.revenue = null
+          this.card.a = null
+          this.type.a = null
+          this.revenue.a = null
+          this.how_old.a = null
           this.step = 1
         })
         .catch(err => {
