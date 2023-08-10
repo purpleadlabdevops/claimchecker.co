@@ -18,15 +18,17 @@ export default {
   layout: 'home',
   mounted(){
     fbq('track', 'PageView');
-    fbq('track', 'Lead');
-    EF.conversion({
-      offer_id: 200
-    })
-      .then(res => {
-        console.log('EF.conversion')
-        console.dir(res)
-        localStorage.EF_CONV = true
+    if(this.$route.revenue && ['50k$-100k$', '100k$-500k$', 'Over 500k$ a month'].includes(this.$route.revenue)){
+      fbq('track', 'Lead');
+      EF.conversion({
+        offer_id: 200
       })
+        .then(res => {
+          console.log('EF.conversion')
+          console.dir(res)
+          localStorage.EF_CONV = true
+        })
+    }
   }
 }
 </script>

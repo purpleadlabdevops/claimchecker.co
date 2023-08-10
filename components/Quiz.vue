@@ -277,6 +277,12 @@ export default {
         }
       })
         .then(result => {
+          this.$router.push({
+            path: '/thanks',
+            query: {
+              revenue: this.revenue,
+            }
+          })
           console.dir(result);
           this.card = null
           this.type = null
@@ -286,8 +292,8 @@ export default {
           this.company = null
           this.address = null
           this.ein = null
+          this.revenue = null
           this.step = 1
-          this.$router.push('/thanks')
         })
         .catch(err => {
           console.dir(err);
