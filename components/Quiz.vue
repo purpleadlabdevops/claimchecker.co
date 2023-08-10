@@ -303,7 +303,7 @@ export default {
           this.$router.push({
             path: '/thanks',
             query: {
-              revenue: this.revenue,
+              revenue: this.revenue.a,
             }
           })
           console.dir(result);
