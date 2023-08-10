@@ -215,6 +215,7 @@ export default {
             card: this.card,
             type: this.type,
             revenue: this.revenue,
+            how_old: this.how_old,
           })
         }
       })
