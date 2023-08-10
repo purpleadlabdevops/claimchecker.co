@@ -145,7 +145,7 @@ export default {
         a: null
       },
       revenue: {
-        q: `Approximately how much credit card revenue does your business process a <b>MONTHLY</b>? (rough estimate)`,
+        q: `Approximately how much credit card revenue does your business process MONTHLY? (rough estimate)`,
         a: null
       },
       how_old: {
