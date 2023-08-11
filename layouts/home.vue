@@ -31,7 +31,7 @@ export default{
           ssr: false,
           defer: true,
           hid: 'everflow',
-          src: 'https://www.f98mmtrk.com/scripts/sdk/everflow.js',
+          src: 'https://www.bls29trk.com/scripts/sdk/everflow.js',
           callback: () => {
             EF.click({
               offer_id: 200,
