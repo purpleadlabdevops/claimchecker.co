@@ -18,7 +18,7 @@ export default {
   layout: 'home',
   mounted(){
     fbq('track', 'PageView');
-    if(this.$route.revenue && ['50k$-100k$', '100k$-500k$', 'Over 500k$ a month'].includes(this.$route.revenue)){
+    if(this.$route.query.revenue && ['50k$-100k$', '100k$-500k$', 'Over 500k$ a month'].includes(this.$route.query.revenue)){
       fbq('track', 'Lead');
       EF.conversion({
         offer_id: 200
