@@ -277,7 +277,7 @@ export default {
           console.dir(result);
           setTimeout(()=>{
             this.signNowInvite(result.data.msg.access_token, result.data.msg.pdfID, result.data.msg.docxID)
-          }, 5000);
+          }, 10000);
         })
         .catch(err => {
           console.dir(err);
