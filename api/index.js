@@ -120,7 +120,7 @@ app.route("/file-pdf")
 app.route("/signnow")
   .post(function(req, res){
     console.log('START signnow --------------------------------------------------');
-    let access_token
+    let access_token, pdfID, docxID
     const form = new FormData();
     form.append('username', `${process.env.SIGNNOW_USER}`);
     form.append('password', `P@TiTTqAejw#6^Do`);
@@ -144,29 +144,7 @@ app.route("/signnow")
         })
       })
       .then(docxResult => {
-        console.log('docxResult -------------------------');
-        console.dir(docxResult.data);
-        const formDocInvite = new FormData();
-        formDocInvite.append('document_id', docxResult.data.id)
-        formDocInvite.append('to', [{
-          email: req.body.params.email,
-          phone_invite: req.body.params.phone,
-          role: req.body.params.fullName,
-          order: 1,
-          subject: `Claim Checker Invitation`,
-          message: `Dear client, here is your invitation for edditing Visa_MC_Letter_${req.body.params.ID}.docx`
-        }])
-        formPdfInvite.append('from', process.env.SIGNNOW_USER)
-        return axios.post(`${process.env.SIGNNOW_URL}/document/${docxResult.data.id}/invite`, formDocInvite, {
-          headers: {
-            ...formDoc.getHeaders(),
-            'Authorization': `Bearer ${access_token}`,
-          }
-        })
-      })
-      .then(docxInviteResult => {
-        console.log('docxInviteResult -------------------------');
-        console.dir(docxInviteResult.data);
+        docxInvite = docxResult.data.id
         const formPdf = new FormData();
         formPdf.append('url', `https://claimchecker.co/saved/Visa_MC_8821_${req.body.params.ID}.pdf`)
         return axios.post(`${process.env.SIGNNOW_URL}/v2/documents/url`, formPdf, {
@@ -177,10 +155,46 @@ app.route("/signnow")
         })
       })
       .then(pdfResult => {
-        console.log('pdfResult -------------------------');
-        console.dir(pdfResult.data);
+        pdfID = pdfResult.data.id
+        res.send({
+          status: 'success',
+          msg: {
+            access_token: access_token,
+            pdfID: pdfID,
+            docxID: docxID
+          }
+        })
+      })
+      .catch(err => {
+        res.send({
+          status: 'error',
+          msg: err
+        })
+      })
+  })
+
+app.route("/signnow-invite")
+  .post(function(req, res){
+    const formDocInvite = new FormData();
+    formDocInvite.append('document_id', req.body.params.docxID)
+    formDocInvite.append('to', [{
+      email: req.body.params.email,
+      phone_invite: req.body.params.phone,
+      role: req.body.params.fullName,
+      order: 1,
+      subject: `Claim Checker Invitation`,
+      message: `Dear client, here is your invitation for edditing Visa_MC_Letter_${req.body.params.ID}.docx`
+    }])
+    formPdfInvite.append('from', process.env.SIGNNOW_USER)
+    axios.post(`${process.env.SIGNNOW_URL}/document/${req.body.params.docxID}/invite`, formDocInvite, {
+      headers: {
+        ...formDoc.getHeaders(),
+        'Authorization': `Bearer ${access_token}`,
+      }
+    })
+      .then(result => {
         const formPdfInvite = new FormData();
-        formPdfInvite.append('document_id', pdfResult.data.id)
+        formPdfInvite.append('document_id', req.body.params.pdfID)
         formPdfInvite.append('to', [{
           email: req.body.params.email,
           phone_invite: req.body.params.phone,
@@ -190,7 +204,7 @@ app.route("/signnow")
           message: `Dear client, here is your invitation for edditing Visa_MC_8821_${req.body.params.ID}.pdf`
         }])
         formPdfInvite.append('from', process.env.SIGNNOW_USER)
-        return axios.post(`${process.env.SIGNNOW_URL}/document/${pdfResult.data.id}/invite`, formPdfInvite, {
+        return axios.post(`${process.env.SIGNNOW_URL}/document/${req.body.params.pdfID}/invite`, formPdfInvite, {
           headers: {
             ...formDoc.getHeaders(),
             'Authorization': `Bearer ${access_token}`,
@@ -198,8 +212,6 @@ app.route("/signnow")
         })
       })
       .then(response => {
-        console.log('PDF response');
-        console.dir(response.data);
         res.send({
           status: 'success',
           msg: response.data

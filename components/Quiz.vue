@@ -266,14 +266,35 @@ export default {
         })
     },
     signNow(){
-      console.log('START QUERY to /signNow');
       this.$axios.post(`${process.env.API}/signnow`, {
+        headers: { 'Content-Type': 'application/json' },
+        params: {
+          ID: this.ID,
+        }
+      })
+        .then(result => {
+          setTimeout(()=>{
+            this.signNowInvite(result.msg.access_token, result.msg.pdfID, result.msg.docxID)
+          }, 2000);
+        })
+        .catch(err => {
+          console.dir(err);
+        })
+        .finally(()=>{
+          this.spinner = false
+        })
+    },
+    signNowInvite(access_token, pdfID, docxID){
+      this.$axios.post(`${process.env.API}/signnow-invite`, {
         headers: { 'Content-Type': 'application/json' },
         params: {
           ID: this.ID,
           email: this.email,
           phone: this.phone,
           fullName: this.fullName,
+          access_token: access_token,
+          pdfID: pdfID,
+          docxID: docxID
         }
       })
         .then(result => {
@@ -297,11 +318,9 @@ export default {
           this.step = 1
         })
         .catch(err => {
-          console.log('ERROR QUERY to /signNow');
           console.dir(err);
         })
         .finally(()=>{
-          console.log('END QUERY to /signNow');
           this.spinner = false
         })
     },
