@@ -279,12 +279,6 @@ export default {
             this.signNowInvite(result.data.msg.access_token, result.data.msg.pdfID, result.data.msg.docxID)
           }, 10000);
         })
-        .catch(err => {
-          console.dir(err);
-        })
-        .finally(()=>{
-          this.spinner = false
-        })
     },
     signNowInvite(access_token, pdfID, docxID){
       console.log('signNowInvite ----------------------------------------');
