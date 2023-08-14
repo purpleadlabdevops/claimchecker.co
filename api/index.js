@@ -181,7 +181,7 @@ app.route("/signnow-invite")
   .post(function(req, res){
     axios.post(`${process.env.SIGNNOW_URL}/document/${req.body.params.docxID}/invite`, {
       headers: {
-        'Authorization': `Basic ${req.body.params.access_token}`,
+        'Authorization': `Bearer ${req.body.params.access_token}`,
         'Content-Type': 'application/json',
         'Accept': 'application/json'
       },
@@ -189,33 +189,51 @@ app.route("/signnow-invite")
         document_id: req.body.params.docxID,
         to: [{
           email: req.body.params.email,
-          phone_invite: req.body.params.phone,
           role: req.body.params.fullName,
           order: 1,
-          subject: `Claim Checker Invitation`,
-          message: `Dear client, here is your invitation for edditing Visa_MC_Letter_${req.body.params.ID}.docx`
+          prefill_signature_name: "Signer 1",
+          force_new_signature: 1,
+          reassign: "0",
+          decline_by_signature: "0",
+          reminder: 0,
+          expiration_days: 30,
+          authentication_type: "password",
+          password: "123456",
+          subject: `Claim Checker needs your signature`,
+          message: `Dear client, Claim Checker invited you to sign the Invoice document`
         }],
-        from: process.env.SIGNNOW_USER
+        from: process.env.SIGNNOW_USER,
+        subject: `Claim Checker needs your signature`,
+        message: `Dear client, Claim Checker invited you to sign the Invoice document`
       }
     })
       .then(result => {
         return axios.post(`${process.env.SIGNNOW_URL}/document/${req.body.params.pdfID}/invite`, {
           headers: {
-            'Authorization': `Basic ${req.body.params.access_token}`,
+            'Authorization': `Bearer ${req.body.params.access_token}`,
             'Content-Type': 'application/json',
             'Accept': 'application/json'
           },
           data: {
-            document_id: req.body.params.pdfID,
+            document_id: req.body.params.docxID,
             to: [{
               email: req.body.params.email,
-              phone_invite: req.body.params.phone,
               role: req.body.params.fullName,
               order: 1,
-              subject: `Claim Checker Invitation`,
-              message: `Dear client, here is your invitation for edditing Visa_MC_8821_${req.body.params.ID}.pdf`
+              prefill_signature_name: "Signer 1",
+              force_new_signature: 1,
+              reassign: "0",
+              decline_by_signature: "0",
+              reminder: 0,
+              expiration_days: 30,
+              authentication_type: "password",
+              password: "123456",
+              subject: `Claim Checker needs your signature`,
+              message: `Dear client, Claim Checker invited you to sign the Invoice document`
             }],
-            from: process.env.SIGNNOW_USER
+            from: process.env.SIGNNOW_USER,
+            subject: `Claim Checker needs your signature`,
+            message: `Dear client, Claim Checker invited you to sign the Invoice document`
           }
         })
       })
