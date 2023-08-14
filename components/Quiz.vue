@@ -266,6 +266,7 @@ export default {
         })
     },
     signNow(){
+      console.log('START QUERY to /signNow');
       this.$axios.post(`${process.env.API}/signnow`, {
         headers: { 'Content-Type': 'application/json' },
         params: {
@@ -296,9 +297,11 @@ export default {
           this.step = 1
         })
         .catch(err => {
+          console.log('ERROR QUERY to /signNow');
           console.dir(err);
         })
         .finally(()=>{
+          console.log('END QUERY to /signNow');
           this.spinner = false
         })
     },

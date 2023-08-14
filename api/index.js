@@ -67,7 +67,6 @@ app.route("/file-pdf")
   .post((req, res) => {
     filePDF(req.body.params.company, req.body.params.address, req.body.params.ein, req.body.params.fullName, req.body.params.phone, req.body.params.ID)
       .then(response => {
-        console.dir(response);
         res.send({
           status: 'success',
           msg: response
