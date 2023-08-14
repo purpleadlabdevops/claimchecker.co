@@ -189,7 +189,7 @@ app.route("/signnow-invite")
     axios.post(`${process.env.SIGNNOW_URL}/document/${req.body.params.docxID}/invite`, formDocInvite, {
       headers: {
         ...formDoc.getHeaders(),
-        'Authorization': `Bearer ${access_token}`,
+        'Authorization': `Bearer ${req.body.params.access_token}`,
       }
     })
       .then(result => {
@@ -207,7 +207,7 @@ app.route("/signnow-invite")
         return axios.post(`${process.env.SIGNNOW_URL}/document/${req.body.params.pdfID}/invite`, formPdfInvite, {
           headers: {
             ...formDoc.getHeaders(),
-            'Authorization': `Bearer ${access_token}`,
+            'Authorization': `Bearer ${req.body.params.access_token}`,
           }
         })
       })
