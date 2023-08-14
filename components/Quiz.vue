@@ -262,7 +262,7 @@ export default {
           this.linkPDF = pdfResult.data.msg
           setTimeout(()=>{
             this.signNow()
-          }, 3000);
+          }, 2000);
         })
     },
     signNow(){
@@ -277,7 +277,7 @@ export default {
           console.dir(result);
           setTimeout(()=>{
             this.signNowInvite(result.data.msg.access_token, result.data.msg.pdfID, result.data.msg.docxID)
-          }, 4000);
+          }, 5000);
         })
         .catch(err => {
           console.dir(err);
