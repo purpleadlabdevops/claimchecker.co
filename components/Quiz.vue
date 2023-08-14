@@ -276,7 +276,7 @@ export default {
           console.log('signNow result -------------------------');
           console.dir(result);
           setTimeout(()=>{
-            this.signNowInvite(result.msg.access_token, result.msg.pdfID, result.msg.docxID)
+            this.signNowInvite(result.data.msg.access_token, result.data.msg.pdfID, result.data.msg.docxID)
           }, 2000);
         })
         .catch(err => {
@@ -287,6 +287,7 @@ export default {
         })
     },
     signNowInvite(access_token, pdfID, docxID){
+      console.log('signNowInvite ----------------------------------------');
       console.dir({
         ID: this.ID,
         email: this.email,
