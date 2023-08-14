@@ -251,6 +251,40 @@ app.route("/signnow-invite")
       })
   })
 
+/*
+
+curl --request POST \
+  --url https://api.signnow.com/document/60bfca1449e64719854b6534eae5a1b7d6b87d82/invite \
+  --header 'Accept: application/json' \
+  --header 'Authorization: Bearer 4dafa04477805df0215915a784c5a8af6854b0549a43aa20068a4e46277c9054' \
+  --header 'Content-Type: application/json' \
+  --header 'Content-type: ' \
+  --data '{
+  "document_id": "60bfca1449e64719854b6534eae5a1b7d6b87d82",
+  "to": [
+    {
+      "email": "onyx18121990@gmail.com",
+      "role": "Signer 1",
+      "order": 1,
+      "prefill_signature_name": "Signer 1",
+      "force_new_signature": 1,
+      "reassign": "0",
+      "decline_by_signature": "0",
+      "reminder": 0,
+      "expiration_days": 30,
+      "authentication_type": "password",
+      "password": "123456",
+      "subject": "You’ve got a new signature request",
+      "message": "Hi, this is an invite to sign a document from sender@emaildomain.com."
+    }
+  ],
+  "from": "support@claimchecker.co",
+  "subject": "support@claimchecker.co needs your signature",
+  "message": "support@claimchecker.co invited you to sign the Invoice document"
+}'
+
+*/
+
 module.exports = {
   path: '/api',
   handler: app,

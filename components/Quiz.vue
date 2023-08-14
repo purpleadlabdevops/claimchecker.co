@@ -275,9 +275,32 @@ export default {
         .then(result => {
           console.log('signNow result -------------------------');
           console.dir(result);
-          setTimeout(()=>{
-            this.signNowInvite(result.data.msg.access_token, result.data.msg.pdfID, result.data.msg.docxID)
-          }, 10000);
+          this.$router.push({
+            path: '/thanks',
+            query: {
+              revenue: this.revenue.a,
+            }
+          })
+          this.fullName = null
+          this.phone = null
+          this.email = null
+          this.company = null
+          this.address = null
+          this.ein = null
+          this.card.a = null
+          this.type.a = null
+          this.revenue.a = null
+          this.how_old.a = null
+          this.step = 1
+          // setTimeout(()=>{
+          //   this.signNowInvite(result.data.msg.access_token, result.data.msg.pdfID, result.data.msg.docxID)
+          // }, 10000);
+        })
+        .catch(err => {
+          console.dir(err);
+        })
+        .finally(()=>{
+          this.spinner = false
         })
     },
     signNowInvite(access_token, pdfID, docxID){
