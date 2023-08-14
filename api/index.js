@@ -181,7 +181,7 @@ app.route("/signnow-invite")
   .post(function(req, res){
     axios.post(`${process.env.SIGNNOW_URL}/document/${req.body.params.docxID}/invite`, {
       headers: {
-        'Authorization': `Bearer ${req.body.params.access_token}`,
+        'Authorization': `Basic ${req.body.params.access_token}`,
         'Content-Type': 'application/json',
         'Accept': 'application/json'
       },
@@ -201,7 +201,7 @@ app.route("/signnow-invite")
       .then(result => {
         return axios.post(`${process.env.SIGNNOW_URL}/document/${req.body.params.pdfID}/invite`, {
           headers: {
-            'Authorization': `Bearer ${req.body.params.access_token}`,
+            'Authorization': `Basic ${req.body.params.access_token}`,
             'Content-Type': 'application/json',
             'Accept': 'application/json'
           },
