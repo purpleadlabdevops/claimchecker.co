@@ -145,28 +145,29 @@ app.route("/signnow")
         })
       })
       .then(docxResult => {
-        console.log('docxResult --------------------------------------------------')
-        console.dir(docxResult.data)
-
-        // const formDocInvite = new FormData();
-        // formDocInvite.append('document_id', ``)
-        // formDocInvite.append('to', [{
-        //   email: ``,
-        //   phone_invite: ``,
-        //   role_id: ``,
-        //   role: ``,
-        //   order: ``,
-        //   subject: ``,
-        //   message: ``
-        // }])
-        // formDocInvite.append('from', ``)
-        // axios.post(`${process.env.SIGNNOW_URL}/document/{document_id}/invite`, formDoc, {
-        //   headers: {
-        //     ...formDoc.getHeaders(),
-        //     'Authorization': `Bearer ${access_token}`,
-        //   }
-        // })
-
+        console.log('docxResult -------------------------');
+        console.dir(docxResult.data);
+        const formDocInvite = new FormData();
+        formDocInvite.append('document_id', docxResult.data.id)
+        formDocInvite.append('to', [{
+          email: req.body.params.email,
+          phone_invite: req.body.params.phone,
+          role: req.body.params.fullName,
+          order: 1,
+          subject: `Claim Checker Invitation`,
+          message: `Dear client, here is your invitation for edditing Visa_MC_Letter_${req.body.params.ID}.docx`
+        }])
+        formPdfInvite.append('from', process.env.SIGNNOW_USER)
+        return axios.post(`${process.env.SIGNNOW_URL}/document/${docxResult.data.id}/invite`, formDocInvite, {
+          headers: {
+            ...formDoc.getHeaders(),
+            'Authorization': `Bearer ${access_token}`,
+          }
+        })
+      })
+      .then(docxInviteResult => {
+        console.log('docxInviteResult -------------------------');
+        console.dir(docxInviteResult.data);
         const formPdf = new FormData();
         formPdf.append('url', `https://claimchecker.co/saved/Visa_MC_8821_${req.body.params.ID}.pdf`)
         return axios.post(`${process.env.SIGNNOW_URL}/v2/documents/url`, formPdf, {
@@ -176,8 +177,29 @@ app.route("/signnow")
           }
         })
       })
+      .then(pdfResult => {
+        console.log('pdfResult -------------------------');
+        console.dir(pdfResult.data);
+        const formPdfInvite = new FormData();
+        formPdfInvite.append('document_id', pdfResult.data.id)
+        formPdfInvite.append('to', [{
+          email: req.body.params.email,
+          phone_invite: req.body.params.phone,
+          role: req.body.params.fullName,
+          order: 1,
+          subject: `Claim Checker Invitation`,
+          message: `Dear client, here is your invitation for edditing Visa_MC_8821_${req.body.params.ID}.pdf`
+        }])
+        formPdfInvite.append('from', process.env.SIGNNOW_USER)
+        return axios.post(`${process.env.SIGNNOW_URL}/document/${pdfResult.data.id}/invite`, formPdfInvite, {
+          headers: {
+            ...formDoc.getHeaders(),
+            'Authorization': `Bearer ${access_token}`,
+          }
+        })
+      })
       .then(response => {
-        console.log('PDF respinse');
+        console.log('PDF response');
         console.dir(response.data);
         res.send({
           status: 'success',

@@ -270,7 +270,10 @@ export default {
       this.$axios.post(`${process.env.API}/signnow`, {
         headers: { 'Content-Type': 'application/json' },
         params: {
-          ID: this.ID
+          ID: this.ID,
+          email: this.email,
+          phone: this.phone,
+          fullName: this.fullName,
         }
       })
         .then(result => {
