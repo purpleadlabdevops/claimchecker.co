@@ -48,7 +48,6 @@ app.route("/file-docx")
   .post((req, res) => {
     fileDOCX(req.body.params.fullName, req.body.params.company, req.body.params.ID, req.body.params.address)
       .then(response => {
-        console.dir(response);
         res.send({
           status: 'success',
           msg: response
@@ -144,7 +143,7 @@ app.route("/signnow")
         })
       })
       .then(docxResult => {
-        docxInvite = docxResult.data.id
+        docxID = docxResult.data.id
         const formPdf = new FormData();
         formPdf.append('url', `https://claimchecker.co/saved/Visa_MC_8821_${req.body.params.ID}.pdf`)
         return axios.post(`${process.env.SIGNNOW_URL}/v2/documents/url`, formPdf, {
