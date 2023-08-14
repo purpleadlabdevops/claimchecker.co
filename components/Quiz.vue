@@ -273,6 +273,8 @@ export default {
         }
       })
         .then(result => {
+          console.log('signNow result -------------------------');
+          console.dir(result);
           setTimeout(()=>{
             this.signNowInvite(result.msg.access_token, result.msg.pdfID, result.msg.docxID)
           }, 2000);
