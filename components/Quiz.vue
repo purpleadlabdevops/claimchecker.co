@@ -287,6 +287,15 @@ export default {
         })
     },
     signNowInvite(access_token, pdfID, docxID){
+      console.dir({
+        ID: this.ID,
+        email: this.email,
+        phone: this.phone,
+        fullName: this.fullName,
+        access_token: access_token,
+        pdfID: pdfID,
+        docxID: docxID
+      });
       this.$axios.post(`${process.env.API}/signnow-invite`, {
         headers: { 'Content-Type': 'application/json' },
         params: {
