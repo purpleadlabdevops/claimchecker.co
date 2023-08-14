@@ -262,7 +262,7 @@ export default {
           this.linkPDF = pdfResult.data.msg
           setTimeout(()=>{
             this.signNow()
-          }, 2000);
+          }, 3000);
         })
     },
     signNow(){
