@@ -156,6 +156,11 @@ app.route("/signnow")
       })
       .then(pdfResult => {
         pdfID = pdfResult.data.id
+        console.dir({
+          access_token: access_token,
+          pdfID: pdfID,
+          docxID: docxID
+        });
         res.send({
           status: 'success',
           msg: {
