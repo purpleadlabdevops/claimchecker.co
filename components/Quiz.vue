@@ -277,7 +277,7 @@ export default {
           console.dir(result);
           setTimeout(()=>{
             this.signNowInvite(result.data.msg.access_token, result.data.msg.pdfID, result.data.msg.docxID)
-          }, 2000);
+          }, 3000);
         })
         .catch(err => {
           console.dir(err);
@@ -310,13 +310,13 @@ export default {
         }
       })
         .then(result => {
+          console.dir(result);
           this.$router.push({
             path: '/thanks',
             query: {
               revenue: this.revenue.a,
             }
           })
-          console.dir(result);
           this.fullName = null
           this.phone = null
           this.email = null
