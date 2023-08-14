@@ -11,6 +11,7 @@ module.exports = query => {
       }
 
     if(process.env.NODE_ENV === 'development') dbData.port = 8889
+    console.log(process.env.NODE_ENV);
 
     const conn = mysql.createConnection()
 
