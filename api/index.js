@@ -179,39 +179,43 @@ app.route("/signnow")
 
 app.route("/signnow-invite")
   .post(function(req, res){
-    const formDocInvite = new FormData();
-    formDocInvite.append('document_id', req.body.params.docxID)
-    formDocInvite.append('to', [{
-      email: req.body.params.email,
-      phone_invite: req.body.params.phone,
-      role: req.body.params.fullName,
-      order: 1,
-      subject: `Claim Checker Invitation`,
-      message: `Dear client, here is your invitation for edditing Visa_MC_Letter_${req.body.params.ID}.docx`
-    }])
-    formPdfInvite.append('from', process.env.SIGNNOW_USER)
     axios.post(`${process.env.SIGNNOW_URL}/document/${req.body.params.docxID}/invite`, formDocInvite, {
       headers: {
-        ...formDoc.getHeaders(),
         'Authorization': `Bearer ${req.body.params.access_token}`,
-      }
-    })
-      .then(result => {
-        const formPdfInvite = new FormData();
-        formPdfInvite.append('document_id', req.body.params.pdfID)
-        formPdfInvite.append('to', [{
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      },
+      data: {
+        document_id: req.body.params.docxID,
+        to: [{
           email: req.body.params.email,
           phone_invite: req.body.params.phone,
           role: req.body.params.fullName,
           order: 1,
           subject: `Claim Checker Invitation`,
-          message: `Dear client, here is your invitation for edditing Visa_MC_8821_${req.body.params.ID}.pdf`
-        }])
-        formPdfInvite.append('from', process.env.SIGNNOW_USER)
+          message: `Dear client, here is your invitation for edditing Visa_MC_Letter_${req.body.params.ID}.docx`
+        }],
+        from: process.env.SIGNNOW_USER
+      }
+    })
+      .then(result => {
         return axios.post(`${process.env.SIGNNOW_URL}/document/${req.body.params.pdfID}/invite`, formPdfInvite, {
           headers: {
-            ...formDoc.getHeaders(),
             'Authorization': `Bearer ${req.body.params.access_token}`,
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+          },
+          data: {
+            document_id: req.body.params.pdfID,
+            to: [{
+              email: req.body.params.email,
+              phone_invite: req.body.params.phone,
+              role: req.body.params.fullName,
+              order: 1,
+              subject: `Claim Checker Invitation`,
+              message: `Dear client, here is your invitation for edditing Visa_MC_8821_${req.body.params.ID}.pdf`
+            }],
+            from: process.env.SIGNNOW_USER
           }
         })
       })
