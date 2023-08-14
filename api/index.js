@@ -213,7 +213,7 @@ app.route("/signnow")
         })
       })
   })
-console.log(process.env.NODE_ENV);
+
 module.exports = {
   path: '/api',
   handler: app,

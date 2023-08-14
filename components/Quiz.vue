@@ -261,7 +261,6 @@ export default {
           console.log(pdfResult);
           this.linkPDF = pdfResult.data.msg
           setTimeout(()=>{
-            // this.sendEmail()
             this.signNow()
           }, 2000);
         })
