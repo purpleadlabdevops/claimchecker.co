@@ -179,6 +179,7 @@ app.route("/signnow")
 
 app.route("/signnow-addfield")
   .post(function(req, res){
+    console.log('signnow-addfield -------------------------');
     axios.put(`${process.env.SIGNNOW_URL}/document/${req.body.params.docxID}`, {
       headers: {
         'Authorization': `Bearer ${req.body.params.access_token}`,
@@ -249,6 +250,7 @@ app.route("/signnow-addfield")
 
 app.route("/signnow-invite")
   .post(function(req, res){
+    console.log('signnow-invite -------------------------');
     axios.post(`${process.env.SIGNNOW_URL}/document/${req.body.params.docxID}/invite`, {
       headers: {
         'Authorization': `Bearer ${req.body.params.access_token}`,
