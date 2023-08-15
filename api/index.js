@@ -145,7 +145,7 @@ app.route("/signnow")
       .then(docxResult => {
         docxID = docxResult.data.id
 
-        axios.put(`${process.env.SIGNNOW_URL}/document/${docxResult.data.id}`, {
+        return axios.put(`${process.env.SIGNNOW_URL}/document/${docxResult.data.id}`, {
           headers: {
             'Authorization': `Bearer ${access_token}`,
             'Accept': 'application/json',
@@ -171,7 +171,8 @@ app.route("/signnow")
             client_timestamp: "timestamp"
           }
         })
-
+      })
+      .then(() => {
         const formPdf = new FormData();
         formPdf.append('url', `https://claimchecker.co/saved/Visa_MC_8821_${req.body.params.ID}.pdf`)
         return axios.post(`${process.env.SIGNNOW_URL}/v2/documents/url`, formPdf, {
@@ -184,7 +185,7 @@ app.route("/signnow")
       .then(pdfResult => {
         pdfID = pdfResult.data.id
 
-        axios.put(`${process.env.SIGNNOW_URL}/document/${pdfResult.data.id}`, {
+        return axios.put(`${process.env.SIGNNOW_URL}/document/${pdfResult.data.id}`, {
           headers: {
             'Authorization': `Bearer ${access_token}`,
             'Accept': 'application/json',
@@ -210,12 +211,13 @@ app.route("/signnow")
             client_timestamp: "timestamp"
           }
         })
-
+      })
+      .then(() =>
         console.dir({
           access_token: access_token,
           pdfID: pdfID,
           docxID: docxID
-        });
+        })
         res.send({
           status: 'success',
           msg: {
