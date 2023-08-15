@@ -164,6 +164,9 @@ export default {
       notQualify: false,
       linkDOCX: null,
       linkPDF: null,
+      access_token: null,
+      pdfID: null,
+      docxID: null,
     }
   },
   methods: {
@@ -275,26 +278,58 @@ export default {
         .then(result => {
           console.log('signNow result -------------------------');
           console.dir(result);
-          this.$router.push({
-            path: '/thanks',
-            query: {
-              revenue: this.revenue.a,
-            }
-          })
-          this.fullName = null
-          this.phone = null
-          this.email = null
-          this.company = null
-          this.address = null
-          this.ein = null
-          this.card.a = null
-          this.type.a = null
-          this.revenue.a = null
-          this.how_old.a = null
-          this.step = 1
-          // setTimeout(()=>{
-          //   this.signNowInvite(result.data.msg.access_token, result.data.msg.pdfID, result.data.msg.docxID)
-          // }, 10000);
+
+          this.access_token = result.data.msg.access_token
+          this.pdfID = result.data.msg.pdfID
+          this.docxID = result.data.msg.docxID
+
+          setTimeout(()=>{
+            this.signNowAddfield()
+          }, 2000);
+
+          // OR
+
+
+          // this.$router.push({
+          //   path: '/thanks',
+          //   query: {
+          //     revenue: this.revenue.a,
+          //   }
+          // })
+          // this.fullName = null
+          // this.phone = null
+          // this.email = null
+          // this.company = null
+          // this.address = null
+          // this.ein = null
+          // this.card.a = null
+          // this.type.a = null
+          // this.revenue.a = null
+          // this.how_old.a = null
+          // this.step = 1
+        })
+        .catch(err => {
+          console.dir(err);
+        })
+        // .finally(()=>{
+        //   this.spinner = false
+        // })
+    },
+    signNowAddfield(){
+      console.log('signNowAddfield ----------------------------------------');
+      this.$axios.post(`${process.env.API}/signnow-addfield`, {
+        headers: { 'Content-Type': 'application/json' },
+        params: {
+          access_token: this.access_token,
+          pdfID: this.pdfID,
+          docxID: this.docxID
+        }
+      })
+        .then(result => {
+          console.dir(result);
+          setTimeout(()=>{
+            this.signNowInvite()
+          }, 2000);
         })
         .catch(err => {
           console.dir(err);
@@ -302,17 +337,17 @@ export default {
         .finally(()=>{
           this.spinner = false
         })
-    },
-    signNowInvite(access_token, pdfID, docxID){
+    },,
+    signNowInvite(){
       console.log('signNowInvite ----------------------------------------');
       console.dir({
         ID: this.ID,
         email: this.email,
         phone: this.phone,
         fullName: this.fullName,
-        access_token: access_token,
-        pdfID: pdfID,
-        docxID: docxID
+        access_token: this.access_token,
+        pdfID: this.pdfID,
+        docxID: this.docxID
       });
       this.$axios.post(`${process.env.API}/signnow-invite`, {
         headers: { 'Content-Type': 'application/json' },
@@ -321,9 +356,9 @@ export default {
           email: this.email,
           phone: this.phone,
           fullName: this.fullName,
-          access_token: access_token,
-          pdfID: pdfID,
-          docxID: docxID
+          access_token: this.access_token,
+          pdfID: this.pdfID,
+          docxID: this.docxID
         }
       })
         .then(result => {

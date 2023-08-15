@@ -144,37 +144,6 @@ app.route("/signnow")
       })
       .then(docxResult => {
         docxID = docxResult.data.id
-
-        return axios.put(`${process.env.SIGNNOW_URL}/document/${docxResult.data.id}`, {
-          headers: {
-            'Authorization': `Bearer ${access_token}`,
-            'Accept': 'application/json',
-            'Content-Type': 'application/json'
-          },
-          data: {
-            fields: [
-              {
-                x: 0,
-                y: 0,
-                width: 1,
-                height: 1,
-                type: "text",
-                page_number: 0,
-                required: false,
-                role: "Signer 1",
-                custom_defined_option: false,
-                name: "text1",
-                validator_id: "824085fd04ce63b670b11b2e83457d59ac796a39"
-              }
-            ],
-            elements: [],
-            client_timestamp: "timestamp"
-          }
-        })
-      })
-      .then(docxPutResult => {
-        console.log('docxPutResult --------------------');
-        console.dir(docxPutResult.data);
         const formPdf = new FormData();
         formPdf.append('url', `https://claimchecker.co/saved/Visa_MC_8821_${req.body.params.ID}.pdf`)
         return axios.post(`${process.env.SIGNNOW_URL}/v2/documents/url`, formPdf, {
@@ -186,37 +155,6 @@ app.route("/signnow")
       })
       .then(pdfResult => {
         pdfID = pdfResult.data.id
-
-        return axios.put(`${process.env.SIGNNOW_URL}/document/${pdfResult.data.id}`, {
-          headers: {
-            'Authorization': `Bearer ${access_token}`,
-            'Accept': 'application/json',
-            'Content-Type': 'application/json'
-          },
-          data: {
-            fields: [
-              {
-                x: 0,
-                y: 0,
-                width: 1,
-                height: 1,
-                type: "text",
-                page_number: 0,
-                required: false,
-                role: "Signer 1",
-                custom_defined_option: false,
-                name: "text1",
-                validator_id: "824085fd04ce63b670b11b2e83457d59ac796a39"
-              }
-            ],
-            elements: [],
-            client_timestamp: "timestamp"
-          }
-        })
-      })
-      .then(pdfPutResult => {
-        console.log('pdfPutResult --------------------');
-        console.dir(pdfPutResult.data);
         console.dir({
           access_token: access_token,
           pdfID: pdfID,
@@ -229,6 +167,76 @@ app.route("/signnow")
             pdfID: pdfID,
             docxID: docxID
           }
+        })
+      })
+      .catch(err => {
+        res.send({
+          status: 'error',
+          msg: err
+        })
+      })
+  })
+
+app.route("/signnow-addfield")
+  .post(function(req, res){
+    axios.put(`${process.env.SIGNNOW_URL}/document/${req.body.params.docxID}`, {
+      headers: {
+        'Authorization': `Bearer ${req.body.params.access_token}`,
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      data: {
+        fields: [
+          {
+            x: 0,
+            y: 0,
+            width: 1,
+            height: 1,
+            type: "text",
+            page_number: 0,
+            required: false,
+            role: "Signer 1",
+            custom_defined_option: false,
+            name: "text1",
+            validator_id: "824085fd04ce63b670b11b2e83457d59ac796a39"
+          }
+        ],
+        elements: [],
+        client_timestamp: "timestamp"
+      }
+    })
+      .then(docxResult => {
+        return axios.put(`${process.env.SIGNNOW_URL}/document/${req.body.params.pdfID}`, {
+          headers: {
+            'Authorization': `Bearer ${req.body.params.access_token}`,
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+          },
+          data: {
+            fields: [
+              {
+                x: 0,
+                y: 0,
+                width: 1,
+                height: 1,
+                type: "text",
+                page_number: 0,
+                required: false,
+                role: "Signer 1",
+                custom_defined_option: false,
+                name: "text1",
+                validator_id: "824085fd04ce63b670b11b2e83457d59ac796a39"
+              }
+            ],
+            elements: [],
+            client_timestamp: "timestamp"
+          }
+        })
+      })
+      .then(pdfResult => {
+        res.send({
+          status: 'success',
+          msg: pdfResult.data
         })
       })
       .catch(err => {
