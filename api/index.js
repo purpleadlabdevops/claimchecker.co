@@ -145,32 +145,32 @@ app.route("/signnow")
       .then(docxResult => {
         docxID = docxResult.data.id
 
-        axios.put(`${process.env.SIGNNOW_URL}/document/${docxResult.data.id}%20%20%20%20%20%20-%20adds%20fields%20to%20a%20document`, formPdf, {
-          headers: {
-            'Authorization': `Bearer ${access_token}`,
-            'Accept': 'application/json',
-            'Content-Type': 'application/json'
-          },
-          data: {
-            fields: [
-              {
-                x: 0,
-                y: 0,
-                width: 1,
-                height: 1,
-                type: "text",
-                page_number: 0,
-                required: false,
-                role: "Signer 1",
-                custom_defined_option: false,
-                name: "text1",
-                validator_id: "824085fd04ce63b670b11b2e83457d59ac796a39"
-              }
-            ],
-            elements: [],
-            client_timestamp: "timestamp"
-          }
-        })
+        // axios.put(`${process.env.SIGNNOW_URL}/document/${docxResult.data.id}%20%20%20%20%20%20-%20adds%20fields%20to%20a%20document`, formPdf, {
+        //   headers: {
+        //     'Authorization': `Bearer ${access_token}`,
+        //     'Accept': 'application/json',
+        //     'Content-Type': 'application/json'
+        //   },
+        //   data: {
+        //     fields: [
+        //       {
+        //         x: 0,
+        //         y: 0,
+        //         width: 1,
+        //         height: 1,
+        //         type: "text",
+        //         page_number: 0,
+        //         required: false,
+        //         role: "Signer 1",
+        //         custom_defined_option: false,
+        //         name: "text1",
+        //         validator_id: "824085fd04ce63b670b11b2e83457d59ac796a39"
+        //       }
+        //     ],
+        //     elements: [],
+        //     client_timestamp: "timestamp"
+        //   }
+        // })
 
         const formPdf = new FormData();
         formPdf.append('url', `https://claimchecker.co/saved/Visa_MC_8821_${req.body.params.ID}.pdf`)
@@ -184,32 +184,32 @@ app.route("/signnow")
       .then(pdfResult => {
         pdfID = pdfResult.data.id
 
-        axios.put(`${process.env.SIGNNOW_URL}/document/${pdfResult.data.id}%20%20%20%20%20%20-%20adds%20fields%20to%20a%20document`, formPdf, {
-          headers: {
-            'Authorization': `Bearer ${access_token}`,
-            'Accept': 'application/json',
-            'Content-Type': 'application/json'
-          },
-          data: {
-            fields: [
-              {
-                x: 0,
-                y: 0,
-                width: 1,
-                height: 1,
-                type: "text",
-                page_number: 0,
-                required: false,
-                role: "Signer 1",
-                custom_defined_option: false,
-                name: "text1",
-                validator_id: "824085fd04ce63b670b11b2e83457d59ac796a39"
-              }
-            ],
-            elements: [],
-            client_timestamp: "timestamp"
-          }
-        })
+        // axios.put(`${process.env.SIGNNOW_URL}/document/${pdfResult.data.id}%20%20%20%20%20%20-%20adds%20fields%20to%20a%20document`, formPdf, {
+        //   headers: {
+        //     'Authorization': `Bearer ${access_token}`,
+        //     'Accept': 'application/json',
+        //     'Content-Type': 'application/json'
+        //   },
+        //   data: {
+        //     fields: [
+        //       {
+        //         x: 0,
+        //         y: 0,
+        //         width: 1,
+        //         height: 1,
+        //         type: "text",
+        //         page_number: 0,
+        //         required: false,
+        //         role: "Signer 1",
+        //         custom_defined_option: false,
+        //         name: "text1",
+        //         validator_id: "824085fd04ce63b670b11b2e83457d59ac796a39"
+        //       }
+        //     ],
+        //     elements: [],
+        //     client_timestamp: "timestamp"
+        //   }
+        // })
 
         console.dir({
           access_token: access_token,
