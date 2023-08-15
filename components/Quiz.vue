@@ -337,7 +337,7 @@ export default {
         .finally(()=>{
           this.spinner = false
         })
-    },,
+    },
     signNowInvite(){
       console.log('signNowInvite ----------------------------------------');
       console.dir({
