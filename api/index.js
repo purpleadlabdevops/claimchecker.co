@@ -172,7 +172,9 @@ app.route("/signnow")
           }
         })
       })
-      .then(() => {
+      .then(docxPutResult => {
+        console.log('docxPutResult --------------------');
+        console.dir(docxPutResult.data);
         const formPdf = new FormData();
         formPdf.append('url', `https://claimchecker.co/saved/Visa_MC_8821_${req.body.params.ID}.pdf`)
         return axios.post(`${process.env.SIGNNOW_URL}/v2/documents/url`, formPdf, {
@@ -212,7 +214,9 @@ app.route("/signnow")
           }
         })
       })
-      .then(() => {
+      .then(pdfPutResult => {
+        console.log('pdfPutResult --------------------');
+        console.dir(pdfPutResult.data);
         console.dir({
           access_token: access_token,
           pdfID: pdfID,
