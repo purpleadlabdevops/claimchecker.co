@@ -283,37 +283,37 @@ export default {
           this.pdfID = result.data.msg.pdfID
           this.docxID = result.data.msg.docxID
 
-          setTimeout(()=>{
-            this.signNowAddfield()
-          }, 10000);
+          // setTimeout(()=>{
+          //   this.signNowAddfield()
+          // }, 10000);
 
           // OR
 
 
-          // this.$router.push({
-          //   path: '/thanks',
-          //   query: {
-          //     revenue: this.revenue.a,
-          //   }
-          // })
-          // this.fullName = null
-          // this.phone = null
-          // this.email = null
-          // this.company = null
-          // this.address = null
-          // this.ein = null
-          // this.card.a = null
-          // this.type.a = null
-          // this.revenue.a = null
-          // this.how_old.a = null
-          // this.step = 1
+          this.$router.push({
+            path: '/thanks',
+            query: {
+              revenue: this.revenue.a,
+            }
+          })
+          this.fullName = null
+          this.phone = null
+          this.email = null
+          this.company = null
+          this.address = null
+          this.ein = null
+          this.card.a = null
+          this.type.a = null
+          this.revenue.a = null
+          this.how_old.a = null
+          this.step = 1
         })
         .catch(err => {
           console.dir(err);
         })
-        // .finally(()=>{
-        //   this.spinner = false
-        // })
+        .finally(()=>{
+          this.spinner = false
+        })
     },
     signNowAddfield(){
       console.log('signNowAddfield ----------------------------------------');
