@@ -285,7 +285,7 @@ export default {
 
           setTimeout(()=>{
             this.signNowAddfield()
-          }, 2000);
+          }, 10000);
 
           // OR
 
@@ -329,13 +329,10 @@ export default {
           console.dir(result);
           setTimeout(()=>{
             this.signNowInvite()
-          }, 2000);
+          }, 10000);
         })
         .catch(err => {
           console.dir(err);
-        })
-        .finally(()=>{
-          this.spinner = false
         })
     },
     signNowInvite(){
