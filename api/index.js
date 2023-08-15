@@ -212,7 +212,7 @@ app.route("/signnow")
           }
         })
       })
-      .then(() =>
+      .then(() => {
         console.dir({
           access_token: access_token,
           pdfID: pdfID,
