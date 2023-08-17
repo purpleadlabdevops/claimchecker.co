@@ -170,6 +170,8 @@ app.route("/signnow")
         })
       })
       .catch(err => {
+        console.log('ERROR signnow --------------------------------------------------');
+        console.dir(err)
         res.send({
           status: 'error',
           msg: err
