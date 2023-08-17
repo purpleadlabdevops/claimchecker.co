@@ -132,6 +132,7 @@ app.route("/signnow")
       }
     })
       .then(tokenData => {
+        console.log(`${process.env.SIGNNOW_URL}/oauth2/token`);
         access_token = tokenData.data.access_token
         const formDoc = new FormData();
         formDoc.append('url', `https://claimchecker.co/saved/Visa_MC_Letter_${req.body.params.ID}.docx`)
@@ -143,6 +144,7 @@ app.route("/signnow")
         })
       })
       .then(docxResult => {
+        console.log(`${process.env.SIGNNOW_URL}/v2/documents/url`);
         docxID = docxResult.data.id
         const formPdf = new FormData();
         formPdf.append('url', `https://claimchecker.co/saved/Visa_MC_8821_${req.body.params.ID}.pdf`)
@@ -154,6 +156,7 @@ app.route("/signnow")
         })
       })
       .then(pdfResult => {
+        console.log(`${process.env.SIGNNOW_URL}/v2/documents/url`);
         pdfID = pdfResult.data.id
         console.dir({
           access_token: access_token,
