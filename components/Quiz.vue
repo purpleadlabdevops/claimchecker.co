@@ -65,6 +65,7 @@
               placeholder="Phone"
               v-model="phone"
               @input="phoneInput"
+              ref="phone"
               minlength="14"
               maxlength="14"
               id="phone"
@@ -75,6 +76,7 @@
               type="email"
               v-model="email"
               id="email"
+              ref="email"
               placeholder="Your Email"
               required />
           </div>
@@ -194,10 +196,20 @@ export default {
       this.step = 3
     },
     toStep4(){
-      if(this.validateEmail(this.email)){
-        this.step = 4
+      if(this.phone.length < 14){
+        this.$refs.phone.classList.add('err')
+        alert('Please insert valid phone number')
+        setTimeout(()=>{
+          this.$refs.phone.classList.remove('err')
+        }, 2000);
+      } else if(!this.validateEmail(this.email)){
+        this.$refs.email.classList.add('err')
+        alert('Please insert valid email')
+        setTimeout(()=>{
+          this.$refs.email.classList.remove('err')
+        }, 2000);
       } else {
-        alert('Please insert right email format.')
+        this.step = 4
       }
     },
     submit(e){
